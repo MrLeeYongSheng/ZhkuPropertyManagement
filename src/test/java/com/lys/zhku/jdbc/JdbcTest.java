@@ -11,18 +11,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lys.zhku.config.RootConfig;
-import com.lys.zhku.jdbc.config.JdbcConfig;
+import com.lys.zhku.mapper.UsersMapper;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=JdbcConfig.class)
+@ContextConfiguration(classes=RootConfig.class)
 public class JdbcTest {
 
 	@Autowired
 	DataSource dataSource;
 	
+	@Autowired
+	UsersMapper usersMapper;
+	
 	@Test
 	public void test() {
-		assertNotNull(dataSource);
+		assertNotNull(usersMapper);
+		System.out.println(usersMapper.selectByPrimaryKey("admin").getPassword());
 	}
 
 }

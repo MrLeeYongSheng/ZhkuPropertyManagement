@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1" defaultModelType="flat" targetRuntime="MyBatis3Simple">
+  	<property name="beginningDelimiter" value="`"/>
+  	<property name="EndingDelimiter" value="`"/>
+  	<property name="javaFileEncoding" value="UTF-8"/>
+  	<commentGenerator>
+  		<property name="suppressDate" value="true"/>
+  		<property name="addRemarkComment" value="true"/>
+  	</commentGenerator>
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/zhku" driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+    <javaModelGenerator targetPackage="com.lys.zhku.model" targetProject="ZhkuPropertyManagement/src/main/java" />
+    <sqlMapGenerator targetPackage="com.lys.zhku.mapper" targetProject="ZhkuPropertyManagement/src/main/resources" />
+    <javaClientGenerator targetPackage="com.lys.zhku.mapper" targetProject="ZhkuPropertyManagement/src/main/java" type="XMLMAPPER" />
+    <table tableName="%"/>
+  </context>
+</generatorConfiguration>
