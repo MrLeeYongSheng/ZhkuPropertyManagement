@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -19,14 +20,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
+			.passwordEncoder(new StandardPasswordEncoder())
 			.dataSource(dataSource);
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		http.formLogin().loginPage("/login")
+		.and()
 		.authorizeRequests()
-			.anyRequest().hasAuthority("user").and().httpBasic().realmName("zhku");
+			.antMatchers("/login").permitAll()
+			.antMatchers("/home").hasAuthority("user");
 	}
 	
 }

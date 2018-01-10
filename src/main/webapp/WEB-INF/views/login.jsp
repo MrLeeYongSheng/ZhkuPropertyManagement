@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -7,7 +10,7 @@
     <meta name="renderer" content="webkit">
     <meta name="keywords" content='easyui,jui,jquery easyui,easyui demo,easyui中文'/>
     <meta name="description" content='TopJUI前端框架，基于最新版EasyUI前端框架构建，纯HTML调用功能组件，不用写JS代码的EasyUI，专注你的后端业务开发！'/>
-    <title>TopJUI前端框架 - 用户登录</title>
+    <title>仲园物业管理系统 - 用户登录</title>
     <!-- 浏览器标签图片 -->
     <link rel="shortcut icon" href="./topjui/image/favicon.ico"/>
     <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
@@ -123,19 +126,18 @@
         <div class="login-title text-center">
             <span class="flag"><i class="fa fa-user"></i> 用户登陆</span>
             <h1>
-                <small>TopJUI前端快速开发框架</small>
+                <small>仲园物业管理系统</small>
             </h1>
         </div>
         <div class="login-content ">
             <div class="form">
-                <form id="modifyPassword" class="form-horizontal" action="#" method="post">
+                <form:form id="modifyPassword" class="form-horizontal" action="${pageContext.request.contextPath}/login" method="post">
                     <input type="hidden" id="referer" name="referer" value="${param.referer}">
                     <div class="form-group">
                         <div class="col-xs-10 col-xs-offset-1">
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="用户名"
-                                       value="topjui">
+                                <input type="text" id="username" name="username" class="form-control" placeholder="用户名">
                             </div>
                         </div>
                     </div>
@@ -144,7 +146,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                 <input type="password" id="password" name="password" class="form-control"
-                                       placeholder="密码" value="topjui">
+                                       placeholder="密码" >
                             </div>
                         </div>
                     </div>
@@ -158,7 +160,7 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
@@ -175,14 +177,14 @@
 </div>
 
 <!-- 引入jQuery -->
-<script src="/static/plugins/jquery/jquery.min.js"></script>
-<script src="/static/plugins/jquery/jquery.cookie.js"></script>
-<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="./static/plugins/jquery/jquery.min.js"></script>
+<script src="./static/plugins/jquery/jquery.cookie.js"></script>
+<script src="./static/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-<script src="/static/plugins/bootstrap/plugins/html5shiv.min.js"></script>
-<script src="/static/plugins/bootstrap/plugins/respond.min.js"></script>
+<script src="./static/plugins/bootstrap/plugins/html5shiv.min.js"></script>
+<script src="./static/plugins/bootstrap/plugins/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
     if (navigator.appName == "Microsoft Internet Explorer" &&
@@ -193,7 +195,7 @@
         alert("您的浏览器版本过低，请使用360安全浏览器的极速模式或IE9.0以上版本的浏览器");
     }
 </script>
-<script>
+<!--<script>
     var _hmt = _hmt || [];
     (function () {
         var hm = document.createElement("script");
@@ -201,10 +203,14 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-</script>
+</script>-->
 <script type="text/javascript">
     $(function () {
-
+    	
+    	if(location.href.match("\\?error")!=null) {
+    		$('#myModal').modal();
+    	}    		
+    	
         $('#password').keyup(function (event) {
             if (event.keyCode == "13") {
                 $("#login").trigger("click");
@@ -224,14 +230,16 @@
             ) {
                 alert("您的浏览器版本过低，请使用360安全浏览器的极速模式或IE9.0以上版本的浏览器");
             } else {
+            	$("form:first").submit();
                 var formData = {
                     username: $('#username').val(),
                     password: $('#password').val(),
-                    referer: $('#referer').val()
+                    referer: $('#referer').val(),
+                    ${_csrf.parameterName } : $('#${_csrf.parameterName }').val()
                 };
                 $.ajax({
                     type: 'POST',
-                    url: '/json/response/login.json',
+                    url: '${pageContext.request.contextPath}/login',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(formData),
                     success: function (data) {

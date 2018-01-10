@@ -2,6 +2,7 @@ package com.lys.zhku.config;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -18,8 +19,14 @@ public class RootConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		
+		//使用Spring JDBC自带的数据源
+		//DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		//dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		
+		//使用Mybatis的连接池数据源
+		PooledDataSource dataSource = new PooledDataSource();
+		dataSource.setDriver("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/zhku");
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
