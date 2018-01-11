@@ -39,7 +39,7 @@
 
 .tabs li.tabs-selected a.tabs-inner{border-top-color: #dd4b39;border-top-width: 3px;}
 .banner{width: 100%;height: 50px;background: #dd4b39;color: #fff;}
-.banner .l-btn-text{margin:0px;}
+.banner .l-btn-text{/*margin:0px;*/}
 .banner .webname{background:#d73925;width: 215px; font-weight:bold; font-size: 20px;line-height: 25px; text-align:left; padding-left:10px; }
 .panel-icon, .panel-tool {margin-top:-6px;}
 /*easyui inner*/
