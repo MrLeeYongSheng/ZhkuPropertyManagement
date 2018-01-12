@@ -1,0 +1,7 @@
+<!-- taglibs -->
+<!-- 导入jstl标签 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!-- page scope var -->
+<!-- 设置变量prePath为应用的跟路径 -->
+<c:set scope="page" var="prePath" value="${pageContext.request.contextPath }"/>

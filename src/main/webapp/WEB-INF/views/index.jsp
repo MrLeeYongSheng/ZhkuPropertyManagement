@@ -1,6 +1,11 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="/jspf/commonHeader.jspf" %><!-- 相对于webapp根路径下 -->
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<security:csrfMetaTags/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- 避免IE使用兼容模式 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -9,23 +14,23 @@
     <meta name="description" content='TopJUI前端框架，基于最新版EasyUI前端框架构建，纯HTML调用功能组件，不用写JS代码的EasyUI，专注你的后端业务开发！'/>
     <title>TopJUI前端框架 - 静态演示</title>
     <!-- 浏览器标签图片 -->
-    <link rel="shortcut icon" href="./topjui/image/favicon.ico"/>
+    <link rel="shortcut icon" href="${prePath }/topjui/image/favicon.ico"/>
     <!-- TopJUI框架样式 -->
-    <link type="text/css" href="./topjui/css/topjui.core.min.css" rel="stylesheet">
-    <link type="text/css" href="./topjui/themes/default/topjui.red.css" rel="stylesheet" id="dynamicTheme"/>
+    <link type="text/css" href="${prePath }/topjui/css/topjui.core.min.css" rel="stylesheet">
+    <link type="text/css" href="${prePath }/topjui/themes/default/topjui.red.css" rel="stylesheet" id="dynamicTheme"/>
     <!-- FontAwesome字体图标 -->
-    <link type="text/css" href="./static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link type="text/css" href="${prePath }/static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
     <!-- jQuery相关引用 -->
-    <script type="text/javascript" src="./static/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="./static/plugins/jquery/jquery.cookie.js"></script>
+    <script type="text/javascript" src="${prePath }/static/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="${prePath }/static/plugins/jquery/jquery.cookie.js"></script>
     <!-- TopJUI框架配置 -->
-    <script type="text/javascript" src="./static/public/js/topjui.config.js"></script>
+    <script type="text/javascript" src="${prePath }/static/public/js/topjui.config.js"></script>
     <!-- TopJUI框架核心 -->
-    <script type="text/javascript" src="./topjui/js/topjui.core.min.js"></script>
+    <script type="text/javascript" src="${prePath }/topjui/js/topjui.core.min.js"></script>
     <!-- TopJUI中文支持 -->
-    <script type="text/javascript" src="./topjui/js/locale/topjui.lang.zh_CN.js"></script>
+    <script type="text/javascript" src="${prePath }/topjui/js/locale/topjui.lang.zh_CN.js"></script>
     <!-- 首页js -->
-    <script type="text/javascript" src="./static/public/js/topjui.index.js" charset="utf-8"></script>
+    <script type="text/javascript" src="${prePath }/static/public/js/topjui.index.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -307,6 +312,28 @@
                 }
         );
     });
+    
+    //退出系统
+    function logout() {
+        $.iMessager.confirm('提示', '确定要退出吗?', function (r) {
+            if (r) {
+                $.iMessager.progress({
+                    text: '正在退出中...'
+                });
+        		var paramName = $("meta[name='_csrf_parameter']").attr("content");
+        		var value = $("meta[name='_csrf']").attr("content");
+        		var header = $("meta[name='_csrf_header']").attr("content");
+        		var csrf = {paramName:value};
+    			$.ajax({
+    				type:"post",
+    				url:"${pageContext.request.contextPath}/logout",
+    				async:false,
+    				data : paramName+"="+value
+    			});
+    			location.href='${pageContext.request.contextPath}/login';
+            }
+        });
+    }
 </script>
 <div data-toggle="topjui-layout" data-options="id:'index_layout',fit:true">
     <div id="north" class="banner" data-options="region:'north',border:false,split:false"
@@ -358,17 +385,17 @@
             </tr>
         </table>
         <span style="float: right; padding-right: 10px; height: 50px; line-height: 50px;">
-            <a href="javascript:void(0)" data-toggle="topjui-menubutton"
+            <a href="javascript:void(0)" class="topjui-menubutton"
                data-options="iconCls:'fa fa-user',hasDownArrow:false"
                style="color:#fff;">TopJUI前端框架</a>|
-            <a href="javascript:void(0)" id="mb3" data-toggle="topjui-menubutton"
+            <a href="javascript:void(0)" id="mb3" class="topjui-menubutton"
                data-options="menu:'#mm3',iconCls:'fa fa-cog',hasDownArrow:true" style="color:#fff;">设置</a>
             <div id="mm3" style="width:74px;">
                 <div data-options="iconCls:'fa fa-info-circle'" onclick="javascript:void(0)">个人信息</div>
                 <div class="menu-sep"></div>
                 <div data-options="iconCls:'fa fa-key'" onclick="javascript:modifyPwd(0)">修改密码</div>
             </div>|
-            <a href="javascript:void(0)" id="mb2" data-toggle="topjui-menubutton"
+            <a href="javascript:void(0)" id="mb2" class="topjui-menubutton"
                data-options="menu:'#mm2',iconCls:'fa fa-tree',hasDownArrow:true" style="color:#fff;">主题</a>|
             <div id="mm2" style="width:180px;">
                 <div data-options="iconCls:'fa fa-tree blue'" onclick="changeTheme('blue')">默认主题</div>
@@ -385,7 +412,7 @@
                 <div data-options="iconCls:'fa fa-tree orange'" onclick="changeTheme('yellow')">橙色主题</div>
                 <div data-options="iconCls:'fa fa-tree orange'" onclick="changeTheme('yellowlight')">橙色主题-亮</div>
             </div>
-            <a href="javascript:void(0)" onclick="logout()" data-toggle="topjui-menubutton"
+            <a href="javascript:void(0)" onclick="logout()" class="topjui-menubutton"
                data-options="iconCls:'fa fa-sign-out',hasDownArrow:false" style="color:#fff;">注销</a>
         </span>
     </div>
@@ -407,13 +434,13 @@
     <div id="center" data-options="region:'center',border:false" style="overflow:hidden;">
         <div id="index_tabs" style="width:100%;height:100%">
             <div title="系统首页" iconCls="fa fa-home" data-options="border:true,
-            content:'<iframe src=\'./html/portal/index.html\' scrolling=\'auto\' frameborder=\'0\' style=\'width:100%;height:100%;\'></iframe>'"></div>
+            content:'<iframe src=\'${prePath }/subviews/portal/index.html\' scrolling=\'auto\' frameborder=\'0\' style=\'width:100%;height:100%;\'></iframe>'"></div>
         </div>
     </div>
 
     <div data-options="region:'south',border:true"
          style="text-align:center;height:30px;line-height:30px;border-bottom:0;overflow:hidden;">
-        <span style="float:left;padding-left:5px;width:30%;text-align: left;">当前用户：TopJUI前端框架</span>
+        <span style="float:left;padding-left:5px;width:30%;text-align: left;">当前用户：<security:authentication property="principal.go"/></span><!-- ${pageContext.request.userPrincipal.name} -->
         <span style="padding-right:5px;width:40%">
             版权所有 © 2014-2017
             <a href="http://www.ewsd.cn" target="_blank">深圳易网时代信息技术有限公司</a>
@@ -506,6 +533,6 @@
       iconCls:'fa fa-key',
       width: 400,
       height: 300,
-      href: '/html/user/modifyPassword.html'"></form>
+      href: '${prePath }/subviews/user/modifyPassword.html'"></form>
 </body>
 </html>

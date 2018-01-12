@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
+import com.lys.zhku.security.userdetails.ZhkuUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,9 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-			.passwordEncoder(new StandardPasswordEncoder())
-			.dataSource(dataSource);
+		auth.userDetailsService(new ZhkuUserDetailsService())
+			//.jdbcAuthentication()
+			//.dataSource(dataSource)
+			.passwordEncoder(new StandardPasswordEncoder());
 	}
 	
 	@Override
@@ -29,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.headers().frameOptions().sameOrigin()
 		.and()
-		.formLogin().loginPage("/login")
+		.formLogin().loginPage("/login").defaultSuccessUrl("/index")
 		.and()
 		.authorizeRequests()
 			.antMatchers("/login").permitAll()

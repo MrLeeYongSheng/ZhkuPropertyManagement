@@ -255,16 +255,26 @@ if ($.cookie('topjuiThemeName')) {
 }
 
 // 退出系统
-function logout() {
+/*function logout() {
     $.iMessager.confirm('提示', '确定要退出吗?', function (r) {
         if (r) {
             $.iMessager.progress({
                 text: '正在退出中...'
             });
-            window.location.href = './login.html' + location.search;
+    		var paramName = $("meta[name='_csrf_parameter']").attr("content");
+    		var value = $("meta[name='_csrf']").attr("content");
+    		var header = $("meta[name='_csrf_header']").attr("content");
+    		var csrf = {paramName:value};
+			$.ajax({
+				type:"post",
+				url:"${pageContext.request.contextPath}/logout",
+				async:false,
+				data : paramName+"="+value
+			});
+			location.href='${pageContext.request.contextPath}/login';
         }
     });
-}
+}*/
 
 // 生成左侧导航菜单
 function generateMenu(menuId, systemName) {
