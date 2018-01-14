@@ -1,7 +1,5 @@
 package com.lys.zhku.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
+import com.lys.zhku.mapper.AuthoritiesMapper;
+import com.lys.zhku.mapper.UsersMapper;
 import com.lys.zhku.security.userdetails.ZhkuUserDetailsService;
 
 @Configuration
@@ -17,13 +17,14 @@ import com.lys.zhku.security.userdetails.ZhkuUserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	DataSource dataSource;
+	private UsersMapper usersMapper;
+	
+	@Autowired
+	private AuthoritiesMapper authoritiesMapper;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(new ZhkuUserDetailsService())
-			//.jdbcAuthentication()
-			//.dataSource(dataSource)
+		auth.userDetailsService(new ZhkuUserDetailsService(usersMapper,authoritiesMapper))
 			.passwordEncoder(new StandardPasswordEncoder());
 	}
 	
