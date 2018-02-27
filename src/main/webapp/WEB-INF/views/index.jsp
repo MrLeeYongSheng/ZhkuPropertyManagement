@@ -440,7 +440,7 @@
 
     <div data-options="region:'south',border:true"
          style="text-align:center;height:30px;line-height:30px;border-bottom:0;overflow:hidden;">
-        <span style="float:left;padding-left:5px;width:30%;text-align: left;">当前用户：<security:authentication property="principal.go"/></span><!-- ${pageContext.request.userPrincipal.name} -->
+        <span style="float:left;padding-left:5px;width:30%;text-align: left;">当前用户：<security:authentication property="principal.nickname"/></span><!-- principal.go  -->
         <span style="padding-right:5px;width:40%">
             版权所有 © 2014-2017
             <a href="http://www.ewsd.cn" target="_blank">深圳易网时代信息技术有限公司</a>

@@ -34,6 +34,6 @@ public interface AuthoritiesMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(Authorities record);
-	
+
 	List<Authorities> selectByUsersUsername(String username);
 }

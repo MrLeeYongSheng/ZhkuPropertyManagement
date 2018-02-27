@@ -27,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();// 让Servlet容器默认的Servlet处理静态资源的请求,而不是使用DispatcherServlet来处理
-							// 让webapp/文件夹下的非/WEB-INF/文件夹的容可得到处理
+							// 让webapp/文件夹下的非/WEB-INF/文件夹的内容可得到处理
 							//DispatcherServlet无法处理的url交给默认的Servlet处理
 	}
 /*
