@@ -5,3 +5,11 @@
 <!-- page scope var -->
 <!-- 设置变量prePath为应用的跟路径 -->
 <c:set scope="page" var="prePath" value="${pageContext.request.contextPath }"/>
+
+<!-- 导入jquery.easyui -->
+<link rel="stylesheet" type="text/css" href="${prePath}/jquery-easyui-1.5.4.2/themes/default/easyui.css">   
+<link rel="stylesheet" type="text/css" href="${prePath}/jquery-easyui-1.5.4.2/themes/icon.css"> 
+<!-- jquery.min.js必须在jquery.easyui.min.js之前否则解析不了jquery.min.js -->  
+<script type="text/javascript" src="${prePath}/jquery-easyui-1.5.4.2/jquery.min.js"></script>   
+<script type="text/javascript" src="${prePath}/jquery-easyui-1.5.4.2/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${prePath}/jquery-easyui-1.5.4.2/locale/easyui-lang-zh_CN.js"></script>

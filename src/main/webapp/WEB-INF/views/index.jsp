@@ -341,7 +341,7 @@
         <table style="float:left;border-spacing:0px;">
             <tr>
                 <td class="webname">
-                    <span class="fa fa-envira" style="font-size:26px; padding-right:8px;"></span>TopJUI前端框架
+                    <span class="fa fa-envira" style="font-size:26px; padding-right:8px;"></span>仲园物业管理
                 </td>
                 <td class="collapseMenu" style="text-align: center;cursor: pointer;">
                     <span class="fa fa-chevron-circle-left" style="font-size: 18px;"></span>
@@ -387,7 +387,7 @@
         <span style="float: right; padding-right: 10px; height: 50px; line-height: 50px;">
             <a href="javascript:void(0)" class="topjui-menubutton"
                data-options="iconCls:'fa fa-user',hasDownArrow:false"
-               style="color:#fff;">TopJUI前端框架</a>|
+               style="color:#fff;"><security:authentication property="principal.nickname"/></a>|
             <a href="javascript:void(0)" id="mb3" class="topjui-menubutton"
                data-options="menu:'#mm3',iconCls:'fa fa-cog',hasDownArrow:true" style="color:#fff;">设置</a>
             <div id="mm3" style="width:74px;">
@@ -442,11 +442,11 @@
          style="text-align:center;height:30px;line-height:30px;border-bottom:0;overflow:hidden;">
         <span style="float:left;padding-left:5px;width:30%;text-align: left;">当前用户：<security:authentication property="principal.nickname"/></span><!-- principal.go  -->
         <span style="padding-right:5px;width:40%">
-            版权所有 © 2014-2017
-            <a href="http://www.ewsd.cn" target="_blank">深圳易网时代信息技术有限公司</a>
-            <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备16028103号-1</a>
+            版权所有 © 2014-2018
+            <a href="http://www.ewsd.cn" target="_blank">仲园物业管理信息系统</a>
+            <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备8888888号-8</a>
         </span>
-        <span style="float:right;padding-right:5px;width:30%;text-align: right;">版本：<script>document.write(topJUI.version)</script></span>
+        <span style="float:right;padding-right:5px;width:30%;text-align: right;">版本：<script>document.write('1.0')</script></span>
     </div>
 </div>
 

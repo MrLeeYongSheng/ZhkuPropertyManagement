@@ -234,8 +234,8 @@
                 var formData = {
                     username: $('#username').val(),
                     password: $('#password').val(),
-                    referer: $('#referer').val(),
-                    ${_csrf.parameterName } : $('#${_csrf.parameterName }').val()
+                    referer: $('#referer').val()
+                    //,${_csrf.parameterName } : $('#${_csrf.parameterName }').val()
                 };
                 $.ajax({
                     type: 'POST',

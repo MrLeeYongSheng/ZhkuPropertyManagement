@@ -32,13 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.headers().frameOptions().sameOrigin()
-		//.and().csrf().disable()
-		.and()
+		.and().csrf().disable()
+		//.and()
 		.formLogin().loginPage("/login").defaultSuccessUrl("/index")
 		.and()
 		.authorizeRequests()
 			.antMatchers("/login").permitAll()
-			.antMatchers("/home").hasAuthority("user");
+			.antMatchers("/","/index").hasAnyAuthority("user");
 	}
 	
 }

@@ -49,11 +49,21 @@ public class HomeController {
 		return "/test/home";
 	}
 	
-	@RequestMapping(value = "/{pathName}", method = RequestMethod.GET)
-	public String login(@PathVariable String pathName) {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+
+		return "login";
+	}
+	
+
+	
+
+	
+/*	@RequestMapping(value = "/{pathName}", method = RequestMethod.GET)
+	public String pathName(@PathVariable String pathName) {
 
 		return pathName;
-	}
+	}*/
 
 	@RequestMapping(value = {"/index","/"})
 	public String index() {
