@@ -35,30 +35,7 @@
 						height : 500,
 						cache : false,
 						modal : true,//将窗体显示为模式化窗口
-						content:"<iframe src='${prePath}/students/student_add2' frameborder='0' width='100%' height='100%'></iframe>",//所要加载的内容
-						buttons:[{
-							text:'保存',
-							iconCls:'icon-ok',
-							handler:function(){
-								// submit the form
-								var win = $("iframe").get(0).contentWindow;//获取本窗体的iframe模块的窗体对象
-								win.$("#ff").submit();
-							}
-						},{
-							text:'清空',
-							iconCls:'icon-reload',
-							handler:function(){
-								var win = $("iframe").get(0).contentWindow;//获取本窗体的iframe模块的窗体对象
-								win.$("#ff").form("clear");
-							}
-						},{
-							text:'关闭',
-							iconCls:'icon-cancel',
-							handler:function(){
-								$("#win").dialog("close");
-							}
-						}]
-						
+						content:"<iframe src='${prePath}/students/student_add' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
 					});
 				}
 			}, '-', {
