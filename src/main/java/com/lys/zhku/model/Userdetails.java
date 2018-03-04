@@ -278,12 +278,4 @@ public class Userdetails {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-	@Override
-	public String toString() {
-		return "Userdetails [usersUsername=" + usersUsername + ", idcard=" + idcard + ", phonenum=" + phonenum
-				+ ", shortnum=" + shortnum + ", email=" + email + ", qq=" + qq + ", urgentnum=" + urgentnum
-				+ ", birthplace=" + birthplace + ", address=" + address + ", political=" + political + ", nation="
-				+ nation + ", remark=" + remark + "]";
-	}
 }

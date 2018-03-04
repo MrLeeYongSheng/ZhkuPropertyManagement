@@ -17,13 +17,13 @@ public class DataDict {
 	public String key;
 	public String value;
 	public String parentId;
+	public Boolean enable;
 	public String getParentId() {
 		return parentId;
 	}
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
-	public Boolean enable;
 	public Integer getId() {
 		return id;
 	}
