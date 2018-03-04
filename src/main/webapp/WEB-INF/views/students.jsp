@@ -68,6 +68,14 @@
 				title : '学号',
 				width : 100
 			}, {
+				field : 'name',
+				title : '姓名',
+				width : 100
+			}, {
+				field : 'gender',
+				title : '性别',
+				width : 100
+			}, {
 				field : 'campus',
 				title : '校区',
 				width : 100

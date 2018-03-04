@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/jspf/commonHeader.jspf"%>
-<%@include file="/jspf/form.css.jspf"%>
+<%@include file="/jspf/customerHeader.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,42 +19,42 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="label">用户名</td>
-				<td><input type="text" name="userNameId" class="easyui-textbox"
-					data-options="required:true,width:278,prompt:'必填'"></td>
+				<td class="label">学号</td>
+				<td><input name="usersUsername" class="easyui-textbox"
+					data-options="required:true,width:278,prompt:'必填',validType:'num'"></td>
 				<td class="label">姓名</td>
-				<td><input type="text" name="userName" class="easyui-textbox"
+				<td><input name="name" class="easyui-textbox"
 					data-options="required:true,width:278,prompt:'必填'"></td>
 			</tr>
 			<tr>
 				<td class="label">性别</td>
-				<td><input name="sex" class="easyui-switchbutton" checked
-					data-options="onText:'男',offText:'女',width:278"></td>
-				<td class="label">年龄</td>
-				<td><input type="text" name="age" class="easyui-textbox"
-					data-options="width:278"></td>
+				<td><input id="gender" name="gender" class="easyui-switchbutton"
+					data-options="onText:'男',offText:'女',width:278,checked:true" value="男">
+					<input id="gender_women" name="gender" type="hidden" disabled="true" value="女"/></td>
+				<td class="label">校区</td>
+				<td><input id="campus" name="campus" class="easyui-combobox"
+					data-options="required:true,prompt:'必选',width:278"></td>
 			</tr>
 			<tr>
-				<td class="label">职务</td>
-				<td><input type="text" name="post" data-toggle="topjui-textbox"
-					data-options="width:278"></td>
-				<td class="label">固定电话</td>
-				<td><input type="text" name="telephone"
-					data-toggle="topjui-textbox"
-					data-options="required:true,validType:'telephone',width:278">
-				</td>
+				<td class="label">学院</td>
+				<td><input id="department" name="department" class="easyui-combobox"
+					data-options="prompt:'请先选择校区',width:278"></td>
+				<td class="label">专业</td>
+				<td><input id="major" name="major" class="easyui-combobox"
+					data-options="prompt:'请先选择学院',width:278"></td>
 			</tr>
 			<tr>
-				<td class="label">电子邮箱</td>
-				<td><input type="text" name="email"
-					data-toggle="topjui-textbox"
-					data-options="required:true,validType:'email',prompt:'必填',width:278">
-				</td>
-				<td class="label">手机</td>
-				<td><input type="text" name="mobile"
-					data-toggle="topjui-textbox"
-					data-options="required:true,validType:'cellphone',prompt:'必填',width:278">
-				</td>
+				<td class="label">年级</td>
+				<td><input name="grade" class="easyui-textbox"
+					data-options="width:278,prompt:'请输入数字',validType:'num'"></td>
+				<td class="label">班级</td>
+				<td><input name="classnum" class="easyui-textbox"
+					data-options="width:278,prompt:'请输入数字',validType:'num'"></td>
+			</tr>
+			<tr>
+				<td class="label">宿舍</td>
+				<td><input name="dormitory" class="easyui-textbox"
+					data-options="required:true,width:278,prompt:'必填'"></td>		
 			</tr>
 			<tr>
 				<td colspan="4">
@@ -64,65 +64,52 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="label">国家</td>
-				<td><input type="text" name="country"
-					data-toggle="topjui-textbox" data-options="readonly:true,width:278">
+				<td class="label">身份证号</td>
+				<td><input name="idcard" class="easyui-textbox"
+					data-options="required:true,width:278,prompt:'必填'"></td>
 				</td>
-				<td class="label">省份</td>
-				<td><input type="text" name="province"
-					data-toggle="topjui-textbox" data-options="readonly:true,width:278"></td>
+				<td class="label">手机号码</td>
+				<td><input name="phonenum" class="easyui-textbox"
+					data-options="width:278,validType:'num'"></td>
+				</td>
 			</tr>
 			<tr>
-				<td class="label">城市</td>
-				<td><input type="text" name="city" data-toggle="topjui-textbox"
-					data-options="readonly:true,width:278"></td>
-				<td class="label">区县</td>
-				<td><input type="text" name="district"
-					data-toggle="topjui-textbox" data-options="readonly:true,width:278"></td>
+				<td class="label">短号</td>
+				<td><input name="shortnum" class="easyui-textbox"
+					data-options="width:278,validType:'num'"></td>
+				<td class="label">邮件</td>
+				<td><input name="email" class="easyui-textbox"
+					data-options="width:278,validType:'email'"></td>
+			</tr>
+			<tr>
+				<td class="label">QQ</td>
+				<td><input name="qq" class="easyui-textbox"
+					data-options="width:278"></td>
+				<td class="label">紧急联系电话</td>
+				<td><input name="urgentnum" class="easyui-textbox"
+					data-options="width:278,validType:'num'"></td>
 			</tr>
 			<tr>
 				<td class="label">籍贯</td>
-				<td><input type="text" name="nativePlace"
-					data-toggle="topjui-combobox"
-					data-options="url:remoteHost + '/system/codeItem/getListByCodeSetIdAndLevelId?codeSetId=AAAC&levelId=1',
-                       width:278,
-                       valueField:'text',
-                       panelHeight:'250'">
-				</td>
+				<td><input name="birthplace" class="easyui-textbox"
+					data-options="width:278,prompt:'省-市'"></td>
+				<td class="label">详细地址</td>
+				<td><input name="address" class="easyui-textbox"
+					data-options="width:278"></td>
+			</tr>
+			<tr>
+				<td class="label">政治面貌</td>
+				<td><input name="political" class="easyui-textbox"
+					data-options="width:278"></td>
 				<td class="label">民族</td>
-				<td><input type="text" name="nation"
-					data-toggle="topjui-combobox"
-					data-options="url:remoteHost + '/system/codeItem/getListByCodeSetIdAndLevelId?codeSetId=AAAB&levelId=2',
-                       width:278,
-                       valueField:'text',
-                       panelHeight:'250'"></td>
-			</tr>
-			<tr>
-				<td class="label">身份证号</td>
-				<td><input type="text" name="idCard"
-					data-toggle="topjui-textbox" data-options="width:278"></td>
-				<td class="label">毕业院校</td>
-				<td><input type="text" name="school"
-					data-toggle="topjui-textbox" data-options="width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">学历</td>
-				<td><input type="text" id="education" name="education"
-					data-toggle="topjui-combobox"
-					data-options="url:remoteHost + '/system/codeItem/getListByCodeSetIdAndLevelId?codeSetId=AABA&levelId=5',
-                       width:278,
-                       valueField:'text',"></td>
-				<td class="label">学位</td>
-				<td><input type="text" id="degree" name="degree"
-					data-toggle="topjui-combobox"
-					data-options="url:remoteHost + '/system/codeItem/getListByCodeSetIdAndLevelId?codeSetId=AABB&levelId=5',
-                       width:278,
-                       valueField:'text',"></td>
+				<td><input name="nation" class="easyui-textbox"
+					data-options="width:278"></td>
 			</tr>
 			<tr>
 				<td class="label">备注</td>
-				<td colspan="3"><textarea name="remark"
-						style="height: 100px; width: 500px;"></textarea></td>
+				<td colspan="3"><textarea name="remark" class="easyui-validatebox"
+						style="height: 100px; width: 500px;"
+						data-options="validType:'length[0,150]'"></textarea></td>
 			</tr>
 		</table>
 	</form>
@@ -132,11 +119,7 @@
     </div>	
 
 	<script type="text/javascript">
-	$('#ff').form('load', {
-		userNameId : 'name2',
-		userName : 'mymail@gmail.com'
-	});	
-		/* $('#ff').form({
+		$('#ff').form({
 			url : "${prePath}/students/add",
 		    onSubmit: function(){
 		    	alert("onSubmit");
@@ -146,16 +129,55 @@
 		    success:function(data){
 		    	alert(data);
 		    }
-		}); */ 		
-		$(function(){    
+		});	
+		$(function(){
+			$('#campus').combobox({
+				valueField:'value',
+				textField:'value',
+				url:'${prePath }/students/getDataDictListByKey',
+				queryParams:{"key":"campus"},
+				onLoadSuccess : function() {
+					var selected = $(this).combobox("getData")[0].value;
+					$(this).combobox("select",selected);
+				},
+				onSelect : function(record){
+					var queryParams = {parentId : record.id};
+					$('#department').combobox("options").queryParams = queryParams;
+					$('#department').combobox("reload");
+				}
+			});
+			$('#department').combobox({
+				valueField:'value',
+				textField:'value',
+				url:'${prePath }/students/getDataDictListByParentId',
+				onSelect : function(record){
+					var queryParams = {parentId : record.id};
+					$('#major').combobox("options").queryParams = queryParams;
+					$('#major').combobox("reload");
+				}
+			});
+			$('#major').combobox({
+				valueField:'value',
+				textField:'value',
+				url:'${prePath }/students/getDataDictListByParentId'
+			});
+			
+			$("#gender").switchbutton({
+				onChange : function(checked){
+					if(!checked) {
+						$("#gender_women").attr("disabled", false);
+					} else {
+						$("#gender_women").attr("disabled", true);
+					}
+				}
+			});
+			
 		    $('#btn_submit').bind('click', function(){    
-		        alert('btn_submit');
 		        $("#ff").submit();
 		    });    
 		    $('#btn_reset').bind('click', function(){    
-		        alert('btn_submit'); 
 		        $("#ff").form("reset");
-		    });    
+		    });
 		}); 
 	</script>
 </body>

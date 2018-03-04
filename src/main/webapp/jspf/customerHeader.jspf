@@ -1,0 +1,4 @@
+<!--form表单样式 -->
+<link type="text/css" href="${prePath }/css/form.css" rel="stylesheet">
+<!-- 自定义验证规则 -->
+<script type="text/javascript" src="${prePath}/js/validate.rules.js"></script>
