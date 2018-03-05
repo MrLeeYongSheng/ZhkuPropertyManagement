@@ -15,14 +15,15 @@
 	<script type="text/javascript">
 		$('#dg').datagrid({
 			//数据源
-			url : '${prePath}/student_data.json',
+			url : '${prePath}/students/getStudentsPage',
+			//cache : false,//取消datagrid缓存
 			//行宽填充窗体
 			fitColumns : true,
 			idField : "usersUsername", //指明哪一个字段是标识字段
 			pagination : true,//在DataGrid控件底部显示分页工具栏
 			rownumbers : true,//显示一个行号列
-			pageSize : 1,//初始化页面大小
-			pageList : [ 1, 3, 5, 10, 20 ],//初始化页面大小选择列表
+			pageSize : 5,//初始化页面大小
+			pageList : [5, 10, 15],//初始化页面大小选择列表
 			//菜单栏
 			toolbar : [ {
 				iconCls : 'icon-add',
@@ -42,7 +43,21 @@
 				iconCls : 'icon-edit',
 				text : '修改',
 				handler : function() {
-					alert('修改按钮')
+					alert('修改按钮');
+					var selections = $("#dg").datagrid("getSelections");
+					if(selections.length !=1 ){
+						alert("只能选择一行");
+						return ;
+					}
+					var row = selections[0];
+					$('#win').dialog({
+						title : '添加学生页面',
+						width : 900,
+						height : 500,
+						cache : false,
+						modal : true,//将窗体显示为模式化窗口
+						content:"<iframe src='${prePath}/students/student_add' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
+					});
 				}
 			}, '-', {
 				iconCls : 'icon-remove',
@@ -101,7 +116,6 @@
 				width : 100
 			} ] ]
 		});
-		$('#dg').datagrid('load',{});
 	</script>
 </body>
 </html>

@@ -9,10 +9,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
+	<!-- 配置事务通知,匹配指定的方法开启事务 -->
 	<tx:advice id="tx-advice"  transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="select*"/>
@@ -20,11 +22,15 @@
 			<tx:method name="insert*"/>
 			<tx:method name="update*"/>
 			<tx:method name="delete*"/>
+			<tx:method name="test"/>
 		</tx:attributes>
 	</tx:advice>
 	
+	<!-- 配置切面的切点和通知,指定impl包下的所有类的所有方法织入事务切面 -->
+	<!-- ..指的是本包或者子包下的内容 -->
 	<aop:config>
-		<aop:pointcut id="servicePointcut" expression="execution(* com.lys.zhku.service.impl.*.*(..))"/>
+		<aop:pointcut id="servicePointcut" 
+			expression="execution(* com.lys.zhku.service..impl.*Impl.*(..))"/>
 		<aop:advisor advice-ref="tx-advice" pointcut-ref="servicePointcut"/>
 	</aop:config>
 

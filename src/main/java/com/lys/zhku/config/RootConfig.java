@@ -3,15 +3,11 @@ package com.lys.zhku.config;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
-import org.apache.ibatis.logging.log4j2.Log4j2Impl;
-import org.apache.ibatis.logging.log4j2.Log4j2LoggerImpl;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
@@ -27,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = "com.lys.zhku", excludeFilters = {
 		@Filter(type = FilterType.ANNOTATION, value = { EnableWebMvc.class, Controller.class }) })
 @ImportResource("classpath:com/lys/zhku/config/applicationContext-tx.xml")
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy //开启切面代理
 public class RootConfig {
 
 	@Bean

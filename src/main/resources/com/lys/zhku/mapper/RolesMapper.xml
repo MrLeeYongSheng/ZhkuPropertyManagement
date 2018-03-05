@@ -66,5 +66,11 @@
 			#{usersRoles.rolesId,jdbcType=INTEGER}
 		</foreach>
 	</select>
+	
+	<select id="selectByRole" resultMap="BaseResultMap">
+	    select id, role, enable, remark
+	    from roles
+	    where role = #{role,jdbcType=VARCHAR}		
+	</select>
   
 </mapper>

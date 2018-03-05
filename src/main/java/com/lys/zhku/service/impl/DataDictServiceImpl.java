@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.lys.zhku.mapper.UsersMapper;
 import com.lys.zhku.model.Users;
-import com.lys.zhku.model.dictionary.DataDict;
+import com.lys.zhku.pojo.dictionary.DataDict;
 import com.lys.zhku.service.DataDictService;
 
-@Service("dataDictServiceImpl")
+@Service
 public class DataDictServiceImpl implements DataDictService{
 	
 	@Autowired

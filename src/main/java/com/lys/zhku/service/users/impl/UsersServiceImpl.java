@@ -1,0 +1,48 @@
+package com.lys.zhku.service.users.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lys.zhku.mapper.RolesMapper;
+import com.lys.zhku.mapper.UsersMapper;
+import com.lys.zhku.mapper.UsersRolesMapper;
+import com.lys.zhku.model.Roles;
+import com.lys.zhku.model.Users;
+import com.lys.zhku.model.UsersRoles;
+import com.lys.zhku.service.users.UsersService;
+import com.lys.zhku.utils.PasswordUtils;
+import com.lys.zhku.utils.RolesUtils;
+import com.lys.zhku.utils.StatusCode;
+
+@Service
+public class UsersServiceImpl implements UsersService {
+
+	@Autowired
+	private UsersMapper usersMapper;
+
+	@Autowired
+	private RolesMapper rolesMapper;
+
+	@Autowired
+	private UsersRolesMapper usersRolesMapper;
+
+	/**
+	 * @param user 用户,其字段不能为空,其密码为必须为原始密码(本方法提供加密)
+	 * @return 0:插入失败,用户已存在<br>1:成功
+	 */
+	@Override
+	public Integer insertUserForStudents(Users user) {
+		user.setPassword(PasswordUtils.encode(user.getPassword()));
+		int userStatus = usersMapper.insert(user);//添加用户
+		if(userStatus==0) {
+			return StatusCode.EXIST;
+		}
+		//为用户添加角色
+		Roles studentRole = rolesMapper.selectByRole(RolesUtils.STUDENTS);//获取学生角色,目的为了其角色ID
+		UsersRoles usersRoles = new UsersRoles();
+		usersRoles.setRolesId(studentRole.getId());
+		usersRoles.setUsersUsername(user.getUsername());
+		usersRolesMapper.insert(usersRoles);
+		return StatusCode.SUCCESS;
+	}
+}

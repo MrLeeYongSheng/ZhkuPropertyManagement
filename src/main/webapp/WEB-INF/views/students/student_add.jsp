@@ -124,10 +124,17 @@
 		    onSubmit: function(){
 		    	alert("onSubmit");
 				var isValid = $(this).form('validate');
-				return isValid;
+				//return isValid;
+				return true;//TODO:测试呢 
 		    },    
 		    success:function(data){
-		    	alert(data);
+		    	var jsonData = $.parseJSON(data)
+				if(jsonData.code==1) {
+					parent.$("#win").dialog("close");
+					parent.$("#dg").datagrid("reload");
+				} else{
+					alert(jsonData.msg);
+				} 
 		    }
 		});	
 		$(function(){

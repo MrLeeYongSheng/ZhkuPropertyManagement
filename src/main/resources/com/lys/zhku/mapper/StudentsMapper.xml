@@ -73,4 +73,15 @@
     dormitory
     from students
   </select>
+  
+	<select id="selectForPagination" resultMap="BaseResultMap" parameterType="com.lys.zhku.pojo.web.Pagination">
+	  select users_username, name, gender, campus, department, major, grade, classnum, 
+	  dormitory
+	  from students limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectTotalForPagination" resultType="java.lang.Integer" parameterType="com.lys.zhku.pojo.web.Pagination">
+	  select count(1) as total
+	  from students
+	</select>
 </mapper>

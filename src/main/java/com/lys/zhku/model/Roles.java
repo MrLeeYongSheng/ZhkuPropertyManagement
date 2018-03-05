@@ -94,4 +94,18 @@ public class Roles {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public Roles(Integer id, String role, Boolean enable, String remark) {
+		super();
+		this.id = id;
+		this.role = role;
+		this.enable = enable;
+		this.remark = remark;
+	}
+
+	public Roles() {
+		super();
+	}
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.lys.zhku.model.dictionary;
+package com.lys.zhku.pojo.dictionary;
 
 public class DataDict {
 	public DataDict() {
