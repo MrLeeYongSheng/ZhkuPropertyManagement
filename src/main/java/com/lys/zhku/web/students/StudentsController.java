@@ -1,7 +1,5 @@
 package com.lys.zhku.web.students;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +51,16 @@ public class StudentsController {
 	public String students() {
 		return "students";
 	}
-	
+
+	/**
+	 * 获取students的datagrid页面
+	 * 
+	 * @param pagination
+	 * @return
+	 */
 	@RequestMapping("/getStudentsPage")
-	@ResponseBody public Page<Students> getStudentsPage(Pagination pagination) {
+	@ResponseBody
+	public Page<Students> getStudentsPage(Pagination pagination) {
 		return studentsService.getStudentsPage(pagination);
 	}
 
@@ -83,6 +88,33 @@ public class StudentsController {
 		studentsService.insertStudent(student, userdetail);
 		return new Message(StatusCode.SUCCESS, "插入成功");
 	}
+	
+	/**
+	 * 修改一个学生的信息
+	 * 
+	 * @param student
+	 * @param userdetail
+	 * @return
+	 */
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@ResponseBody
+	public Message studentEdit(Students student, Userdetails userdetail) {
+		studentsService.updateStudent(student, userdetail);
+		return new Message(StatusCode.SUCCESS, "修改成功");
+	}	
+
+	/**
+	 * 删除多个学生的信息
+	 * 
+	 * @param usersUsernames
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Message studentDelete(String[] usersUsernames) {
+		studentsService.deleteStudentsByUsersUsernames(usersUsernames);
+		return new Message(StatusCode.SUCCESS, "修改成功");
+	}	
 
 	@RequestMapping(value = "/getDataDictListByKey")
 	@ResponseBody

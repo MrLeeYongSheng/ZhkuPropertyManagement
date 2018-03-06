@@ -9,7 +9,9 @@ import com.lys.zhku.mapper.UsersRolesMapper;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Users;
 import com.lys.zhku.model.UsersRoles;
+import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.service.users.UsersService;
+import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.RolesUtils;
 import com.lys.zhku.utils.StatusCode;
@@ -44,5 +46,17 @@ public class UsersServiceImpl implements UsersService {
 		usersRoles.setUsersUsername(user.getUsername());
 		usersRolesMapper.insert(usersRoles);
 		return StatusCode.SUCCESS;
+	}
+
+	@Override
+	public Integer updateUserEnableByUsernames(String[] usernames, boolean enable) {
+		if(CollectionUtils.isEmpty(usernames)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		int status = usersMapper.updateEnableByPrimarykeys(usernames, enable);
+		if(status<1) {
+			throw new ErrorException(StatusCode.ERROR, "操作失败");
+		}
+		return status;
 	}
 }

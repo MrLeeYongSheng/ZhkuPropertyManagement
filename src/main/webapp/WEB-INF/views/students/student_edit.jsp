@@ -20,8 +20,8 @@
 			</tr>
 			<tr>
 				<td class="label">学号</td>
-				<td><input name="usersUsername" class="easyui-textbox"
-					data-options="required:true,width:278,prompt:'必填',validType:'num'"></td>
+				<td><input id="usersUsername" name="usersUsername" class="easyui-textbox"
+					data-options="width:278,prompt:'必填',validType:'num',readonly:true"></td>
 				<td class="label">姓名</td>
 				<td><input name="name" class="easyui-textbox"
 					data-options="required:true,width:278,prompt:'必填'"></td>
@@ -120,8 +120,9 @@
 
 	<script type="text/javascript">
 		$('#ff').form({
-			url : "${prePath}/students/add",
+			url : "${prePath}/students/edit",
 		    onSubmit: function(){
+		    	alert("onSubmit");
 				var isValid = $(this).form('validate');
 				return isValid;
 		    },    
@@ -177,11 +178,22 @@
 				}
 			});
 			
-		    $('#btn_submit').bind('click', function(){    
+			var row = parent.$("#dg").datagrid("getSelected");
+			$("#ff").form("load",row); //应该放在combobox等会自动加载的组件下面,否则其其自动加载的内容会覆盖
+			
+			//加载"其他信息",userdetils表的信息
+			$.getJSON("${prePath}/userdetails/getUserdetailsByUsersUsername",
+				{usersUsername:row.usersUsername},
+				function(json){
+					$("#ff").form("load",json);
+			});
+
+			$('#btn_submit').bind('click', function(){    
 		        $("#ff").submit();
 		    });    
 		    $('#btn_reset').bind('click', function(){    
 		        $("#ff").form("reset");
+		        $("#usersUsername").textbox("setValue",row.usersUsername);
 		    });
 		}); 
 	</script>

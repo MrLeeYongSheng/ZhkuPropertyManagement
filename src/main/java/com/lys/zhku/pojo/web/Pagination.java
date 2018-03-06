@@ -5,6 +5,7 @@ public class Pagination {
 	private Integer rows;// pageSize
 	private Integer page;// pageNumber
 	private Integer index;// 数据库的开始记录的下标
+	private Boolean enable;
 
 	public Integer getRows() {
 		return rows;
@@ -24,6 +25,14 @@ public class Pagination {
 
 	public Integer getIndex() {
 		return (page-1)*rows;
+	}
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
 	}
 
 	public Boolean isIllegal() {

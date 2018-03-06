@@ -57,4 +57,20 @@
     select username, nickname, password, enable
     from users
   </select>
+
+  <update id="updateEnableByPrimarykeys">
+    update users
+    set enable = #{enable,jdbcType=BIT}
+    <where>
+    	<if test="usernames != null and usernames.length != 0">
+    		username in
+    		<foreach collection="usernames" item="username" index="i" open="(" close=")" separator=",">
+    			#{username,jdbcType=VARCHAR}
+    		</foreach>
+    	</if>
+    	<if test="usernames == null or usernames.length == 0">
+			and 0=1
+    	</if>
+    </where>    
+  </update>  
 </mapper>

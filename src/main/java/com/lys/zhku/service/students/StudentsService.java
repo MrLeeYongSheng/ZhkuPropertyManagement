@@ -14,6 +14,14 @@ public interface StudentsService {
 	 * @return
 	 */
 	Integer insertStudent(Students student, Userdetails userdetail);
+
+	/**
+	 * 更新一条学生记录
+	 * @param student
+	 * @param userdetail
+	 * @return
+	 */
+	Integer updateStudent(Students student, Userdetails userdetail);
 	
 	/**
 	 * 获取学生的Students表的数据分页记录
@@ -21,4 +29,11 @@ public interface StudentsService {
 	 * @return
 	 */
 	Page<Students> getStudentsPage(Pagination pagination);
+	
+	/**
+	 * 物理删除:根据usersUsernames数组删除对应的记录
+	 * @param usersUsernames
+	 * @return
+	 */
+	Integer deleteStudentsByUsersUsernames(String[] usersUsernames);
 }

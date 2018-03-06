@@ -16,6 +16,7 @@ import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.service.students.StudentsService;
 import com.lys.zhku.service.users.UsersService;
+import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.StatusCode;
@@ -47,7 +48,7 @@ public class StudentsServiceImpl implements StudentsService {
 		users.setUsername(student.getUsersUsername());
 		Integer userStatus = usersService.insertUserForStudents(users);
 		if(userStatus==0) {
-			return StatusCode.EXIST;
+			throw new ErrorException(StatusCode.EXIST, "账号已存在");
 		}
 		//插入students
 		int studentStatus = studentsMapper.insert(student);
@@ -76,5 +77,30 @@ public class StudentsServiceImpl implements StudentsService {
 		List<Students> list = studentsMapper.selectForPagination(pagination);
 		page.setRows(list);
 		return page;
+	}
+
+	@Override
+	public Integer updateStudent(Students student, Userdetails userdetail) {
+		//检查model
+		if(!(ModelUtils.isNotNullForAllNotNullField(student) && ModelUtils.isNotNullForAllNotNullField(userdetail))) {
+			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "缺失必要字段");
+		}
+		
+		//插入students
+		int studentStatus = studentsMapper.updateByPrimaryKey(student);
+		//插入userDetails
+		int userdetailStatus = userdetailsMapper.updateByPrimaryKey(userdetail);
+		
+		if(studentStatus+userdetailStatus<2) {
+			throw new ErrorException(StatusCode.ERROR, "更新数据 发生内部错误");
+		}
+		
+		return StatusCode.SUCCESS;
+	}
+
+	@Override
+	public Integer deleteStudentsByUsersUsernames(String[] usersUsernames) {
+		//错误逻辑交给usersService.updateUserEnableByUsernames方法处理
+		return usersService.updateUserEnableByUsernames(usersUsernames, false);
 	}
 }

@@ -3,6 +3,8 @@ package com.lys.zhku.mapper;
 import com.lys.zhku.model.Users;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UsersMapper {
 
 	/**
@@ -34,4 +36,6 @@ public interface UsersMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(Users record);
+	
+	int updateEnableByPrimarykeys(@Param("usernames")String[] usernames, @Param("enable") boolean enable);
 }

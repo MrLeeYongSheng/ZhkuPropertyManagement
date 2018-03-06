@@ -5,6 +5,8 @@ import com.lys.zhku.pojo.web.Pagination;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface StudentsMapper {
 
 	/**
@@ -40,4 +42,6 @@ public interface StudentsMapper {
 	List<Students> selectForPagination(Pagination pagination);
 	
 	Integer selectTotalForPagination(Pagination pagination);
+	
+	Integer deleteByPrimaryKeys(String[] usersUsernames);
 }

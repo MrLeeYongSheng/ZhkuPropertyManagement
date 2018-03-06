@@ -5,7 +5,7 @@
     "state": "open",
     "iconCls": "",
     "text": "学生管理",
-    "url": "./students"
+    "url": "./students/students"
   },
   {
     "id": 221,
