@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lys.zhku.mapper.UserdetailsMapper;
+import com.lys.zhku.mapper.UsersRolesMapper;
 import com.lys.zhku.mapper.WorkersMapper;
 import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.model.Users;
@@ -30,12 +31,15 @@ public class WorkersServiceImpl implements WorkersService {
 	private UserdetailsMapper userdetailsMapper;
 	
 	@Autowired
+	private UsersRolesMapper usersRolesMapper;
+	
+	@Autowired
 	private UsersService usersService;
 	
 	@Override
 	public Integer insertWorker(Workers worker, Userdetails userdetail) {
 		//检查model
-		if(!(ModelUtils.isNotNullForAllNotNullField(worker) && ModelUtils.isNotNullForAllNotNullField(userdetail))) {
+		if(worker==null || userdetail==null || !(ModelUtils.isNotNullForAllNotNullField(worker) && ModelUtils.isNotNullForAllNotNullField(userdetail))) {
 			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "缺失必要字段");
 		}
 		
@@ -64,7 +68,7 @@ public class WorkersServiceImpl implements WorkersService {
 	@Override
 	public Integer updateWorker(Workers worker, Userdetails userdetail) {
 		//检查model
-		if(!(ModelUtils.isNotNullForAllNotNullField(worker) && ModelUtils.isNotNullForAllNotNullField(userdetail))) {
+		if(worker==null || userdetail==null || !(ModelUtils.isNotNullForAllNotNullField(worker) && ModelUtils.isNotNullForAllNotNullField(userdetail))) {
 			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "缺失必要字段");
 		}
 		
@@ -101,6 +105,14 @@ public class WorkersServiceImpl implements WorkersService {
 	public Integer deleteWorkersByUsersUsernames(String[] usersUsernames) {
 		//错误逻辑交给usersService.updateUserEnableByUsernames方法处理
 		return usersService.updateUserEnableByUsernames(usersUsernames, false);
+	}
+
+	@Override
+	public int deleteWorkersByUsersUsernamesInMemory(String[] usersUsernames) {
+		usersRolesMapper.deleteByUsernames(usersUsernames);
+		workersMapper.deleteByUsernames(usersUsernames);
+		userdetailsMapper.deleteByUsernames(usersUsernames);
+		return usersService.deleteByUsernamesInMemory(usersUsernames);
 	}
 
 }

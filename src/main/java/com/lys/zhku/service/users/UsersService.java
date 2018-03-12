@@ -25,4 +25,6 @@ public interface UsersService {
 	 * @return 0:插入失败,用户已存在<br>1:成功
 	 */
 	Integer insertUserForworkers(Users user);
+
+	int deleteByUsernamesInMemory(String[] usersUsernames);
 }

@@ -80,4 +80,9 @@ public class UsersServiceImpl implements UsersService {
 		usersRoles.setUsersUsername(user.getUsername());
 		return usersRolesMapper.insert(usersRoles);
 	}
+
+	@Override
+	public int deleteByUsernamesInMemory(String[] usersUsernames) {
+		return usersMapper.deleteByPrimaryKeys(usersUsernames);
+	}
 }

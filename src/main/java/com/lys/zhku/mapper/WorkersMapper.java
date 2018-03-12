@@ -5,6 +5,8 @@ import com.lys.zhku.pojo.web.Pagination;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface WorkersMapper {
 
 	/**
@@ -40,4 +42,11 @@ public interface WorkersMapper {
 	int selectTotalForPagination(Pagination pagination);
 
 	List<Workers> selectForPagination(Pagination pagination);
+
+	/**
+	 * 根据userUsername数组删除对应的记录
+	 * @param usersUsernames
+	 * @return
+	 */
+	int deleteByUsernames(@Param("usersUsernames") String[] usersUsernames);
 }

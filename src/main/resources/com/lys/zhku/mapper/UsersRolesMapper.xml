@@ -62,4 +62,18 @@
 	where ur.users_username = #{usersUsername,jdbcType=VARCHAR}
   </select>
 
+  <delete id="deleteByUsernames">
+    delete from users_roles
+   <where>
+   		<if test="usersUsernames!=null and usersUsernames.length>0">
+   			users_username in
+   			<foreach collection="usersUsernames" item="username" index="i" open="(" close=")" separator=",">
+   				#{username, jdbcType=VARCHAR}
+   			</foreach>
+   		</if>
+   		<if test="usersUsernames==null or usersUsernames.length==0">
+   			1=0
+   		</if>
+   </where>
+  </delete>
 </mapper>

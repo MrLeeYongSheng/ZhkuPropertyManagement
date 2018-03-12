@@ -38,4 +38,11 @@ public interface UsersMapper {
 	int updateByPrimaryKey(Users record);
 	
 	int updateEnableByPrimarykeys(@Param("usernames")String[] usernames, @Param("enable") boolean enable);
+
+	/**
+	 * 根据主键数组删除记录,内存上删除
+	 * @param usernames
+	 * @return
+	 */
+	int deleteByPrimaryKeys(@Param("usernames") String[] usernames);
 }

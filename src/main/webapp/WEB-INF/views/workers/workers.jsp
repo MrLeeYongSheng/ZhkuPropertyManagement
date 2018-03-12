@@ -30,7 +30,7 @@
 				$("#dg").datagrid("clearSelections");
 				$("#dg").datagrid("selectRow",index);
 				$('#win').dialog({
-					title : '查看学生页面',
+					title : '查看工人页面',
 					width : 900,
 					height : 500,
 					cache : false,
@@ -44,7 +44,7 @@
 				text : '增加',
 				handler : function() {
 					$('#win').dialog({
-						title : '添加学生页面',
+						title : '添加工人页面',
 						width : 900,
 						height : 500,
 						cache : false,
@@ -62,7 +62,7 @@
 						return ;
 					}
 					$('#win').dialog({
-						title : '修改学生页面',
+						title : '修改工人页面',
 						width : 900,
 						height : 500,
 						cache : false,
@@ -108,18 +108,6 @@
 							}
 						});						
 					});
-				}
-			}, '-', {
-				text : '<input id="search_gender" class="easyui-combobox" data-options="">',
-			}, '-', {
-				text : '<input id="ss" class="easyui-combobox" data-options="">',
-			}, '-', {
-				text : '<input id="dd" class="easyui-textbox" data-options="">',
-			}, '-', {
-				iconCls : 'icon-search',
-				text : '查询',
-				handler : function() {
-					alert('查询按钮');//TODO: 查询
 				}
 			} ],
 			//列    

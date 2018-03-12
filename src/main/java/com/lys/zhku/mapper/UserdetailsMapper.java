@@ -3,6 +3,8 @@ package com.lys.zhku.mapper;
 import com.lys.zhku.model.Userdetails;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UserdetailsMapper {
 
 	/**
@@ -34,4 +36,11 @@ public interface UserdetailsMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(Userdetails record);
+
+	/**
+	 * 根据usersUsernames(外键)数组删除记录,内存上永久删除
+	 * @param usersUsernames
+	 * @return
+	 */
+	int deleteByUsernames(@Param("usersUsernames") String[] usersUsernames);
 }

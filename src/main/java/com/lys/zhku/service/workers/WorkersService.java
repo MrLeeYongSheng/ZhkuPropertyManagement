@@ -35,4 +35,6 @@ public interface WorkersService {
 	 * @return
 	 */
 	Integer deleteWorkersByUsersUsernames(String[] usersUsernames);
+
+	int deleteWorkersByUsersUsernamesInMemory(String[] usersUsernames);
 }

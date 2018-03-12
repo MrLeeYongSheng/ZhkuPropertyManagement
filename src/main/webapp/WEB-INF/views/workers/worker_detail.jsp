@@ -19,7 +19,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="label">学号</td>
+				<td class="label">帐号</td>
 				<td><input id="usersUsername" name="usersUsername" class="easyui-textbox"
 					data-options="readonly:true,width:278"></td>
 				<td class="label">姓名</td>
@@ -30,30 +30,9 @@
 				<td class="label">性别</td>
 				<td><input id="gender" name="gender" class="easyui-textbox"
 					data-options="readonly:true,width:278">
-				<td class="label">校区</td>
-				<td><input id="campus" name="campus" class="easyui-textbox"
+				<td class="label">职位</td>
+				<td><input id="position" name="position" class="easyui-textbox"
 					data-options="readonly:true,width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">学院</td>
-				<td><input id="department" name="department" class="easyui-textbox"
-					data-options="readonly:true,width:278"></td>
-				<td class="label">专业</td>
-				<td><input id="major" name="major" class="easyui-textbox"
-					data-options="readonly:true,width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">年级</td>
-				<td><input name="grade" class="easyui-textbox"
-					data-options="readonly:true,width:278"></td>
-				<td class="label">班级</td>
-				<td><input name="classnum" class="easyui-textbox"
-					data-options="readonly:true,width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">宿舍</td>
-				<td><input name="dormitory" class="easyui-textbox"
-					data-options="readonly:true,width:278"></td>		
 			</tr>
 			<tr>
 				<td colspan="4">
