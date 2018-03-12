@@ -43,5 +43,5 @@ public interface StudentsMapper {
 	
 	Integer selectTotalForPagination(Pagination pagination);
 	
-	Integer deleteByPrimaryKeys(String[] usersUsernames);
+	Integer deleteByPrimaryKeys(@Param("usersUsernames") String[] usersUsernames);
 }

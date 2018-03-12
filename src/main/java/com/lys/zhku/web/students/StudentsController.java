@@ -43,16 +43,6 @@ public class StudentsController {
 	}
 
 	/**
-	 * 获取Students管理的datagrid的页面路径
-	 * 
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public String students() {
-		return "students";
-	}
-
-	/**
 	 * 获取students的datagrid页面
 	 * 
 	 * @param pagination
@@ -65,7 +55,7 @@ public class StudentsController {
 	}
 
 	/**
-	 * 获取Students管理的子功能页面路径
+	 * 获取Students管理的功能页面路径
 	 * 
 	 * @param pathName
 	 * @return

@@ -4,8 +4,8 @@
     "pid": 1327,
     "state": "open",
     "iconCls": "",
-    "text": "时间轴",
-    "url": "./html/extend/timeaxis.html"
+    "text": "角色权限",
+    "url": "./system/rolesAuthorities/main"
   },
   {
     "id": 221,

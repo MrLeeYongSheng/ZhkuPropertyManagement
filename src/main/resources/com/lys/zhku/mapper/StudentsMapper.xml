@@ -89,7 +89,9 @@
 
 	<select id="selectTotalForPagination" resultType="java.lang.Integer" parameterType="com.lys.zhku.pojo.web.Pagination">
 	  select count(1) as total
-	  from students
+	  from students,users  
+      where students.users_username=users.username      
+      and users.enable=#{enable,jdbcType=BOOLEAN}
 	</select>
 	
   <delete id="deleteByPrimaryKeys" parameterType="java.lang.String">

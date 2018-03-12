@@ -55,4 +55,20 @@
     select id, roles_id, authorities_id
     from roles_authorities
   </select>
+
+  <delete id="deleteByRolesId" parameterType="java.lang.Integer">
+    delete from roles_authorities
+    where roles_id = #{rolesId,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectByRoleIdAndAuthId" resultMap="BaseResultMap">
+    select id, roles_id, authorities_id
+    from roles_authorities
+    where roles_id=#{roleId, jdbcType=INTEGER} and authorities_id=#{authId, jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByRolesIdAndAuthsId">
+    delete from roles_authorities
+    where roles_id = #{roleId,jdbcType=INTEGER} and authorities_id=#{authId,jdbcType=INTEGER}
+  </delete>
 </mapper>

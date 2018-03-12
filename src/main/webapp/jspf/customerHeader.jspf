@@ -2,3 +2,4 @@
 <link type="text/css" href="${prePath }/css/form.css" rel="stylesheet">
 <!-- 自定义验证规则 -->
 <script type="text/javascript" src="${prePath}/js/validate.rules.js"></script>
+<script type="text/javascript" src="${prePath}/js/customer.lib.js"></script>

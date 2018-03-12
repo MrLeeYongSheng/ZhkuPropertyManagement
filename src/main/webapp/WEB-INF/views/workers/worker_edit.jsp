@@ -122,6 +122,7 @@
 		$('#ff').form({
 			url : "${prePath}/students/edit",
 		    onSubmit: function(){
+		    	alert("onSubmit");
 				var isValid = $(this).form('validate');
 				return isValid;
 		    },    
@@ -131,7 +132,7 @@
 					parent.$("#win").dialog("close");
 					parent.$("#dg").datagrid("reload");
 				} else{
-					$.messager.alert('操作结果',jsonData.msg,'info');
+					alert(jsonData.msg);
 				} 
 		    }
 		});	

@@ -12,8 +12,8 @@
     "pid": 1327,
     "state": "open",
     "iconCls": "",
-    "text": "自动完成",
-    "url": "./html/extend/autocomplete_index.html"
+    "text": "工作人员",
+    "url": "./workers/workers"
   },
   {
     "id": 1343,

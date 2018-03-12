@@ -34,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
 	 */
 	@Override
 	public Integer insertUserForStudents(Users user) {
-		user.setPassword(PasswordUtils.encode(user.getPassword()));
+/*		user.setPassword(PasswordUtils.encode(user.getPassword()));
 		int userStatus = usersMapper.insert(user);//添加用户
 		if(userStatus==0) {
 			return StatusCode.EXIST;
@@ -45,7 +45,9 @@ public class UsersServiceImpl implements UsersService {
 		usersRoles.setRolesId(studentRole.getId());
 		usersRoles.setUsersUsername(user.getUsername());
 		usersRolesMapper.insert(usersRoles);
-		return StatusCode.SUCCESS;
+		return StatusCode.SUCCESS;*/
+		
+		return insertUserForRoles(user, RolesUtils.STUDENTS);
 	}
 
 	@Override
@@ -58,5 +60,24 @@ public class UsersServiceImpl implements UsersService {
 			throw new ErrorException(StatusCode.ERROR, "操作失败");
 		}
 		return status;
+	}
+
+	@Override
+	public Integer insertUserForworkers(Users user) {
+		return insertUserForRoles(user, RolesUtils.WORKERS);
+	}
+	
+	private Integer insertUserForRoles(Users user, String roleName) {
+		user.setPassword(PasswordUtils.encode(user.getPassword()));
+		int userStatus = usersMapper.insert(user);//添加用户
+		if(userStatus==0) {
+			return StatusCode.EXIST;
+		}
+		//为用户添加角色
+		Roles role = rolesMapper.selectByRole(roleName);//获取学生角色,目的为了其角色ID
+		UsersRoles usersRoles = new UsersRoles();
+		usersRoles.setRolesId(role.getId());
+		usersRoles.setUsersUsername(user.getUsername());
+		return usersRolesMapper.insert(usersRoles);
 	}
 }

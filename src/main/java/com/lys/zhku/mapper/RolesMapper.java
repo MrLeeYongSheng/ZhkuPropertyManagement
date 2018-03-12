@@ -2,6 +2,8 @@ package com.lys.zhku.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.UsersRoles;
 
@@ -39,4 +41,10 @@ public interface RolesMapper {
 	List<Roles> selectByUsersRolesList(List<UsersRoles> usersRolesList);
 
 	Roles selectByRole(String role);
+	
+	List<Roles> selectAllWithAuthorities(@Param("rolesEnable") boolean rolesEnable, @Param("authoritiesEnable") boolean authoritiesEnable);
+
+	int updateByPrimaryKeyForEnable(@Param("id") Integer id, @Param("enable") boolean enable);
+	
+	List<Roles> selectAllByEnable(boolean enable);
 }

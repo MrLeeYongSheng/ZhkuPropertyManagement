@@ -5,7 +5,9 @@ public class Pagination {
 	private Integer rows;// pageSize
 	private Integer page;// pageNumber
 	private Integer index;// 数据库的开始记录的下标
-	private Boolean enable;
+	
+	//查询条件
+	private Boolean enable = true;//默认为true
 
 	public Integer getRows() {
 		return rows;

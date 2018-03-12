@@ -3,6 +3,8 @@ package com.lys.zhku.mapper;
 import com.lys.zhku.model.Authorities;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface AuthoritiesMapper {
 
 	/**
@@ -36,4 +38,10 @@ public interface AuthoritiesMapper {
 	int updateByPrimaryKey(Authorities record);
 
 	List<Authorities> selectByUsersUsername(String username);
+
+	List<Authorities> selectAllByEnable(boolean enable);
+
+	Authorities selectByAuthority(String authority);
+
+	int deleteByPrimaryKeys(@Param("ids") Integer[] ids);
 }

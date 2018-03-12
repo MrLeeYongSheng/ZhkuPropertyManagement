@@ -3,6 +3,8 @@ package com.lys.zhku.mapper;
 import com.lys.zhku.model.RolesAuthorities;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface RolesAuthoritiesMapper {
 
 	/**
@@ -34,4 +36,27 @@ public interface RolesAuthoritiesMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(RolesAuthorities record);
+	
+	/**
+	 * 根据role id 物理删除相关记录
+	 * @param roleId
+	 * @return
+	 */
+	int deleteByRolesId(Integer rolesId);
+
+	/**
+	 * 根据roleId和authId查找唯一记录
+	 * @param roleId
+	 * @param authId
+	 * @return
+	 */
+	RolesAuthorities selectByRoleIdAndAuthId(@Param("roleId") Integer roleId, @Param("authId") Integer authId);
+
+	/**
+	 * 根据roleId和authId查找唯一记录并删除
+	 * @param roleId
+	 * @param authId
+	 * @return
+	 */
+	int deleteByRolesIdAndAuthsId(@Param("roleId") Integer roleId, @Param("authId") Integer authId);
 }

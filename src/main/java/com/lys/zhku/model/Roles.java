@@ -1,5 +1,7 @@
 package com.lys.zhku.model;
 
+import java.util.List;
+
 public class Roles {
 
 	/**
@@ -95,17 +97,13 @@ public class Roles {
 		this.remark = remark;
 	}
 
-	public Roles(Integer id, String role, Boolean enable, String remark) {
-		super();
-		this.id = id;
-		this.role = role;
-		this.enable = enable;
-		this.remark = remark;
+	private List<Authorities> authorities;
+
+	public List<Authorities> getAuthorities() {
+		return authorities;
 	}
 
-	public Roles() {
-		super();
+	public void setAuthorities(List<Authorities> authorities) {
+		this.authorities = authorities;
 	}
-	
-	
 }

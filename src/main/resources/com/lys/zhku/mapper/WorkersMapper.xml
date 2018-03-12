@@ -57,4 +57,23 @@
     select users_username, name, gender, position
     from workers
   </select>
+  
+	<select id="selectForPagination" resultMap="BaseResultMap" parameterType="com.lys.zhku.pojo.web.Pagination">
+	    select users_username, name, gender, position
+	    from workers,users 
+	  <where>
+	  	workers.users_username=users.username 
+	  	<if test="enable != null">
+	  		and users.enable=#{enable,jdbcType=BOOLEAN}
+	  	</if>
+	  </where>
+	  limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectTotalForPagination" resultType="java.lang.Integer" parameterType="com.lys.zhku.pojo.web.Pagination">
+	  select count(1) as total
+	  from workers,users  
+      where workers.users_username=users.username      
+      and users.enable=#{enable,jdbcType=BOOLEAN}
+	</select>  
 </mapper>

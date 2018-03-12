@@ -72,5 +72,33 @@
 	    from roles
 	    where role = #{role,jdbcType=VARCHAR}		
 	</select>
+	
+  <resultMap id="CustomerBaseResultMap" type="com.lys.zhku.model.Roles">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <collection property="authorities" columnPrefix="authorities_" resultMap="com.lys.zhku.mapper.AuthoritiesMapper.BaseResultMap"/>
+  </resultMap>
   
+  <select id="selectAllWithAuthorities" resultMap="CustomerBaseResultMap">
+	select roles.id, roles.role, roles.enable, roles.remark, authorities.id as authorities_id,
+		authorities.authority as authorities_authority, authorities.enable as authorities_enable,
+		authorities.remark as authorities_remark
+	from roles left join roles_authorities on  roles.id=roles_authorities.roles_id 
+	left join authorities on roles_authorities.authorities_id=authorities.id and authorities.enable=#{authoritiesEnable,jdbcType=BIT}
+	where roles.enable=#{rolesEnable,jdbcType=BIT}  
+  </select>
+  
+  <update id="updateByPrimaryKeyForEnable">
+    update roles
+    set enable = #{enable,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllByEnable" resultMap="BaseResultMap">
+    select id, role, enable, remark
+    from roles
+    where enable=#{enable, jdbcType=BOOLEAN}
+  </select>
 </mapper>

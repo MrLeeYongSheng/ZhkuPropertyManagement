@@ -1,6 +1,8 @@
 package com.lys.zhku.mapper;
 
 import com.lys.zhku.model.Workers;
+import com.lys.zhku.pojo.web.Pagination;
+
 import java.util.List;
 
 public interface WorkersMapper {
@@ -34,4 +36,8 @@ public interface WorkersMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(Workers record);
+
+	int selectTotalForPagination(Pagination pagination);
+
+	List<Workers> selectForPagination(Pagination pagination);
 }

@@ -20,9 +20,9 @@
 			<tx:method name="select*"/>
 			<tx:method name="get*"/>
 			<tx:method name="insert*"/>
+			<tx:method name="add*"/>
 			<tx:method name="update*"/>
 			<tx:method name="delete*"/>
-			<tx:method name="test"/>
 		</tx:attributes>
 	</tx:advice>
 	

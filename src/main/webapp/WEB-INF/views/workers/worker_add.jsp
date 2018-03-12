@@ -19,9 +19,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="label">学号</td>
-				<td><input id="usersUsername" name="usersUsername" class="easyui-textbox"
-					data-options="width:278,prompt:'必填',validType:'num',readonly:true"></td>
+				<td class="label">账号</td>
+				<td><input name="usersUsername" class="easyui-textbox"
+					data-options="required:true,width:278,prompt:'必填',validType:'num'"></td>
 				<td class="label">姓名</td>
 				<td><input name="name" class="easyui-textbox"
 					data-options="required:true,width:278,prompt:'必填'"></td>
@@ -31,30 +31,9 @@
 				<td><input id="gender" name="gender" class="easyui-switchbutton"
 					data-options="onText:'男',offText:'女',width:278,checked:true" value="男">
 					<input id="gender_women" name="gender" type="hidden" disabled="true" value="女"/></td>
-				<td class="label">校区</td>
-				<td><input id="campus" name="campus" class="easyui-combobox"
+				<td class="label">职位</td>
+				<td><input id="position" name="position" class="easyui-textbox"
 					data-options="required:true,prompt:'必选',width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">学院</td>
-				<td><input id="department" name="department" class="easyui-combobox"
-					data-options="prompt:'请先选择校区',width:278"></td>
-				<td class="label">专业</td>
-				<td><input id="major" name="major" class="easyui-combobox"
-					data-options="prompt:'请先选择学院',width:278"></td>
-			</tr>
-			<tr>
-				<td class="label">年级</td>
-				<td><input name="grade" class="easyui-textbox"
-					data-options="width:278,prompt:'请输入数字',validType:'num'"></td>
-				<td class="label">班级</td>
-				<td><input name="classnum" class="easyui-textbox"
-					data-options="width:278,prompt:'请输入数字',validType:'num'"></td>
-			</tr>
-			<tr>
-				<td class="label">宿舍</td>
-				<td><input name="dormitory" class="easyui-textbox"
-					data-options="required:true,width:278,prompt:'必填'"></td>		
 			</tr>
 			<tr>
 				<td colspan="4">
@@ -120,7 +99,7 @@
 
 	<script type="text/javascript">
 		$('#ff').form({
-			url : "${prePath}/students/edit",
+			url : "${prePath}/workers/add",
 		    onSubmit: function(){
 				var isValid = $(this).form('validate');
 				return isValid;
@@ -131,42 +110,11 @@
 					parent.$("#win").dialog("close");
 					parent.$("#dg").datagrid("reload");
 				} else{
-					$.messager.alert('操作结果',jsonData.msg,'info');
+					alert(jsonData.msg);
 				} 
 		    }
 		});	
 		$(function(){
-			$('#campus').combobox({
-				valueField:'value',
-				textField:'value',
-				url:'${prePath }/students/getDataDictListByKey',
-				queryParams:{"key":"campus"},
-				onLoadSuccess : function() {
-					var selected = $(this).combobox("getData")[0].value;
-					$(this).combobox("select",selected);
-				},
-				onSelect : function(record){
-					var queryParams = {parentId : record.id};
-					$('#department').combobox("options").queryParams = queryParams;
-					$('#department').combobox("reload");
-				}
-			});
-			$('#department').combobox({
-				valueField:'value',
-				textField:'value',
-				url:'${prePath }/students/getDataDictListByParentId',
-				onSelect : function(record){
-					var queryParams = {parentId : record.id};
-					$('#major').combobox("options").queryParams = queryParams;
-					$('#major').combobox("reload");
-				}
-			});
-			$('#major').combobox({
-				valueField:'value',
-				textField:'value',
-				url:'${prePath }/students/getDataDictListByParentId'
-			});
-			
 			$("#gender").switchbutton({
 				onChange : function(checked){
 					if(!checked) {
@@ -177,22 +125,11 @@
 				}
 			});
 			
-			var row = parent.$("#dg").datagrid("getSelected");
-			$("#ff").form("load",row); //应该放在combobox等会自动加载的组件下面,否则其其自动加载的内容会覆盖
-			
-			//加载"其他信息",userdetils表的信息
-			$.getJSON("${prePath}/userdetails/getUserdetailsByUsersUsername",
-				{usersUsername:row.usersUsername},
-				function(json){
-					$("#ff").form("load",json);
-			});
-
-			$('#btn_submit').bind('click', function(){    
+		    $('#btn_submit').bind('click', function(){    
 		        $("#ff").submit();
 		    });    
 		    $('#btn_reset').bind('click', function(){    
 		        $("#ff").form("reset");
-		        $("#usersUsername").textbox("setValue",row.usersUsername);
 		    });
 		}); 
 	</script>

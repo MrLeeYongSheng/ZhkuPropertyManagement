@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 		$('#dg').datagrid({
 			//数据源
-			url : '${prePath}/students/getStudentsPage',
+			url : '${prePath}/workers/getWorkersPage',
 			queryParams : {enable:true},//加载有效的账号信息
 			cache : false,//取消datagrid缓存
 			//行宽填充窗体
@@ -35,7 +35,7 @@
 					height : 500,
 					cache : false,
 					modal : true,//将窗体显示为模式化窗口
-					content:"<iframe src='${prePath}/students/student_detail' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
+					content:"<iframe src='${prePath}/workers/worker_detail' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
 				});
 			},
 			//菜单栏
@@ -49,7 +49,7 @@
 						height : 500,
 						cache : false,
 						modal : true,//将窗体显示为模式化窗口
-						content:"<iframe src='${prePath}/students/student_add' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
+						content:"<iframe src='${prePath}/workers/worker_add' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
 					});
 				}
 			}, '-', {
@@ -67,7 +67,7 @@
 						height : 500,
 						cache : false,
 						modal : true,//将窗体显示为模式化窗口
-						content:"<iframe src='${prePath}/students/student_edit' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
+						content:"<iframe src='${prePath}/workers/worker_edit' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
 					});
 				}
 			}, '-', {
@@ -91,7 +91,7 @@
 						$.ajax({
 							type : "POST",//请求方式
 							dataType : 'json',
-							url : "${prePath}/students/delete",//请求目的URL
+							url : "${prePath}/workers/delete",//请求目的URL
 							traditional : true,//用传统的方式来序列化数据,去除参数名的[]
 							data : {//请求数据
 								usersUsernames : pks
@@ -129,7 +129,7 @@
 				width : 100
 			}, {
 				field : 'usersUsername',
-				title : '学号',
+				title : '账号',
 				width : 100
 			}, {
 				field : 'name',
@@ -140,28 +140,8 @@
 				title : '性别',
 				width : 100
 			}, {
-				field : 'campus',
-				title : '校区',
-				width : 100
-			}, {
-				field : 'department',
-				title : '学院',
-				width : 100
-			}, {
-				field : 'major',
-				title : '专业',
-				width : 100
-			}, {
-				field : 'grade',
-				title : '年级',
-				width : 100
-			}, {
-				field : 'classnum',
-				title : '班级',
-				width : 100
-			}, {
-				field : 'dormitory',
-				title : '宿舍',
+				field : 'position',
+				title : '职位',
 				width : 100
 			} ] ]
 		});

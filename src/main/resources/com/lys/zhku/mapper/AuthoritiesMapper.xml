@@ -64,12 +64,41 @@
 		a.authority,
 		a.`enable`
 	FROM
-		roles_authorities AS ra
-		INNER JOIN authorities AS a ON ra.authorities_id = a.id ,
-		users_roles AS ur
+        users AS u LEFT JOIN users_roles AS ur ON u.username=ur.users_username        
+        LEFT JOIN roles AS r ON r.id = ur.roles_id
+        LEFT JOIN roles_authorities AS ra ON ra.roles_id=r.id        
+        LEFT JOIN authorities AS a ON ra.authorities_id = a.id		
 	WHERE
-		ra.roles_id = ur.roles_id AND
-		ur.users_username = #{username}
+         u.enable=true         
+         AND r.enable=true         
+         AND a.enable=true
+		 AND ur.users_username = #{username, jdbcType=VARCHAR}
   </select>
   
+  <select id="selectAllByEnable" resultMap="BaseResultMap">
+    select id, authority, enable, remark
+    from authorities
+    where enable=#{enable, jdbcType=BOOLEAN}
+  </select>
+
+  <select id="selectByAuthority" resultMap="BaseResultMap">
+    select id, authority, enable, remark
+    from authorities
+    where authority=#{authority, jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKeys">
+    delete from authorities
+    <where>
+    	<if test="ids!=null and ids.length>0">
+    		id in
+    		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+    			#{id,jdbcType=INTEGER}
+    		</foreach>
+    	</if>
+    	<if test="ids==null or ids.length==0">
+    		1=0
+    	</if>
+    </where>
+  </delete>
 </mapper>
