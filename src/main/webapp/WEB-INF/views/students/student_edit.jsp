@@ -139,14 +139,10 @@
 			$('#campus').combobox({
 				valueField:'value',
 				textField:'value',
-				url:'${prePath }/students/getDataDictListByKey',
+				url:'${prePath }/students/getDatadictListByDatadict',
 				queryParams:{"key":"campus"},
-				onLoadSuccess : function() {
-					var selected = $(this).combobox("getData")[0].value;
-					$(this).combobox("select",selected);
-				},
 				onSelect : function(record){
-					var queryParams = {parentId : record.id};
+					var queryParams = {parentid : record.id, key : 'department'};
 					$('#department').combobox("options").queryParams = queryParams;
 					$('#department').combobox("reload");
 				}
@@ -154,9 +150,9 @@
 			$('#department').combobox({
 				valueField:'value',
 				textField:'value',
-				url:'${prePath }/students/getDataDictListByParentId',
+				url:'${prePath }/students/getDatadictListByDatadict',
 				onSelect : function(record){
-					var queryParams = {parentId : record.id};
+					var queryParams = {parentid : record.id, key : 'major'};
 					$('#major').combobox("options").queryParams = queryParams;
 					$('#major').combobox("reload");
 				}
@@ -164,7 +160,7 @@
 			$('#major').combobox({
 				valueField:'value',
 				textField:'value',
-				url:'${prePath }/students/getDataDictListByParentId'
+				url:'${prePath }/students/getDatadictListByDatadict'
 			});
 			
 			$("#gender").switchbutton({

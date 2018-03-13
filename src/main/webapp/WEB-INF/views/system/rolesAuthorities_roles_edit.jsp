@@ -57,7 +57,6 @@
 					return isValid;
 			    },
 			    success:function(data){
-			    	alert(data);
 			    	parent.$("#tg").treegrid("reload");
 			    	parent.$("#win").dialog("close");
 			    }

@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lys.zhku.model.Datadict;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
-import com.lys.zhku.pojo.dictionary.DataDict;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
-import com.lys.zhku.service.impl.DataDictServiceImpl;
 import com.lys.zhku.service.students.StudentsService;
+import com.lys.zhku.service.system.DatadictService;
 import com.lys.zhku.utils.StatusCode;
 
 @Controller
@@ -29,7 +29,10 @@ import com.lys.zhku.utils.StatusCode;
 public class StudentsController {
 
 	@Autowired
-	StudentsService studentsService;
+	private StudentsService studentsService;
+
+	@Autowired
+	private DatadictService datadictService;
 
 	/**
 	 * 用来处理异常ErrorException的情况
@@ -51,6 +54,7 @@ public class StudentsController {
 	@RequestMapping("/getStudentsPage")
 	@ResponseBody
 	public Page<Students> getStudentsPage(Pagination pagination) {
+		pagination.setEnable(true);
 		return studentsService.getStudentsPage(pagination);
 	}
 
@@ -108,14 +112,20 @@ public class StudentsController {
 
 	@RequestMapping(value = "/getDataDictListByKey")
 	@ResponseBody
-	public List<DataDict> getDataDictListByKey(@RequestParam String key) {
-		return new DataDictServiceImpl().getDataDictList(key);
+	public List<Datadict> getDataDictListByKey(@RequestParam String key) {
+		return datadictService.getDataDictList(key);
 	}
 
 	@RequestMapping(value = "/getDataDictListByParentId")
 	@ResponseBody
-	public List<DataDict> getDataDictListByParentId(@RequestParam Integer parentId) {
-		return new DataDictServiceImpl().getDataDictListByParentId(parentId);
+	public List<Datadict> getDataDictListByParentId(@RequestParam Integer parentId) {
+		return datadictService.getDataDictListByParentId(parentId);
+	}
+
+	@RequestMapping(value = "/getDatadictListByDatadict")
+	@ResponseBody
+	public List<Datadict> getDatadictListByDatadict(Datadict datadict) {
+		return datadictService.getListByDatadict(datadict);
 	}
 
 }

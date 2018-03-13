@@ -24,8 +24,8 @@
 			idField : "usersUsername", //指明哪一个字段是标识字段
 			pagination : true,//在DataGrid控件底部显示分页工具栏
 			rownumbers : true,//显示一个行号列
-			pageSize : 2,//初始化页面大小
-			pageList : [2, 5, 10, 15],//初始化页面大小选择列表
+			pageSize : 5,//初始化页面大小
+			pageList : [5, 10, 20, 30],//初始化页面大小选择列表
 			onDblClickRow : function(index,row){//双击一行查看详细信息
 				$("#dg").datagrid("clearSelections");
 				$("#dg").datagrid("selectRow",index);

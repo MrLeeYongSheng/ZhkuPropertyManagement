@@ -44,6 +44,7 @@ public class WorkersController {
 	@RequestMapping("getWorkersPage")
 	@ResponseBody
 	public Page<Workers> getWorkersPage(Pagination pagination){
+		pagination.setEnable(true);
 		return workersService.getWorkersPage(pagination);
 	}
 	

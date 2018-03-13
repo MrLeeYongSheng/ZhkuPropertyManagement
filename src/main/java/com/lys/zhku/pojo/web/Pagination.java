@@ -7,7 +7,7 @@ public class Pagination {
 	private Integer index;// 数据库的开始记录的下标
 	
 	//查询条件
-	private Boolean enable = true;//默认为true
+	private Boolean enable;
 
 	public Integer getRows() {
 		return rows;

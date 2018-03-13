@@ -16,28 +16,34 @@
 			<tr>
 				<td colspan="4">
 					<div class="divider">
-						<span>权限修改</span>
+						<span>数据词典修改</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="label">名称</td>
+				<td class="label">键</td>
 				<td>
 					<input id="id" name="id" type="hidden">
-					<input id="authority" name="authority" class="easyui-textbox"
+					<input id="key" name="key" class="easyui-textbox"
 					data-options="required:true,prompt:'必选',width:278"></td>
+			</tr>
+			<tr>
+				<td class="label">值</td>
+				<td>
+					<input id="value" name="value" class="easyui-textbox"
+					data-options="required:true,prompt:'必选',width:278"></td>
+			</tr>
+			<tr>
+				<td class="label">父级id</td>
+				<td>
+					<input id="parentid" name="parentid" class="easyui-textbox"
+					data-options="width:278"></td>
 			</tr>
 			<tr>
 				<td class="label">有效性</td>
 				<td><input id="enable" name="enable" class="easyui-switchbutton"
 					data-options="onText:'有效',offText:'无效',width:278,checked:true" value="true">
 					<input id="disable" name="enable" type="hidden" disabled="true" value="false"/></td>			
-			</tr>
-			<tr>
-				<td class="label">备注</td>
-				<td><textarea id="remark" name="remark" class="easyui-validatebox"
-						style="height: 100; width: 300;"
-						data-options="validType:'length[0,100]'"></textarea></td>
 			</tr>
 		</table>
 	</form>
@@ -55,14 +61,13 @@
 			
 			//表单定义
 			$('#ff').form({
-				url : "${prePath}/system/rolesAuthorities/auths/update",
+				url : "${prePath}/system/datadict/edit",
 			    onSubmit: function(){
 					var isValid = $(this).form('validate');
 					return isValid;
 			    },    
 			    success:function(data){
 			    	parent.$("#dg").datagrid("reload");
-			    	parent.$("#tg").treegrid("reload");
 			    	parent.$("#win").dialog("close");
 			    }
 			});	

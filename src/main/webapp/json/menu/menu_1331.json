@@ -12,8 +12,8 @@
     "pid": 1327,
     "state": "open",
     "iconCls": "",
-    "text": "自动完成",
-    "url": "./html/extend/autocomplete_index.html"
+    "text": "数据字典",
+    "url": "./system/datadict/main"
   },
   {
     "id": 1343,

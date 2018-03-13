@@ -1,6 +1,7 @@
 package com.lys.zhku.utils;
 
 import com.lys.zhku.model.Authorities;
+import com.lys.zhku.model.Datadict;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
@@ -51,5 +52,15 @@ public class ModelUtils {
 
 	public static boolean isNotNullForAllNotNullField(Roles role) {
 		return !(role.getId()==null || StringUtils.isEmpty(role.getRole()) || role.getEnable()==null);
+	}
+
+	public static boolean isNotNullForAllNotNullFieldExceptPrimaryKey(Datadict datadict) {
+		return !(datadict.getEnable()==null ||
+				StringUtils.isEmpty(datadict.getKey()) || StringUtils.isEmpty(datadict.getValue()));
+	}
+
+	public static boolean isNotNullForAllNotNullField(Datadict datadict) {
+		return !(datadict.getId()==null || datadict.getEnable()==null ||
+				StringUtils.isEmpty(datadict.getKey()) || StringUtils.isEmpty(datadict.getValue()));
 	}
 }
