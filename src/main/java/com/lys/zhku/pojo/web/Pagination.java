@@ -2,12 +2,12 @@ package com.lys.zhku.pojo.web;
 
 public class Pagination {
 
-	private Integer rows;// pageSize
-	private Integer page;// pageNumber
-	private Integer index;// 数据库的开始记录的下标
+	protected Integer rows;// pageSize
+	protected Integer page;// pageNumber
+	protected Integer index;// 数据库的开始记录的下标
 	
 	//查询条件
-	private Boolean enable;
+	protected Boolean enable;
 
 	public Integer getRows() {
 		return rows;

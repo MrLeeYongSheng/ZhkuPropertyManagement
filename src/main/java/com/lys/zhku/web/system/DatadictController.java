@@ -1,5 +1,7 @@
 package com.lys.zhku.web.system;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,4 +55,10 @@ public class DatadictController {
 		datadictService.editDatadictByIds(datadict);
 		return new Message(StatusCode.SUCCESS, "修改数据记录成功");
 	}
+	
+	@RequestMapping(value = "/getDatadictListByDatadict")
+	@ResponseBody
+	public List<Datadict> getDatadictListByDatadict(Datadict datadict) {
+		return datadictService.getListByDatadict(datadict);
+	}	
 }

@@ -83,6 +83,15 @@
 	  	<if test="enable != null">
 	  		and users.enable=#{enable,jdbcType=BOOLEAN}
 	  	</if>
+	  	<if test="dormitoryLike != null">
+	  		and students.dormitory like '%'#{dormitory,jdbcType=VARCHAR}'%'
+	  	</if>
+	  	<if test="dormitory != null">
+	  		and students.dormitory = #{dormitory,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="campus != null">
+	  		and students.campus = #{campus,jdbcType=VARCHAR}
+	  	</if>
 	  </where>
 	  limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
 	</select>

@@ -1,9 +1,9 @@
 /**
  * 自定义函数库
  */
-function showDialog(id,path) {
+function showDialog(id,path,title) {
 	$('#'+id).dialog({
-		title : '查看学生页面',
+		title : title,
 		width : 900,
 		height : 500,
 		cache : false,

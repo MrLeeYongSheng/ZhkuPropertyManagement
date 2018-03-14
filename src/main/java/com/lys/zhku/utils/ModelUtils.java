@@ -2,6 +2,7 @@ package com.lys.zhku.utils;
 
 import com.lys.zhku.model.Authorities;
 import com.lys.zhku.model.Datadict;
+import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
@@ -62,5 +63,16 @@ public class ModelUtils {
 	public static boolean isNotNullForAllNotNullField(Datadict datadict) {
 		return !(datadict.getId()==null || datadict.getEnable()==null ||
 				StringUtils.isEmpty(datadict.getKey()) || StringUtils.isEmpty(datadict.getValue()));
+	}
+
+	public static boolean isNotNullForAllNotNullFieldExceptPrimaryKey(Dormitory dormitory) {
+		return !(StringUtils.isEmpty(dormitory.getCampus()) || StringUtils.isEmpty(dormitory.getName()) ||
+				dormitory.getMaxNumber()==null || dormitory.getNumber()==null || dormitory.getEnable()==null);
+	}
+
+	public static boolean isNotNullForAllNotNullField(Dormitory dormitory) {
+		return !(dormitory.getId()==null || dormitory.getEnable()==null || 
+				StringUtils.isEmpty(dormitory.getCampus()) || StringUtils.isEmpty(dormitory.getName()) ||
+				dormitory.getMaxNumber()==null || dormitory.getNumber()==null);
 	}
 }

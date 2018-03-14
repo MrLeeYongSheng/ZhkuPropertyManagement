@@ -4,8 +4,8 @@
     "pid": 1330,
     "state": "open",
     "iconCls": "",
-    "text": "拆线图",
-    "url": "./html/echarts/line.html"
+    "text": "宿舍管理",
+    "url": "./school/dormitory/main"
   },
   {
     "id": 1355,

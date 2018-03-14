@@ -20,6 +20,7 @@ import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.pojo.web.StudentsPagination;
 import com.lys.zhku.service.students.StudentsService;
 import com.lys.zhku.service.system.DatadictService;
 import com.lys.zhku.utils.StatusCode;
@@ -53,7 +54,7 @@ public class StudentsController {
 	 */
 	@RequestMapping("/getStudentsPage")
 	@ResponseBody
-	public Page<Students> getStudentsPage(Pagination pagination) {
+	public Page<Students> getStudentsPage(StudentsPagination pagination) {
 		pagination.setEnable(true);
 		return studentsService.getStudentsPage(pagination);
 	}

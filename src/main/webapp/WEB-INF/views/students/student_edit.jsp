@@ -130,6 +130,7 @@
 				if(jsonData.code==1) {
 					parent.$("#win").dialog("close");
 					parent.$("#dg").datagrid("reload");
+					parent.$('#dg').datagrid('clearSelections'); //把CheckBox历史选项清空
 				} else{
 					$.messager.alert('操作结果',jsonData.msg,'info');
 				} 

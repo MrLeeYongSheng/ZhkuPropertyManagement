@@ -16,28 +16,28 @@
 			<tr>
 				<td colspan="4">
 					<div class="divider">
-						<span>权限修改</span>
+						<span>宿舍添加</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="label">名称</td>
+				<td class="label">宿舍号</td>
 				<td>
-					<input id="id" name="id" type="hidden">
-					<input id="authority" name="authority" class="easyui-textbox"
+					<input id="name" name="name" class="easyui-textbox"
+					data-options="required:true,prompt:'必填',width:278">
+				</td>
+			</tr>
+			<tr>
+				<td class="label">校区</td>
+				<td><input id="campus" name="campus" class="easyui-combobox"
 					data-options="required:true,prompt:'必选',width:278"></td>
 			</tr>
 			<tr>
-				<td class="label">有效性</td>
-				<td><input id="enable" name="enable" class="easyui-switchbutton"
-					data-options="onText:'有效',offText:'无效',width:278,checked:true" value="true">
-					<input id="disable" name="enable" type="hidden" disabled="true" value="false"/></td>			
-			</tr>
-			<tr>
-				<td class="label">备注</td>
-				<td><textarea id="remark" name="remark" class="easyui-validatebox"
-						style="height: 100; width: 300;"
-						data-options="validType:'length[0,100]'"></textarea></td>
+				<td class="label">宿舍最大人数</td>
+				<td>
+					<input id="maxNumber" name="maxNumber" class="easyui-textbox"
+					data-options="required:true,prompt:'必填',width:278,validType: 'num'">
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -46,37 +46,32 @@
         <a id="btn_reset" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">重置</a>
     </div>		
 	<script type="text/javascript">
-	
 		$(function(){
+			$('#campus').combobox({
+				valueField:'value',
+				textField:'value',
+				limitToList: true,
+				url:'${prePath }/system/datadict/getDatadictListByDatadict',
+				queryParams:{"key":"campus"},
+				onLoadSuccess : function() {
+					var selected = $(this).combobox("getData")[0].value;
+					$(this).combobox("select",selected);
+				}
+			});
 			
-			//从父页面获取数据,并填充到表单
-			var row = parent.$("#dg").datagrid("getSelected");
-			$("#ff").form("load",row);
-			
-			//表单定义
 			$('#ff').form({
-				url : "${prePath}/system/rolesAuthorities/auths/update",
+				url : "${prePath}/school/dormitory/add",
 			    onSubmit: function(){
 					var isValid = $(this).form('validate');
 					return isValid;
-			    },    
+			    },
 			    success:function(data){
 			    	parent.$("#dg").datagrid("reload");
-			    	parent.$('#dg').datagrid('clearSelections'); //把CheckBox历史选项清空
-			    	parent.$("#tg").treegrid("reload");
 			    	parent.$("#win").dialog("close");
 			    }
 			});	
-			$("#enable").switchbutton({
-				onChange : function(checked){
-					if(checked) {
-						$("#disable").attr("disabled", true);
-					} else {
-						$("#disable").attr("disabled", false);
-					}
-				}
-			});
-		    $('#btn_submit').bind('click', function(){  
+			
+		    $('#btn_submit').bind('click', function(){    
 		        $("#ff").submit();
 		    });    
 		    $('#btn_reset').bind('click', function(){    
