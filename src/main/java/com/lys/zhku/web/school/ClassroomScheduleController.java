@@ -8,18 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lys.zhku.model.Classroom;
 import com.lys.zhku.model.ClassroomSchedule;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.service.school.ClassroomScheduleService;
-import com.lys.zhku.service.school.ClassroomService;
 import com.lys.zhku.utils.StatusCode;
 
 @Controller
-@RequestMapping("/school/classroomSchedule")
+@RequestMapping("/school/classroom/schedule")
 public class ClassroomScheduleController {
 	
 	@Autowired
@@ -33,7 +31,7 @@ public class ClassroomScheduleController {
 	
 	@RequestMapping(value="/{path}", method=RequestMethod.GET)
 	public String view(@PathVariable String path) {
-		return "school/classroomSchedule/" + path;
+		return "school/classroom/schedule/" + path;
 	}
 
 	@RequestMapping(value="/getPage")

@@ -30,14 +30,14 @@
 			onDblClickRow : function(index,row){//双击一行查看详细信息
 				$("#dg").datagrid("clearSelections");
 				$("#dg").datagrid("selectRow",index);
-				showDialog("win","${prePath}/school/classroom/detail","查看宿舍详情页面");
+				showDialog("win","${prePath}/school/classroom/schedule/main","查看教室安排表页面");
 			}, 
 			//菜单栏
 			toolbar : [ {
 				iconCls : 'icon-add',
 				text : '增加',
 				handler : function() {
-					showDialog("win","${prePath}/school/classroom/add","添加宿舍页面");
+					showDialog("win","${prePath}/school/classroom/add","添加教室页面");
 				}
 			}, '-', {
 				iconCls : 'icon-edit',
@@ -48,7 +48,7 @@
 						$.messager.alert('操作提示','必须且只能选择一行！','info');
 						return ;
 					}
-					showDialog("win","${prePath}/school/classroom/edit","修改宿舍页面");
+					showDialog("win","${prePath}/school/classroom/edit","修改教室页面");
 				}
 			}, '-', {
 				iconCls : 'icon-remove',

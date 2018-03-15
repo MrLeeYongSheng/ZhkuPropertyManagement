@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/jspf/commonHeader.jspf"%>
+<%@include file="/jspf/customerHeader.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 		
 		$('#dg').datagrid({
 			//数据源
-			url : '${prePath}/school/classroomSchedule/getPage',
+			url : '${prePath}/school/classroom/schedule/getPage',
 			queryParams : {
 				dormitory : row.name,
 				campus : row.campus
@@ -36,7 +37,7 @@
 				$("#dg").datagrid("clearSelections");
 				$("#dg").datagrid("selectRow",index);
 				$('#win').dialog({
-					title : '查看学生页面',
+					title : '查看教室安排表详情页面',
 					width : 900,
 					height : 500,
 					cache : false,
@@ -49,14 +50,7 @@
 				iconCls : 'icon-add',
 				text : '增加',
 				handler : function() {
-					$('#win').dialog({
-						title : '添加学生页面',
-						width : 900,
-						height : 500,
-						cache : false,
-						modal : true,//将窗体显示为模式化窗口
-						content:"<iframe src='${prePath}/students/student_add' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
-					});
+					showDialogWithAll("win","${prePath}/school/classroom/schedule/add","添加安排信息",400,500,false,true)
 				}
 			}, '-', {
 				iconCls : 'icon-edit',
@@ -67,14 +61,7 @@
 						$.messager.alert('操作提示','必须且只能选择一行！','info');
 						return ;
 					}
-					$('#win').dialog({
-						title : '修改学生页面',
-						width : 900,
-						height : 500,
-						cache : false,
-						modal : true,//将窗体显示为模式化窗口
-						content:"<iframe src='${prePath}/students/student_edit' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
-					});
+					showDialogWithAll("win","${prePath}/school/classroom/schedule/edit","修改安排信息",400,500,false,true);
 				}
 			}, '-', {
 				iconCls : 'icon-remove',
@@ -92,15 +79,15 @@
 						}
 						var pks = new Array();
 						$.each(selections,function(rowNum,row){
-							pks.push(row.usersUsername);
+							pks.push(row.id);
 						});
 						$.ajax({
 							type : "POST",//请求方式
 							dataType : 'json',
-							url : "${prePath}/students/delete",//请求目的URL
+							url : "${prePath}/school/classroom/schedule/delete",//请求目的URL
 							traditional : true,//用传统的方式来序列化数据,去除参数名的[]
 							data : {//请求数据
-								usersUsernames : pks
+								ids : pks
 							},
 							success : function(msg) {//数据返回时所执行的函数
 								$('#dg').datagrid('clearSelections'); //把CheckBox历史选项清空
