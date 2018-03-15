@@ -13,6 +13,7 @@
     <javaModelGenerator targetPackage="com.lys.zhku.model" targetProject="ZhkuPropertyManagement/src/main/java" />
     <sqlMapGenerator targetPackage="com.lys.zhku.mapper" targetProject="ZhkuPropertyManagement/src/main/resources" />
     <javaClientGenerator targetPackage="com.lys.zhku.mapper" targetProject="ZhkuPropertyManagement/src/main/java" type="XMLMAPPER" />
-    <table tableName="dormitory"/>
+    <table tableName="classroom"/>
+    <table tableName="classroom_schedule"/>
   </context>
 </generatorConfiguration>

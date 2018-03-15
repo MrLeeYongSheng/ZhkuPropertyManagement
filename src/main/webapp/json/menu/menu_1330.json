@@ -12,8 +12,8 @@
     "pid": 1330,
     "state": "open",
     "iconCls": "",
-    "text": "柱状图",
-    "url": "./html/echarts/bar.html"
+    "text": "教室管理",
+    "url": "./school/classroom/main"
   },
   {
     "id": 1356,

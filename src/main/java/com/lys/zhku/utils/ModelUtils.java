@@ -1,6 +1,8 @@
 package com.lys.zhku.utils;
 
 import com.lys.zhku.model.Authorities;
+import com.lys.zhku.model.Classroom;
+import com.lys.zhku.model.ClassroomSchedule;
 import com.lys.zhku.model.Datadict;
 import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.model.Roles;
@@ -74,5 +76,25 @@ public class ModelUtils {
 		return !(dormitory.getId()==null || dormitory.getEnable()==null || 
 				StringUtils.isEmpty(dormitory.getCampus()) || StringUtils.isEmpty(dormitory.getName()) ||
 				dormitory.getMaxNumber()==null || dormitory.getNumber()==null);
+	}
+
+	public static boolean isNotNullForAllNotNullFieldExceptPrimaryKey(Classroom classroom) {
+		return !(classroom.getEnable()==null || StringUtils.isEmpty(classroom.getCampus()) || 
+				StringUtils.isEmpty(classroom.getClassname()));
+	}
+
+	public static boolean isNotNullForAllNotNullField(Classroom classroom) {
+		return !(classroom.getId()==null || !isNotNullForAllNotNullFieldExceptPrimaryKey(classroom));
+	}
+
+	public static boolean isNotNullForAllNotNullFieldExceptPrimaryKey(ClassroomSchedule cs) {
+		return !(cs.getClassroomId()== null || cs.getDate()==null || cs.getEnable()==null ||
+				cs.getC1()==null || cs.getC2()==null || cs.getC3()==null || cs.getC4()==null ||
+				cs.getC5()==null || cs.getC6()==null || cs.getC7()==null || cs.getC8()==null ||
+				cs.getC9()==null || cs.getC10()==null || cs.getC11()==null || cs.getC12()==null);
+	}
+
+	public static boolean isNotNullForAllNotNullField(ClassroomSchedule cs) {
+		return !(cs.getId()==null || !isNotNullForAllNotNullFieldExceptPrimaryKey(cs));
 	}
 }

@@ -16,15 +16,15 @@
 			<tr>
 				<td colspan="4">
 					<div class="divider">
-						<span>宿舍修改</span>
+						<span>教室修改</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="label">宿舍号</td>
+				<td class="label">教室号</td>
 				<td>
-					<input id="name" name="name" class="easyui-textbox"
-					data-options="readonly:true,width:278">
+					<input id="classname" name="classname" class="easyui-textbox"
+					data-options="required:true,prompt:'必填',width:278">
 					<input name="id" type="hidden">
 				</td>
 			</tr>
@@ -34,17 +34,10 @@
 					data-options="required:true,prompt:'必选',width:278"></td>
 			</tr>
 			<tr>
-				<td class="label">宿舍现住人数</td>
-				<td>
-					<input id="number" name="number" class="easyui-textbox"
-					data-options="required:true,prompt:'必填',width:278,validType: 'num'">
-				</td>
-			</tr>
-			<tr>
-				<td class="label">宿舍最大人数</td>
+				<td class="label">教室最大人数</td>
 				<td>
 					<input id="maxNumber" name="maxNumber" class="easyui-textbox"
-					data-options="required:true,prompt:'必填',width:278,validType: 'num'">
+					data-options="prompt:'输入数字',width:278,validType: 'num'">
 				</td>
 			</tr>
 			<tr>
@@ -68,10 +61,10 @@
 			limitToList: true,
 			url:'${prePath }/system/datadict/getDatadictListByDatadict',
 			queryParams:{"key":"campus"}
-		});				
+		});		
 
 		$('#ff').form({
-			url : "${prePath}/school/dormitory/edit",
+			url : "${prePath}/school/classroom/edit",
 		    onSubmit: function(){
 				var isValid = $(this).form('validate');
 				return isValid;
@@ -97,11 +90,11 @@
 				}
 			}
 		});
-
+		
 		//从父页面获取数据,并填充到表单
 		var row = parent.$("#dg").datagrid("getSelected");
 		$("#ff").form("load",row);
-		
+
 		$('#btn_submit').bind('click', function(){    
 	        $("#ff").submit();
 	    });    
