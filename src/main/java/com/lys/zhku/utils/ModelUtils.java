@@ -97,4 +97,5 @@ public class ModelUtils {
 	public static boolean isNotNullForAllNotNullField(ClassroomSchedule cs) {
 		return !(cs.getId()==null || !isNotNullForAllNotNullFieldExceptPrimaryKey(cs));
 	}
+
 }
