@@ -21,6 +21,10 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	int updateByPrimaryKey(T record);
+	
+	/*
+	 * 自动生成的分界线************************************************
+	 */
 
 	/**
 	 * 根据分页参数查找总记录数

@@ -12,4 +12,9 @@ public class ParkServiceImpl extends BaseSchoolServiceImpl<Park> implements Park
 
 	@Autowired
 	protected ParkMapper parkMapper;
+
+	@Override
+	public int existEntity(Park record) {
+		return 0;
+	}
 }

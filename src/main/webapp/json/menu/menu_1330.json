@@ -20,8 +20,8 @@
     "pid": 1330,
     "state": "open",
     "iconCls": "",
-    "text": "饼图",
-    "url": "./html/echarts/pie.html"
+    "text": "车位管理",
+    "url": "./school/park/main"
   },
   {
     "id": 1357,

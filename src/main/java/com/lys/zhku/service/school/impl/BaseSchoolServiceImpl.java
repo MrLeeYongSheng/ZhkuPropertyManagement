@@ -15,7 +15,7 @@ import com.lys.zhku.service.school.BaseSchoolService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.StatusCode;
 
-public class BaseSchoolServiceImpl<T> implements BaseSchoolService<T> {
+public abstract class BaseSchoolServiceImpl<T> implements BaseSchoolService<T> {
 	
 	protected BaseMapper<T> baseMapper;
 	
@@ -56,6 +56,9 @@ public class BaseSchoolServiceImpl<T> implements BaseSchoolService<T> {
 	@Override
 	public int insertEntity(T record) {
 		//数据的合法性由controller来校验
+		if(existEntity(record)>0) {
+			throw new ErrorException(StatusCode.EXIST, "记录已经存在,插入失败");
+		}
 		return baseMapper.insert(record);
 	}
 

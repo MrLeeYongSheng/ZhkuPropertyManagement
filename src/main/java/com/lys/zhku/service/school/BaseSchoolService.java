@@ -34,6 +34,13 @@ public interface BaseSchoolService<T> {
 	int insertEntity(T record);
 
 	/**
+	 * 记录是否存在
+	 * @param record
+	 * @return
+	 */
+	int existEntity(T record);
+
+	/**
 	 * 根据传进来的数组id删除对应记录
 	 * @param ids
 	 * @return
