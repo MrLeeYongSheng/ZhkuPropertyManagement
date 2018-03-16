@@ -11,7 +11,7 @@
 		<java-version>1.8</java-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<org.springframework-version>4.3.13.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.14.RELEASE</org.springframework-version>
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 		<org.aspectj-version>1.8.13</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -23,6 +23,8 @@
 		<mokito-version>1.9.5</mokito-version> <!-- 用来测试普通POJO用, 测试Controller可用Spring test自带mock -->
 		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
 		<javax.el.version>3.0.1-b08</javax.el.version>
+		<spring-data-redis.version>1.8.10.RELEASE</spring-data-redis.version>
+		<redis.clients.version>2.9.0</redis.clients.version>
 	</properties>
 
 	<dependencyManagement>
@@ -39,6 +41,20 @@
 
 	<dependencies>
 
+		<!-- 提供对redis缓存的支持,提供缓存管理器等 -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring-data-redis.version}</version>
+		</dependency>
+
+		<!-- 提供Jedis连接客户端 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${redis.clients.version}</version>
+		</dependency>
+
 		<!-- hibernate-validator校验bean -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -46,8 +62,7 @@
 			<version>${hibernate-validator.version}</version>
 		</dependency>
 
-		<!-- hibernate-validator使用代码验证时的依赖,
-			但只使用SpringMVC的Controller的自动验证则不用该依赖 -->
+		<!-- hibernate-validator使用代码验证时的依赖, 但只使用SpringMVC的Controller的自动验证则不用该依赖 -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
