@@ -9,10 +9,6 @@ import com.lys.zhku.pojo.web.Pagination;
 
 public interface DatadictService {
 
-	List<Datadict> getDataDictList(String key);
-
-	List<Datadict> getDataDictListByParentId(Integer parentId);
-
 	int insertDatadict(Datadict datadict);
 
 	/**

@@ -111,18 +111,6 @@ public class StudentsController {
 		return new Message(StatusCode.SUCCESS, "修改成功");
 	}	
 
-	@RequestMapping(value = "/getDataDictListByKey")
-	@ResponseBody
-	public List<Datadict> getDataDictListByKey(@RequestParam String key) {
-		return datadictService.getDataDictList(key);
-	}
-
-	@RequestMapping(value = "/getDataDictListByParentId")
-	@ResponseBody
-	public List<Datadict> getDataDictListByParentId(@RequestParam Integer parentId) {
-		return datadictService.getDataDictListByParentId(parentId);
-	}
-
 	@RequestMapping(value = "/getDatadictListByDatadict")
 	@ResponseBody
 	public List<Datadict> getDatadictListByDatadict(Datadict datadict) {

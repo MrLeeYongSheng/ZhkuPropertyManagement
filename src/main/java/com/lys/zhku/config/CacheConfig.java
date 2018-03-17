@@ -2,10 +2,14 @@ package com.lys.zhku.config;
 
 import java.util.HashSet;
 
+import javax.inject.Named;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -16,13 +20,23 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableCaching
 public class CacheConfig {
 	
-/*	@Bean
-	public CacheManager cacheManager() {
-		return new ConcurrentMapCacheManager();
+	public static final String ZHKU="zhku";
+	public static final String DATADICT="zhku.datadict";
+	
+/*	@Bean//TODO: 专门用来做测试的ConcurrentMapCacheManager
+	//@Primary
+	public ConcurrentMapCacheManager mcacheManager() {
+		ConcurrentMapCacheManager cm = new ConcurrentMapCacheManager();
+		HashSet<String> cacheNames = new HashSet<String>();
+		cacheNames.add(ZHKU);//本系统的主缓存区
+		cacheNames.add(DATADICT);//数据字典的缓存区
+		cm.setCacheNames(cacheNames);
+		return cm ;
 	}*/
 	
 	@SuppressWarnings("rawtypes")
 	@Bean
+	@Primary //TODO: 暂时测试时注释
 	public CacheManager cacheManager(RedisOperations redisOperations) {
 		RedisCacheManager manager = new RedisCacheManager(redisOperations);
 		/*使用说明
@@ -46,8 +60,10 @@ public class CacheConfig {
 		//指定缓存区名字,会配置为静态缓存管理:操作非存在缓存区,操作无效
 		//否则为动态缓存管理:操作非存在缓存区,会自动建立缓存区
 		HashSet<String> cacheNames = new HashSet<String>();
-		cacheNames.add("zhku");//本系统的主缓存区
+		cacheNames.add(ZHKU);//本系统的主缓存区
+		cacheNames.add(DATADICT);//数据字典的缓存区
 		manager.setCacheNames(cacheNames);
+		manager.setUsePrefix(true);
 		manager.afterPropertiesSet();//重新执行配置,使配置生效
 		return manager;
 	}
