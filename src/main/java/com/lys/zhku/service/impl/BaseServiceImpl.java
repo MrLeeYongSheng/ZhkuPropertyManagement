@@ -1,4 +1,4 @@
-package com.lys.zhku.service.school.impl;
+package com.lys.zhku.service.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -11,11 +11,11 @@ import com.lys.zhku.mapper.base.BaseMapper;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
-import com.lys.zhku.service.school.BaseSchoolService;
+import com.lys.zhku.service.BaseService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.StatusCode;
 
-public abstract class BaseSchoolServiceImpl<T> implements BaseSchoolService<T> {
+public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	
 	protected BaseMapper<T> baseMapper;
 	
@@ -28,6 +28,7 @@ public abstract class BaseSchoolServiceImpl<T> implements BaseSchoolService<T> {
 		String simpleName = type.getSimpleName();
 		String targetFieldName = simpleName.substring(0, 1).toLowerCase() + simpleName.substring(1)+"Mapper";
 		Field targetField = this.getClass().getDeclaredField(targetFieldName);
+		targetField.setAccessible(true);//使非公有字段可以进行操作
 		baseMapperField.set(this, targetField.get(this));
 	}
 

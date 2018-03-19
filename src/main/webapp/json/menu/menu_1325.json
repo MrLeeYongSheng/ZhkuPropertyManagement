@@ -26,7 +26,7 @@
 	{
 		"id": 1329,
 		"pid": 1325,
-		"text": "菜单按钮",
+		"text": "文件管理",
 		"state": "closed",
 		"iconCls": "fa fa-list",
 		"url": ""

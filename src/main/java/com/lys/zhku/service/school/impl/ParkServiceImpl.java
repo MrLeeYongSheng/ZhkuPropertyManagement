@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.lys.zhku.mapper.ParkMapper;
 import com.lys.zhku.model.Park;
+import com.lys.zhku.service.impl.BaseServiceImpl;
 import com.lys.zhku.service.school.ParkService;
 
 @Service
-public class ParkServiceImpl extends BaseSchoolServiceImpl<Park> implements ParkService<Park> {
+public class ParkServiceImpl extends BaseServiceImpl<Park> implements ParkService<Park> {
 
 	@Autowired
 	protected ParkMapper parkMapper;

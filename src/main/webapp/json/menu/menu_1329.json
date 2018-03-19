@@ -4,16 +4,16 @@
     "pid": 1329,
     "state": "open",
     "iconCls": "",
-    "text": "打开弹出窗口",
-    "url": "./html/menu/openDialog_index.html"
+    "text": "文件管理",
+    "url": "./files/main"
   },
   {
     "id": 1340,
     "pid": 1329,
     "state": "open",
     "iconCls": "",
-    "text": "打开Tab窗口",
-    "url": "./html/menu/openTab_index.html"
+    "text": "文件下载",
+    "url": "./files/download"
   },
   {
     "id": 1341,

@@ -1,0 +1,17 @@
+#上传临时文件夹路径
+uploadTempPath=D:\\zhku\\temp
+
+#编码格式
+encoding=UTF-8
+
+#数据库连接用户名
+jdbc.username=root
+
+#数据库连接密码
+jdbc.password=123456
+
+#数据库连接驱动
+jdbc.driver=com.mysql.jdbc.Driver
+
+#数据库连接url
+jdbc.url=jdbc:mysql://localhost:3306/zhku

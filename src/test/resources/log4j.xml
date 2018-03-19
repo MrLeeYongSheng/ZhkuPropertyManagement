@@ -9,7 +9,7 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-
+	
 	<!-- author : MrLeeYongSheng - MyBatis Loggers -->
 	<logger name="com.lys.zhku.mapper">
 		<level value="TRACE"></level>

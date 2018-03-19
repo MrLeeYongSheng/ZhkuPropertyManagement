@@ -1,4 +1,4 @@
-package com.lys.zhku.service.school;
+package com.lys.zhku.service;
 
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
@@ -17,7 +17,7 @@ import com.lys.zhku.pojo.web.Pagination;
  *
  * @param <T> 填充的泛型为使用者的Model
  */
-public interface BaseSchoolService<T> {
+public interface BaseService<T> {
 
 	/**
 	 * 根据分页参数查询分页记录

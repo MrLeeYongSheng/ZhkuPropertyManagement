@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -24,7 +27,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 		@Filter(type = FilterType.ANNOTATION, value = { EnableWebMvc.class, Controller.class }) })
 @ImportResource("classpath:com/lys/zhku/config/applicationContext-tx.xml")
 @EnableAspectJAutoProxy //开启切面代理
+@PropertySource(value="classpath:com/lys/zhku/config/webapp.porperties", encoding="UTF-8")
 public class RootConfig {
+	
+	@Autowired
+	private Environment env;
 
 	@Bean
 	public DataSource dataSource() {
@@ -35,10 +42,10 @@ public class RootConfig {
 
 		// 使用Mybatis的连接池数据源
 		PooledDataSource dataSource = new PooledDataSource();
-		dataSource.setDriver("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/zhku");
-		dataSource.setUsername("root");
-		dataSource.setPassword("123456");
+		dataSource.setDriver(env.getProperty("jdbc.driver"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.username"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
 		return dataSource;
 	}
 
@@ -72,7 +79,7 @@ public class RootConfig {
 	 * @return
 	 */
 	@Bean
-	public MapperScannerConfigurer mapperScannerConfigurer() {
+	public static MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setBasePackage("com.lys.zhku.mapper");
 		return mapperScannerConfigurer;

@@ -1,5 +1,7 @@
 package com.lys.zhku.service.school;
 
-public interface ParkService<T> extends BaseSchoolService<T>{
+import com.lys.zhku.service.BaseService;
+
+public interface ParkService<T> extends BaseService<T>{
 
 }
