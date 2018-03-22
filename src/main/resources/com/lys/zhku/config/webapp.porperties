@@ -1,6 +1,15 @@
 #上传临时文件夹路径
 uploadTempPath=D:\\zhku\\temp
 
+#ftp服务器地址
+ftp.url=192.168.15.136
+
+#ftp服务器账号
+ftp.username=python
+
+#ftp服务器密码
+ftp.password=123456
+
 #编码格式
 encoding=UTF-8
 

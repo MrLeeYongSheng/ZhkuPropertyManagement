@@ -3,7 +3,13 @@ package com.lys.zhku.jdbc;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,8 +28,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.lys.zhku.aop.CommonServicesAspect;
 import com.lys.zhku.config.RootConfig;
 import com.lys.zhku.mapper.AuthoritiesMapper;
+import com.lys.zhku.mapper.ClassroomMapper;
+import com.lys.zhku.mapper.ClassroomScheduleMapper;
 import com.lys.zhku.mapper.DatadictMapper;
 import com.lys.zhku.mapper.DormitoryMapper;
+import com.lys.zhku.mapper.FilesMapper;
+import com.lys.zhku.mapper.ParkMapper;
 import com.lys.zhku.mapper.RolesAuthoritiesMapper;
 import com.lys.zhku.mapper.RolesMapper;
 import com.lys.zhku.mapper.StudentsMapper;
@@ -32,7 +42,11 @@ import com.lys.zhku.mapper.UsersMapper;
 import com.lys.zhku.mapper.UsersRolesMapper;
 import com.lys.zhku.mapper.WorkersMapper;
 import com.lys.zhku.model.Authorities;
+import com.lys.zhku.model.Classroom;
+import com.lys.zhku.model.ClassroomSchedule;
 import com.lys.zhku.model.Datadict;
+import com.lys.zhku.model.Files;
+import com.lys.zhku.model.Park;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Users;
@@ -41,6 +55,7 @@ import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.pojo.web.StudentsPagination;
 import com.lys.zhku.security.userdetails.ZhkuUserDetails;
 import com.lys.zhku.security.userdetails.ZhkuUserDetailsService;
+import com.lys.zhku.utils.PropertiesUtils;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=RootConfig.class)
@@ -70,20 +85,23 @@ public class JdbcTest {
 	
 	@Autowired
 	DormitoryMapper dormitoryMapper;
-
+	
 	@Autowired
-	CommonServicesAspect commonServicesAspect;
+	ClassroomMapper classroomMapper;
+	
+	@Autowired
+	ClassroomScheduleMapper classroomScheduleMapper;
+	
+	@Autowired
+	ParkMapper<Park> parkMapper;
+	
+	@Autowired
+	FilesMapper filesMapper;
 	
 	@Test
-	public void testMapper() {
+	public void testMapper() throws Exception {
+		List<String> list = filesMapper.selectUuidNameByPrimaryKeys(null);
 
-//		Pagination p = new Pagination();
-		StudentsPagination pp = new StudentsPagination();
-		pp.setRows(1);
-		pp.setPage(1);
-		pp.setEnable(true);
-		pp.setCampus("白云区");
-		studentsMapper.selectForPagination(pp);
 	}
 	
 	@Test

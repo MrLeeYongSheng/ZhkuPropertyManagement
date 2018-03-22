@@ -1,14 +1,16 @@
 package com.lys.zhku.web.files;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.Part;
-import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.Validator;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -24,8 +26,11 @@ import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.FTPClientService;
 import com.lys.zhku.service.files.FilesService;
+import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.StatusCode;
+import com.lys.zhku.utils.StringUtils;
 
 @Controller
 @RequestMapping("/files")
@@ -33,6 +38,11 @@ public class FilesController {
 	
 	@Autowired
 	private FilesService<Files> filesService;
+	
+	@Autowired
+	private FTPClientService ftpClientService;
+	
+	private static Logger log = Logger.getLogger(FilesController.class);
 
 	@ExceptionHandler
 	@ResponseBody
@@ -51,27 +61,87 @@ public class FilesController {
 		return filesService.getPageByPagination(pagination);
 	}
 
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+/*	@RequestMapping(value="/add", method=RequestMethod.POST)
 	@ResponseBody
-	public Message add(@RequestPart("files") Part[] files, @Valid Files file, Errors e) {
-		
-		file.setTime(new Date());
-		file.setSize(100L);
-		if(e.hasErrors()) {
-			file.setEnable(true);
-			Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-			Set<ConstraintViolation<Files>> validate = validator.validate(file);
-			if(validate.size()>0) {
-				return new Message(StatusCode.INCOMPLETE_MODEL_DATA, "非完整Files信息,插入记录失败");
-			}
-		}
+	public Message addTest(@RequestPart("files") Part[] files, Files file) {//TODO:测试环境
+		file.setEnable(true);
+		file.setUuidName("uuidName");
 		filesService.insertEntity(file);
 		return new Message(StatusCode.SUCCESS, "插入记录成功");
+		
+	}*/
+	
+/*	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@ResponseBody
+	public Message addTest2(@RequestPart("files") Part[] files, String parentDir) {//TODO:测试环境
+		List<Files> filesList = ftpClientService.uploadFileToFtpServer(files, parentDir);
+		return new Message(StatusCode.SUCCESS, "插入记录成功:"+filesList.size());
+		
+	}*/
+/*	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@ResponseBody
+	public Message addTest3(@RequestPart("files") Part[] files, String parentDir) {//TODO:测试环境
+		Set<String> set = new HashSet<String>();
+		for (Part part : files) {
+			if(!set.add(part.getSubmittedFileName())) {
+				throw new ErrorException(StatusCode.ERROR, "不允许上传具有相同名字的文件");
+			}
+		}
+		if(CollectionUtils.isEmpty(files) || StringUtils.isEmpty(parentDir)) {
+			if(log.isDebugEnabled())
+				log.error("数据丢失:files.length:"+files.length + ",parentDir:"+parentDir);
+			return new Message(StatusCode.MISSING_REQUEST_PARAM, "上传失败,数据丢失");
+		}
+		
+		List<Files> filesList = new ArrayList<>(files.length);//模拟成功数据
+		for (Part p : files) {
+			Files fileModel = new Files();
+			fileModel.setEnable(true);
+			fileModel.setName(p.getSubmittedFileName());
+			fileModel.setParentDir(parentDir);
+			fileModel.setSize(p.getSize());
+			fileModel.setTime(new Date());
+			fileModel.setUuidName("uuidName");
+			filesList.add(fileModel);			
+		}
+		
+		if(log.isInfoEnabled()) {
+			log.info("成功:" + filesList.size());
+		}
+		filesService.insertFiles(filesList);
+		return new Message(StatusCode.SUCCESS, "插入记录成功:"+filesList.size());
+		
+	}
+*/	
+	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@ResponseBody
+	public Message add(@RequestPart("files") Part[] files, String parentDir) {//TODO:真实环境
+		
+		Set<String> set = new HashSet<String>();
+		for (Part part : files) {
+			if(!set.add(part.getSubmittedFileName())) {
+				throw new ErrorException(StatusCode.ERROR, "不允许上传具有相同名字的文件");
+			}
+		}
+		if(CollectionUtils.isEmpty(files) || StringUtils.isEmpty(parentDir)) {
+			if(log.isDebugEnabled())
+				log.error("数据丢失:files.length:"+files.length + ",parentDir:"+parentDir);
+			return new Message(StatusCode.MISSING_REQUEST_PARAM, "上传失败,数据丢失");
+		}
+		List<Files> filesList = ftpClientService.uploadFileToFtpServer(files, parentDir);
+		if(log.isInfoEnabled()) {
+			log.info("成功上传:" + filesList.size());
+		}
+		filesService.insertFiles(filesList);
+		return new Message(StatusCode.SUCCESS, "插入记录成功:"+filesList.size());
 	}
 
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Message delete(Integer[] ids) {
+		List<String> uuidNameList = filesService.selectUuidNameByPrimaryKeys(ids);
+		//ftpClientService.deleteFilesByFileNameAndBasePath(uuidNameList, );
 		filesService.deleteEntitys(ids);
 		return new Message(StatusCode.SUCCESS, "删除记录成功");
 	}

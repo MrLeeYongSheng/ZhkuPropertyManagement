@@ -25,6 +25,7 @@
 					<input name="id" type="hidden">	
 					<input name="size" type="hidden">	
 					<input name="time" type="hidden">	
+					<input name="uuidName" type="hidden">	
 				</td>
 			</tr>
 			<tr>

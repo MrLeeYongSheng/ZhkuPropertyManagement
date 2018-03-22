@@ -10,9 +10,22 @@
 		</layout>
 	</appender>
 
+	<!-- 自定义Appenders -->
+	<appender name="" class="org.apache.log4j.ConsoleAppender">
+		<param name="myAppendersForDebug" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %l - %m%n" />
+		</layout>
+	</appender>
+
 	<!-- author : MrLeeYongSheng - MyBatis Loggers -->
 	<logger name="com.lys.zhku.mapper">
 		<level value="TRACE"></level>
+	</logger>
+	<!-- 自定义Logger注册 -->	
+	<logger name="com.lys.zhku.web.files.FilesController">
+		<level value="debug"></level>
+		<appender-ref ref="myAppendersForDebug"/>
 	</logger>
 
 	<!-- Application Loggers -->
