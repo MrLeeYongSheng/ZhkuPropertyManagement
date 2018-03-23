@@ -168,7 +168,6 @@ public class RolesAuthoritiesController {
 	@RequestMapping(value="auths/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Message authsDelete(Integer[] ids) {
-		//TODO: 批量删除权限
 		rolesAuthoritiesService.deleteAuthsByIds(ids);
 		return new Message(StatusCode.SUCCESS, "修改权限成功");
 	}

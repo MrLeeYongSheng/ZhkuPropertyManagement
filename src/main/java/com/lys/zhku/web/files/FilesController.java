@@ -1,5 +1,7 @@
 package com.lys.zhku.web.files;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
 
@@ -44,7 +47,7 @@ public class FilesController {
 	
 	private static Logger log = Logger.getLogger(FilesController.class);
 
-	@ExceptionHandler
+	@ExceptionHandler(value=ErrorException.class)
 	@ResponseBody
 	public Message error(ErrorException e) {
 		return new Message(e.getCode(), e.getMsg());
@@ -61,62 +64,11 @@ public class FilesController {
 		return filesService.getPageByPagination(pagination);
 	}
 
-/*	@RequestMapping(value="/add", method=RequestMethod.POST)
-	@ResponseBody
-	public Message addTest(@RequestPart("files") Part[] files, Files file) {//TODO:测试环境
-		file.setEnable(true);
-		file.setUuidName("uuidName");
-		filesService.insertEntity(file);
-		return new Message(StatusCode.SUCCESS, "插入记录成功");
-		
-	}*/
 	
-/*	@RequestMapping(value="/add", method=RequestMethod.POST)
-	@ResponseBody
-	public Message addTest2(@RequestPart("files") Part[] files, String parentDir) {//TODO:测试环境
-		List<Files> filesList = ftpClientService.uploadFileToFtpServer(files, parentDir);
-		return new Message(StatusCode.SUCCESS, "插入记录成功:"+filesList.size());
-		
-	}*/
-/*	@RequestMapping(value="/add", method=RequestMethod.POST)
-	@ResponseBody
-	public Message addTest3(@RequestPart("files") Part[] files, String parentDir) {//TODO:测试环境
-		Set<String> set = new HashSet<String>();
-		for (Part part : files) {
-			if(!set.add(part.getSubmittedFileName())) {
-				throw new ErrorException(StatusCode.ERROR, "不允许上传具有相同名字的文件");
-			}
-		}
-		if(CollectionUtils.isEmpty(files) || StringUtils.isEmpty(parentDir)) {
-			if(log.isDebugEnabled())
-				log.error("数据丢失:files.length:"+files.length + ",parentDir:"+parentDir);
-			return new Message(StatusCode.MISSING_REQUEST_PARAM, "上传失败,数据丢失");
-		}
-		
-		List<Files> filesList = new ArrayList<>(files.length);//模拟成功数据
-		for (Part p : files) {
-			Files fileModel = new Files();
-			fileModel.setEnable(true);
-			fileModel.setName(p.getSubmittedFileName());
-			fileModel.setParentDir(parentDir);
-			fileModel.setSize(p.getSize());
-			fileModel.setTime(new Date());
-			fileModel.setUuidName("uuidName");
-			filesList.add(fileModel);			
-		}
-		
-		if(log.isInfoEnabled()) {
-			log.info("成功:" + filesList.size());
-		}
-		filesService.insertFiles(filesList);
-		return new Message(StatusCode.SUCCESS, "插入记录成功:"+filesList.size());
-		
-	}
-*/	
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	@ResponseBody
-	public Message add(@RequestPart("files") Part[] files, String parentDir) {//TODO:真实环境
+	public Message add(@RequestPart("files") Part[] files, String parentDir) {
 		
 		Set<String> set = new HashSet<String>();
 		for (Part part : files) {
@@ -140,8 +92,8 @@ public class FilesController {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Message delete(Integer[] ids) {
-		List<String> uuidNameList = filesService.selectUuidNameByPrimaryKeys(ids);
-		//ftpClientService.deleteFilesByFileNameAndBasePath(uuidNameList, );
+		List<Files> filesList = filesService.selectUuidNameAndPositionByPrimaryKeys(ids);
+		ftpClientService.deleteByFiles(filesList);
 		filesService.deleteEntitys(ids);
 		return new Message(StatusCode.SUCCESS, "删除记录成功");
 	}
@@ -154,5 +106,52 @@ public class FilesController {
 		}
 		filesService.updateEntity(file);
 		return new Message(StatusCode.SUCCESS, "修改记录成功");
+	}
+	
+	@RequestMapping("/download")
+	public void download(HttpServletResponse response, Integer id) {
+		if(response==null || id==null) {
+			log.error("HttpServletResponse is null or id is null");
+			throw new ErrorException(StatusCode.ERROR, "HttpServletResponse is null or id is null");
+		}
+		Files file = filesService.selectByPrimaryKey(id);
+		ftpClientService.downloadFilesToResponse(file,response);	
+	}
+	
+	//@RequestMapping("/download")
+	public void downloadTest(HttpServletResponse response, Integer id) {
+		//response操作
+		response.setCharacterEncoding("UTF-8");  
+        response.setContentType("multipart/form-data;charset=UTF-8"); 
+        try {  
+
+		    response.setHeader("Content-Disposition", "attachment;fileName="+ new String( "kkk.properties".getBytes("utf-8"), "ISO8859-1" ) );  
+		    
+		    OutputStream os = response.getOutputStream();
+		    InputStream is = this.getClass().getClassLoader().getResourceAsStream("com/lys/zhku/config/webapp.porperties");
+		    int len=0;
+		    byte[] buff = new byte[1024];
+		    while((len=is.read(buff))>0) {
+		    	os.write(buff, 0, len);
+		    }
+		    is.close();
+		    os.flush();  
+		    os.close();
+		    
+		    
+		    response.setHeader("Content-Disposition", "attachment;fileName="+ new String( "aaaa.properties".getBytes("utf-8"), "ISO8859-1" ) );  
+		     os = response.getOutputStream();
+		     is = this.getClass().getClassLoader().getResourceAsStream("com/lys/zhku/config/webapp.porperties");
+		     len=0;
+		     buff = new byte[1024];
+		    while((len=is.read(buff))>0) {
+		    	os.write(buff, 0, len);
+		    }
+		    is.close();
+		    os.flush();  
+		    os.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }	
 	}
 }

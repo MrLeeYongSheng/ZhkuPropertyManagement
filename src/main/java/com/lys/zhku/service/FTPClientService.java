@@ -1,7 +1,9 @@
 package com.lys.zhku.service;
 
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.lys.zhku.model.Files;
@@ -23,6 +25,19 @@ public interface FTPClientService {
 	 */
 	String generateUUIDFileName(String orginName);
 
-	int deleteFilesByFileNameAndBasePath(List<String> uuidNameList, String basePath);
+	/**
+	 * 根据Files的position和UUIDName来定位文件并删除
+	 * @param filesList
+	 * @return 1:成功
+	 */
+	int deleteByFiles(List<Files> filesList);
+
+	/**
+	 * 根据Files来向ftp下载文件,并在OutputStream输出
+	 * @param file
+	 * @param response
+	 * @return
+	 */
+	int downloadFilesToResponse(Files file, HttpServletResponse response);
 
 }

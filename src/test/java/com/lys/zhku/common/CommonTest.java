@@ -3,6 +3,7 @@ package com.lys.zhku.common;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -54,7 +55,9 @@ public class CommonTest {
 	
 	@Test
 	public void test() throws Exception {
-
+		File file = new File("ab/bb","dd4.vvv");
+		System.out.println(file.getPath());
+		
 		
 	}
 	

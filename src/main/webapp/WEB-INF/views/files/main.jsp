@@ -84,6 +84,34 @@
 						});						
 					});
 				}
+			}, '-', {
+				iconCls : 'icon-edit',
+				text : '下载',
+				handler : function() {
+					var selections = $("#dg").datagrid("getSelections");
+					if(selections.length !=1 ){
+						$.messager.alert('操作提示','必须且只能选择一行！','info');
+						return ;
+					}
+					var row = selections[0];
+					//下载
+					//定义一个form表单
+					var form=$("<form>");
+					form.attr("style","display:none");  
+					form.attr("target","");  
+					form.attr("method","post");  
+					form.attr("action","${prePath}/files/download");
+					//end form
+					//定义input标签
+					var input=$("<input>");  
+					input.attr("type","hidden");  
+					input.attr("name","id");  
+					input.attr("value",row.id);  
+					//end input
+					form.append(input); //将input标签放到form中 
+					$("#win").append(form);//将表单放置在web中  
+					form.submit();//表单提交 	
+				}
 			} ],
 			//列    
 			columns : [ [ {

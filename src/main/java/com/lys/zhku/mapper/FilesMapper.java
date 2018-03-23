@@ -46,9 +46,16 @@ public interface FilesMapper extends BaseMapper<Files>{
 	int insertFiles(@Param("filesList") List<Files> filesList);
 
 	/**
-	 * 根据id获取uuid
+	 * 根据id获取Files
 	 * @param ids
 	 * @return
 	 */
-	List<String> selectUuidNameByPrimaryKeys(@Param("ids") Integer[] ids);
+	List<Files> selectByPrimaryKeys(@Param("ids") Integer[] ids);
+
+	/**
+	 * 根据id获取uuidName和Position
+	 * @param ids
+	 * @return
+	 */
+	List<Files> selectUuidNameAndPositionByPrimaryKeys(@Param("ids") Integer[] ids);
 }

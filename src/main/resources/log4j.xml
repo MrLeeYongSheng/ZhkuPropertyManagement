@@ -11,8 +11,8 @@
 	</appender>
 
 	<!-- 自定义Appenders -->
-	<appender name="" class="org.apache.log4j.ConsoleAppender">
-		<param name="myAppendersForDebug" value="System.out" />
+	<appender name="myAppendersForDebug" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p: %l - %m%n" />
 		</layout>
@@ -23,8 +23,12 @@
 		<level value="TRACE"></level>
 	</logger>
 	<!-- 自定义Logger注册 -->	
-	<logger name="com.lys.zhku.web.files.FilesController">
-		<level value="debug"></level>
+	<logger name="com.lys.zhku.web">
+		<level value="error"></level>
+		<appender-ref ref="myAppendersForDebug"/>
+	</logger>
+	<logger name="com.lys.zhku.service">
+		<level value="error" />
 		<appender-ref ref="myAppendersForDebug"/>
 	</logger>
 

@@ -23,14 +23,7 @@
 				<td><input id="parentDir" name="parentDir" class="easyui-textbox"
 					data-options="required:true,prompt:'必填',width:278"></td>
 			</tr>
-<!-- TODO:测试环境 -->
-<!-- 			<tr>
-				<td class="label">文件名</td>
-				<td><input id="name" name="name" class="easyui-textbox"
-					data-options="required:true,prompt:'必填',width:278"></td>
-			</tr> -->
-			
-<!-- TODO: 真实环境 -->
+
 			<tr>
 				<td class="label">文件</td>
 				<td><input id="fb" name="files" class="easyui-filebox"
@@ -61,7 +54,7 @@
 				} 
 		    }
 		});	
-/* TODO: 真实环境 	 */	
+
 		$('#fb').filebox({    
 		    buttonText: '选择文件', 
 		    buttonAlign: 'left',

@@ -100,7 +100,13 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		List<String> list = filesMapper.selectUuidNameByPrimaryKeys(null);
+		Files f = new Files();
+		f.setEnable(true);
+		f.setName("aa");
+		f.setParentDir("aa");
+		f.setPosition("aa");
+		f.setUuidName("aa");
+		filesMapper.insert(f);
 
 	}
 	

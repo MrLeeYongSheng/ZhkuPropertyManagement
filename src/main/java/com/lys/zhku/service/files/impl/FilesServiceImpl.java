@@ -49,11 +49,27 @@ public class FilesServiceImpl extends BaseServiceImpl<Files> implements FilesSer
 	}
 
 	@Override
-	public List<String> selectUuidNameByPrimaryKeys(Integer[] ids) {
+	public List<Files> selectByPrimaryKeys(Integer[] ids) {
 		if(CollectionUtils.isEmpty(ids)) {
 			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
 		}
-		return filesMapper.selectUuidNameByPrimaryKeys(ids);
+		return filesMapper.selectByPrimaryKeys(ids);
+	}
+
+	@Override
+	public List<Files> selectUuidNameAndPositionByPrimaryKeys(Integer[] ids) {
+		if(CollectionUtils.isEmpty(ids)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return filesMapper.selectUuidNameAndPositionByPrimaryKeys(ids);
+	}
+
+	@Override
+	public Files selectByPrimaryKey(Integer id) {
+		if(id==null) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return filesMapper.selectByPrimaryKey(id);
 	}
 
 }
