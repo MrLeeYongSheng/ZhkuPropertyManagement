@@ -108,7 +108,7 @@
 							//定义input标签
 							var input = $("<input>");
 							input.attr("type","hidden");
-							input.attr("name","ids");
+							input.attr("name","pks");
 							input.attr("value",row.id)
 							form.append(input);//将input拼接到form
 							//end 定义input标签

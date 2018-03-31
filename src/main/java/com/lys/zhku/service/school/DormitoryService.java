@@ -3,8 +3,9 @@ package com.lys.zhku.service.school;
 import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.BaseService;
 
-public interface DormitoryService {
+public interface DormitoryService extends BaseService<Dormitory>{
 
 	Page<Dormitory> getPageByPagination(Pagination pagination);
 

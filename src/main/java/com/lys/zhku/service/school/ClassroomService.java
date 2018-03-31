@@ -3,8 +3,9 @@ package com.lys.zhku.service.school;
 import com.lys.zhku.model.Classroom;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.BaseService;
 
-public interface ClassroomService {
+public interface ClassroomService extends BaseService<Classroom>{
 
 	/**
 	 * 根据分页参数获取分页记录

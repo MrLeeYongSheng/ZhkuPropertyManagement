@@ -1,8 +1,10 @@
 package com.lys.zhku.web.school;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -24,6 +26,7 @@ import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.school.ParkService;
 import com.lys.zhku.utils.StatusCode;
 
@@ -33,6 +36,9 @@ public class ParkController {
 	
 	@Autowired
 	private ParkService<Park> parkService;
+
+	@Autowired
+	private ExportExcelService exportExcelService;
 
 	@ExceptionHandler
 	@ResponseBody
@@ -82,5 +88,26 @@ public class ParkController {
 		}
 		parkService.updateEntity(park);
 		return new Message(StatusCode.SUCCESS, "修改记录成功");
+	}
+	
+	/**
+	 * 导出所有记录信息
+	 * @param response
+	 */
+	@RequestMapping(value="/exportAll")
+	public void exportAllExcel(HttpServletResponse response) {
+		List<Park> list = parkService.getAll();
+		exportExcelService.exportAll(list, response, Park.class);
+	}
+
+	/**
+	 * 导出pks主键集合所指定的记录
+	 * @param response
+	 * @param pks
+	 */
+	@RequestMapping(value="/exportSelections")
+	public void exportSelectionsExcel(HttpServletResponse response, String[] pks) {
+		List<Park> list = parkService.getByPrimaryKeys(pks);
+		exportExcelService.exportAll(list, response, Park.class);
 	}
 }

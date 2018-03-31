@@ -21,9 +21,8 @@
 			//数据源
 			url : '${prePath}/school/classroom/schedule/getPage',
 			queryParams : {
-				dormitory : row.name,
-				campus : row.campus
-				},//加载有效的账号信息
+				classroomId : row.id
+				},
 			cache : false,//取消datagrid缓存
 			//行宽填充窗体
 			fitColumns : true,
@@ -33,18 +32,6 @@
 			rownumbers : true,//显示一个行号列
 			pageSize : 5,//初始化页面大小
 			pageList : [5, 10, 20, 30],//初始化页面大小选择列表
-			onDblClickRow : function(index,row){//双击一行查看详细信息
-				$("#dg").datagrid("clearSelections");
-				$("#dg").datagrid("selectRow",index);
-				$('#win').dialog({
-					title : '查看教室安排表详情页面',
-					width : 900,
-					height : 500,
-					cache : false,
-					modal : true,//将窗体显示为模式化窗口
-					content:"<iframe src='${prePath}/students/student_detail' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
-				});
-			},
 			//菜单栏
 			toolbar : [ {
 				iconCls : 'icon-add',
@@ -101,6 +88,42 @@
 							}
 						});						
 					});
+				}
+			}, '-', {
+				iconCls : 'icon-print',
+				text : '导出已选',
+				handler : function() {
+					var selections = $("#dg").datagrid("getSelections");
+					if(selections.length==0 ){
+						$.messager.alert('操作提示','至少选择一行！','info');
+						return ;
+					}
+					$.messager.confirm('操作提示', '您确定要导出'+selections.length+'条数据吗？', function(r){
+						if (!r){
+							$("#dg").datagrid("clearSelections");
+						    return ;
+						}
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","post");  
+						form.attr("action","${prePath}/school/classroom/schedule/exportSelections");
+						$.each(selections,function(rowNum,row){
+							//定义input标签
+							var input = $("<input>");
+							input.attr("type","hidden");
+							input.attr("name","pks");
+							input.attr("value",row.id)
+							form.append(input);//将input拼接到form
+							//end 定义input标签
+						});					
+						//end form
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+						$("#dg").datagrid("clearSelections");
+					});					
 				}
 			} ],
 			//列    

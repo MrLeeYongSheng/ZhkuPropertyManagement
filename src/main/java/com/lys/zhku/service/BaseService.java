@@ -2,6 +2,7 @@ package com.lys.zhku.service;
 
 import java.util.List;
 
+import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
 
@@ -55,4 +56,17 @@ public interface BaseService<T> {
 	 * @return
 	 */
 	int updateEntity(T record);
+	
+	/**
+	 * 获取所有信息
+	 * @return
+	 */
+	List<T> getAll();
+
+	/**
+	 * @param <E> 主键的类型
+	 * @param pks 主键数组
+	 * @return 对应的查询
+	 */
+	<E> List<T> getByPrimaryKeys(E[] pks);
 }

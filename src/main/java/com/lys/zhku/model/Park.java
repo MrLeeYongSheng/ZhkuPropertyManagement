@@ -7,7 +7,9 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lys.zhku.anno.NameMapping;
 
+@NameMapping("车位信息表")
 public class Park {
     /**
      *
@@ -25,6 +27,7 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("车位号")
     @NotNull
     private String siteNum;
 
@@ -35,6 +38,7 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("车牌号")
     private String carNum;
 
     /**
@@ -44,6 +48,7 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("校区")
     @NotNull
     private String campus;
 
@@ -54,9 +59,10 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("时间")
     @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date entryTime;
 
     /**
@@ -66,6 +72,7 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("预定/使用")
     @NotNull
     private Boolean book;
 
@@ -76,6 +83,7 @@ public class Park {
      *
      * @mbg.generated
      */
+    @NameMapping("有效标志")
     @NotNull
     private Boolean enable;
 

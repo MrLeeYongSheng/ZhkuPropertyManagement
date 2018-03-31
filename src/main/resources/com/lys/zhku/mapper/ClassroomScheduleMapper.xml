@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lys.zhku.mapper.ClassroomScheduleMapper">
+
+  <sql id="selectAllSql">
+    select id, classroom_id, date, enable, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, 
+    c12
+    from classroom_schedule  
+  </sql>
+
   <resultMap id="BaseResultMap" type="com.lys.zhku.model.ClassroomSchedule">
     <!--
       WARNING - @mbg.generated
@@ -97,6 +104,9 @@
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
     	</if>
+    	<if test="classroomId != null">
+    		and classroom_id=#{classroomId,jdbcType=INTEGER}
+    	</if>    	
     </where>
   </select>
 
@@ -107,6 +117,9 @@
     <where>
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
+    	</if>
+    	<if test="classroomId != null">
+    		and classroom_id=#{classroomId,jdbcType=INTEGER}
     	</if>
     </where>
     	limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
@@ -126,4 +139,23 @@
     	</if>
     </where>    
   </delete>   
+  
+  <select id="getAll" resultMap="BaseResultMap">
+  	<include refid="selectAllSql"/>
+  </select>
+
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+  	<include refid="selectAllSql"/>
+    <where>
+    	<if test="pks==null or pks.length==0">
+    		1=0
+    	</if>
+    	<if test="pks!=null and pks.length!=0">
+    		id in
+    		<foreach collection="pks" item="id" open="(" close=")" separator=",">
+    			#{id,jdbcType=INTEGER}
+    		</foreach>
+    	</if>
+    </where>
+  </select>  
 </mapper>

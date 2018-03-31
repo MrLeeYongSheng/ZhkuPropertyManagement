@@ -11,13 +11,14 @@ import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.impl.BaseServiceImpl;
 import com.lys.zhku.service.school.DormitoryService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.StatusCode;
 
 @Service
-public class DormitoryServiceImpl implements DormitoryService {
+public class DormitoryServiceImpl extends BaseServiceImpl<Dormitory> implements DormitoryService {
 
 	@Autowired
 	private DormitoryMapper dormitoryMapper;
@@ -58,6 +59,12 @@ public class DormitoryServiceImpl implements DormitoryService {
 			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "不完整的宿舍信息,缺失必要的请求参数");
 		}
 		return dormitoryMapper.updateByPrimaryKey(dormitory);
+	}
+
+	@Override
+	public int existEntity(Dormitory record) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

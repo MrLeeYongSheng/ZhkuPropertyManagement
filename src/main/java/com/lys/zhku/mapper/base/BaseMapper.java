@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.web.Pagination;
 
 public interface BaseMapper<T> {
@@ -21,6 +22,7 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	int updateByPrimaryKey(T record);
+	
 	
 	/*
 	 * 自动生成的分界线************************************************
@@ -46,5 +48,19 @@ public interface BaseMapper<T> {
 	 * @return
 	 */
 	int deleteByPrimaryKeys(@Param("ids") Integer[] ids);
+	
+	/**
+	 * 获取所有记录的方法
+	 * @param record
+	 * @return
+	 */
 
+	List<T> getAll();
+	/**
+	 * 根据主键数组获取对应的记录
+	 * @param <E> 主键的类型
+	 * @param pks
+	 * @return
+	 */
+	<E> List<T> selectByPrimaryKeys(@Param("pks") E[] pks);
 }

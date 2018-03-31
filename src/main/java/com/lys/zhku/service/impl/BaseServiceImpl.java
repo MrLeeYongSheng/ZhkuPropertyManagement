@@ -8,7 +8,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.lys.zhku.mapper.base.BaseMapper;
-import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
@@ -68,5 +67,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	public int updateEntity(T record) {
 		//数据的合法性由controller来校验
 		return baseMapper.updateByPrimaryKey(record);
+	}
+	
+	@Override
+	public List<T> getAll() {
+		return baseMapper.getAll();
+	}
+	
+	@Override
+	public <E> List<T> getByPrimaryKeys(E[] pks) {
+		if(CollectionUtils.isEmpty(pks)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return baseMapper.selectByPrimaryKeys(pks);
 	}
 }

@@ -5,9 +5,10 @@ import java.util.List;
 import com.lys.zhku.model.Datadict;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.BaseService;
 
 
-public interface DatadictService {
+public interface DatadictService extends BaseService<Datadict> {
 
 	int insertDatadict(Datadict datadict);
 

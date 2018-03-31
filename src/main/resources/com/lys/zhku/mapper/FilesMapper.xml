@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lys.zhku.mapper.FilesMapper">
+
+  <sql id="selectAllSql">
+    select id, parent_dir, name, uuid_name, position, size, time, enable
+    from files  
+  </sql>
+
   <resultMap id="BaseResultMap" type="com.lys.zhku.model.Files">
     <!--
       WARNING - @mbg.generated
@@ -92,12 +98,12 @@
   <delete id="deleteByPrimaryKeys" parameterType="java.lang.Integer">
     delete from files
     <where>
-    	<if test="ids==null or ids.length==0">
+    	<if test="pks==null or pks.length==0">
     		1=0
     	</if>
-    	<if test="ids!=null and ids.length!=0">
+    	<if test="pks!=null and pks.length!=0">
     		id in
-    		<foreach close=")" collection="ids" item="id" open="(" separator=",">
+    		<foreach close=")" collection="pks" item="id" open="(" separator=",">
     			#{id,jdbcType=INTEGER}
     		</foreach>
     	</if>
@@ -108,12 +114,12 @@
     select id, parent_dir, name, uuid_name, position, size, time, enable
     from files
     <where>
-    	<if test="ids==null or ids.length==0">
+    	<if test="pks==null or pks.length==0">
     		1=0
     	</if>
-    	<if test="ids!=null and ids.length!=0">
+    	<if test="pks!=null and pks.length!=0">
     		id in
-    		<foreach close=")" collection="ids" item="id" open="(" separator=",">
+    		<foreach close=")" collection="pks" item="id" open="(" separator=",">
     			#{id,jdbcType=INTEGER}
     		</foreach>
     	</if>
@@ -124,12 +130,12 @@
     select uuid_name, position
     from files
     <where>
-    	<if test="ids==null or ids.length==0">
+    	<if test="pks==null or pks.length==0">
     		1=0
     	</if>
-    	<if test="ids!=null and ids.length!=0">
+    	<if test="pks!=null and pks.length!=0">
     		id in
-    		<foreach close=")" collection="ids" item="id" open="(" separator=",">
+    		<foreach close=")" collection="pks" item="id" open="(" separator=",">
     			#{id,jdbcType=INTEGER}
     		</foreach>
     	</if>
@@ -147,4 +153,8 @@
 		#{file.time,jdbcType=TIMESTAMP}, #{file.enable,jdbcType=BIT})
     </foreach>
   </insert> 
+  
+  <select id="getAll" resultMap="BaseResultMap">
+  	<include refid="selectAllSql"/>
+  </select> 
 </mapper>

@@ -5,25 +5,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.lys.zhku.config.CacheConfig;
 import com.lys.zhku.mapper.DatadictMapper;
 import com.lys.zhku.model.Datadict;
-import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.impl.BaseServiceImpl;
 import com.lys.zhku.service.system.DatadictService;
-import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.StatusCode;
 
 @Service
-public class DatadictServiceImpl implements DatadictService{
+public class DatadictServiceImpl extends BaseServiceImpl<Datadict> implements DatadictService{
 	
 	@Autowired
 	private DatadictMapper datadictMapper; 
@@ -77,6 +74,12 @@ public class DatadictServiceImpl implements DatadictService{
 			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "内部错误");
 		}
 		return datadictMapper.getListByDatadict(datadict);
+	}
+
+	@Override
+	public int existEntity(Datadict record) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

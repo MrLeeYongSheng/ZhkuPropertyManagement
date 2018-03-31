@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lys.zhku.mapper.ParkMapper">
+
+  <sql id="selectAllSql">
+    select id, site_num, car_num, campus, entry_time, book, enable
+    from park	
+  </sql>
+
   <resultMap id="BaseResultMap" type="com.lys.zhku.model.Park">
     <!--
       WARNING - @mbg.generated
@@ -101,4 +107,23 @@
     	</if>
     </where>    
   </delete>  
+  
+  <select id="getAll" resultMap="BaseResultMap">
+  	<include refid="selectAllSql"/>
+  </select>
+
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+  	<include refid="selectAllSql"/>
+    <where>
+    	<if test="pks==null or pks.length==0">
+    		1=0
+    	</if>
+    	<if test="pks!=null and pks.length!=0">
+    		id in
+    		<foreach collection="pks" item="id" open="(" close=")" separator=",">
+    			#{id,jdbcType=INTEGER}
+    		</foreach>
+    	</if>
+    </where>
+  </select>  
 </mapper>

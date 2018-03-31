@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 import com.lys.zhku.mapper.ClassroomMapper;
 import com.lys.zhku.model.Classroom;
-import com.lys.zhku.model.Classroom;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.impl.BaseServiceImpl;
 import com.lys.zhku.service.school.ClassroomService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.StatusCode;
 
 @Service
-public class ClassroomServiceImpl implements ClassroomService {
+public class ClassroomServiceImpl extends BaseServiceImpl<Classroom> implements ClassroomService {
 	
 	@Autowired
 	private ClassroomMapper classroomMapper;
@@ -59,6 +59,12 @@ public class ClassroomServiceImpl implements ClassroomService {
 			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "不完整的教室信息,缺失必要的请求参数");
 		}
 		return classroomMapper.updateByPrimaryKey(classroom);
+	}
+
+	@Override
+	public int existEntity(Classroom record) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lys.zhku.model.ClassroomSchedule;
 import com.lys.zhku.model.Files;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.FTPClientService;
 import com.lys.zhku.service.files.FilesService;
 import com.lys.zhku.utils.CollectionUtils;
@@ -44,6 +46,9 @@ public class FilesController {
 	
 	@Autowired
 	private FTPClientService ftpClientService;
+	
+	@Autowired
+	private ExportExcelService exportExcelService;
 	
 	private static Logger log = Logger.getLogger(FilesController.class);
 
@@ -153,5 +158,26 @@ public class FilesController {
         } catch (Exception e) {  
             e.printStackTrace();  
         }	
+	}
+	
+	/**
+	 * 导出所有记录信息
+	 * @param response
+	 */
+	@RequestMapping(value="/exportAll")
+	public void exportAllExcel(HttpServletResponse response) {
+		List<Files> list = filesService.getAll();
+		exportExcelService.exportAll(list, response, Files.class);
+	}
+
+	/**
+	 * 导出pks主键集合所指定的记录
+	 * @param response
+	 * @param pks
+	 */
+	@RequestMapping(value="/exportSelections")
+	public void exportSelectionsExcel(HttpServletResponse response, String[] pks) {
+		List<Files> list = filesService.getByPrimaryKeys(pks);
+		exportExcelService.exportAll(list, response, Files.class);
 	}
 }
