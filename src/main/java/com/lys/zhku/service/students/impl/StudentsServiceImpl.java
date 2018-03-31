@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lys.zhku.mapper.DormitoryMapper;
 import com.lys.zhku.mapper.StudentsMapper;
 import com.lys.zhku.mapper.UserdetailsMapper;
+import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.model.Users;
@@ -32,7 +34,7 @@ public class StudentsServiceImpl implements StudentsService {
 	
 	@Autowired
 	private UsersService usersService;
-	
+
 	@Override
 	public Integer insertStudent(Students student, Userdetails userdetail) {
 		//检查model
@@ -54,6 +56,7 @@ public class StudentsServiceImpl implements StudentsService {
 		int studentStatus = studentsMapper.insert(student);
 		//插入userDetails
 		int userdetailStatus = userdetailsMapper.insert(userdetail);
+		
 		
 		if(studentStatus+userdetailStatus<2) {
 			throw new ErrorException(StatusCode.ERROR, "插入数据 发生内部错误");
@@ -90,7 +93,7 @@ public class StudentsServiceImpl implements StudentsService {
 		int studentStatus = studentsMapper.updateByPrimaryKey(student);
 		//更新userDetails
 		int userdetailStatus = userdetailsMapper.updateByPrimaryKey(userdetail);
-		
+
 		if(studentStatus+userdetailStatus<2) {
 			throw new ErrorException(StatusCode.ERROR, "更新数据 发生内部错误");
 		}
@@ -102,5 +105,18 @@ public class StudentsServiceImpl implements StudentsService {
 	public Integer deleteStudentsByUsersUsernames(String[] usersUsernames) {
 		//错误逻辑交给usersService.updateUserEnableByUsernames方法处理
 		return usersService.updateUserEnableByUsernames(usersUsernames, false);
+	}
+
+	@Override
+	public List<Students> getAll() {
+		return studentsMapper.selectAll();
+	}
+
+	@Override
+	public List<Students> getByPrimaryKeys(String[] pks) {
+		if(CollectionUtils.isEmpty(pks)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return studentsMapper.selectByPrimaryKeys(pks);
 	}
 }

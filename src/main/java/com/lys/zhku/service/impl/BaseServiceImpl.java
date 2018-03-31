@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.lys.zhku.mapper.base.BaseMapper;
+import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
@@ -68,5 +69,4 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 		//数据的合法性由controller来校验
 		return baseMapper.updateByPrimaryKey(record);
 	}
-
 }

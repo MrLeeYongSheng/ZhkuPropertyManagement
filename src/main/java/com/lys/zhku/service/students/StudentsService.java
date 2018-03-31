@@ -1,5 +1,7 @@
 package com.lys.zhku.service.students;
 
+import java.util.List;
+
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.pojo.web.Page;
@@ -36,4 +38,18 @@ public interface StudentsService {
 	 * @return
 	 */
 	Integer deleteStudentsByUsersUsernames(String[] usersUsernames);
+
+	/**
+	 * 获取所有信息
+	 * @return
+	 */
+	List<Students> getAll();
+
+	/**
+	 * 根据主键数组获取对应记录
+	 * @param pks
+	 * @return
+	 */
+	List<Students> getByPrimaryKeys(String[] pks);
+
 }

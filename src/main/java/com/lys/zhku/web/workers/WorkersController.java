@@ -1,5 +1,9 @@
 package com.lys.zhku.web.workers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +18,7 @@ import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.workers.WorkersService;
 import com.lys.zhku.utils.StatusCode;
 
@@ -23,6 +28,9 @@ public class WorkersController {
 	
 	@Autowired
 	private WorkersService workersService;
+	
+	@Autowired
+	private ExportExcelService exportExcelService;
 	
 	/**
 	 * 用来处理异常ErrorException的情况
@@ -75,5 +83,26 @@ public class WorkersController {
 	public Message deleteWorkers(String[] usersUsernames) {
 		workersService.deleteWorkersByUsersUsernamesInMemory(usersUsernames);
 		return new Message(StatusCode.SUCCESS, "成功");
+	}
+	
+	/**
+	 * 导出所有记录信息
+	 * @param response
+	 */
+	@RequestMapping(value="/exportAll")
+	public void exportAllExcel(HttpServletResponse response) {
+		List<Workers> list = workersService.getAll();
+		exportExcelService.exportAll(list, response, Workers.class);
+	}
+
+	/**
+	 * 导出pks主键集合所指定的记录
+	 * @param response
+	 * @param pks
+	 */
+	@RequestMapping(value="/exportSelections")
+	public void exportSelectionsExcel(HttpServletResponse response, String[] pks) {
+		List<Workers> list = workersService.getByPrimaryKeys(pks);
+		exportExcelService.exportAll(list, response, Workers.class);
 	}
 }

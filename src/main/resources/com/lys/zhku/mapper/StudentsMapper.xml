@@ -117,4 +117,21 @@
     	</if>
     </where>
   </delete>	
+  
+  <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
+    select users_username, name, gender, campus, department, major, grade, classnum, 
+    dormitory
+    from students
+    <where>
+    	<if test="usersUsernames != null and usersUsernames.length != 0">
+    		users_username in
+    		<foreach collection="usersUsernames" item="usersUsername" index="i" open="(" close=")" separator=",">
+    			#{usersUsername,jdbcType=VARCHAR}
+    		</foreach>
+    	</if>
+    	<if test="usersUsernames == null or usersUsernames.length == 0">
+			and 0=1
+    	</if>
+    </where>
+  </select>
 </mapper>

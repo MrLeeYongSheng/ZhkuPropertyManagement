@@ -26,6 +26,8 @@
 		<spring-data-redis.version>1.8.10.RELEASE</spring-data-redis.version>
 		<redis.clients.version>2.9.0</redis.clients.version>
 		<commons-net.version>3.6</commons-net.version>
+		<poi.version>3.17</poi.version>
+		<xmlbeans.version>2.6.0</xmlbeans.version>
 	</properties>
 
 	<dependencyManagement>
@@ -41,12 +43,36 @@
 	</dependencyManagement>
 
 	<dependencies>
-	
-		<!-- commons-net 提供对ftp的支持-->
+		<!-- poi支持Excel的导出导入 -->
 		<dependency>
-		    <groupId>commons-net</groupId>
-		    <artifactId>commons-net</artifactId>
-		    <version>${commons-net.version}</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<!-- 支持xlsx文件 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<!-- 支持xlsx文件 -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<!-- 支持xlsx文件 -->
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>${xmlbeans.version}</version>
+		</dependency>
+
+		<!-- commons-net 提供对ftp的支持 -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>${commons-net.version}</version>
 		</dependency>
 
 		<!-- 提供对redis缓存的支持,提供缓存管理器等 -->

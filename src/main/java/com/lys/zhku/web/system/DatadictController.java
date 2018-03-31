@@ -2,6 +2,8 @@ package com.lys.zhku.web.system;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lys.zhku.model.Datadict;
+import com.lys.zhku.model.Workers;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.system.DatadictService;
 import com.lys.zhku.utils.StatusCode;
 
@@ -22,6 +26,9 @@ public class DatadictController {
 
 	@Autowired
 	private DatadictService datadictService;
+	
+	@Autowired
+	private ExportExcelService exportExcelService;
 
 	@RequestMapping(value="/{path}", method=RequestMethod.GET)
 	public String view(@PathVariable String path) {
@@ -61,4 +68,25 @@ public class DatadictController {
 	public List<Datadict> getDatadictListByDatadict(Datadict datadict) {
 		return datadictService.getListByDatadict(datadict);
 	}	
+/*	
+	*//**
+	 * 导出所有记录信息
+	 * @param response
+	 *//*
+	@RequestMapping(value="/exportAll")
+	public void exportAllExcel(HttpServletResponse response) {
+		List<Datadict> list = datadictService.getAll();
+		exportExcelService.exportAll(list, response, Datadict.class);
+	}
+
+	*//**
+	 * 导出pks主键集合所指定的记录
+	 * @param response
+	 * @param pks
+	 *//*
+	@RequestMapping(value="/exportSelections")
+	public void exportSelectionsExcel(HttpServletResponse response, String[] pks) {
+		List<Datadict> list = datadictService.getByPrimaryKeys(pks);
+		exportExcelService.exportAll(list, response, Datadict.class);
+	}*/
 }

@@ -2,6 +2,9 @@ package com.lys.zhku.model;
 
 import java.io.Serializable;
 
+import com.lys.zhku.anno.NameMapping;
+
+@NameMapping("数据字典")
 public class Datadict implements Serializable{
     /**
 	 * 自动生成
@@ -15,6 +18,7 @@ public class Datadict implements Serializable{
      *
      * @mbg.generated
      */
+	@NameMapping("id")
     private Integer id;
 
     /**
@@ -24,6 +28,7 @@ public class Datadict implements Serializable{
      *
      * @mbg.generated
      */
+	@NameMapping("键")
     private String key;
 
     /**
@@ -33,6 +38,7 @@ public class Datadict implements Serializable{
      *
      * @mbg.generated
      */
+	@NameMapping("值")
     private String value;
 
     /**
@@ -42,6 +48,7 @@ public class Datadict implements Serializable{
      *
      * @mbg.generated
      */
+	@NameMapping("父级id")
     private Integer parentid;
 
     /**
@@ -51,6 +58,7 @@ public class Datadict implements Serializable{
      *
      * @mbg.generated
      */
+	@NameMapping("有效性")
     private Boolean enable;
 
     /**

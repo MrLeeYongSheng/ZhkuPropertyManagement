@@ -7,11 +7,7 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,12 +22,10 @@ import org.springframework.stereotype.Service;
 
 import com.lys.zhku.model.Files;
 import com.lys.zhku.pojo.exception.ErrorException;
-import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.service.FTPClientService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.FileUtils;
 import com.lys.zhku.utils.StatusCode;
-import com.lys.zhku.utils.StringUtils;
 
 /**
  * @author MrLeeYongSheng

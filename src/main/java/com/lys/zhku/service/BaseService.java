@@ -1,5 +1,7 @@
 package com.lys.zhku.service;
 
+import java.util.List;
+
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
 
@@ -53,5 +55,4 @@ public interface BaseService<T> {
 	 * @return
 	 */
 	int updateEntity(T record);
-
 }

@@ -17,6 +17,7 @@ import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.service.users.UsersService;
 import com.lys.zhku.service.workers.WorkersService;
+import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.StatusCode;
@@ -113,6 +114,19 @@ public class WorkersServiceImpl implements WorkersService {
 		workersMapper.deleteByUsernames(usersUsernames);
 		userdetailsMapper.deleteByUsernames(usersUsernames);
 		return usersService.deleteByUsernamesInMemory(usersUsernames);
+	}
+	
+	@Override
+	public List<Workers> getAll() {
+		return workersMapper.selectAll();
+	}
+
+	@Override
+	public List<Workers> getByPrimaryKeys(String[] pks) {
+		if(CollectionUtils.isEmpty(pks)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return workersMapper.selectByPrimaryKeys(pks);
 	}
 
 }

@@ -75,8 +75,12 @@
   </select>
 
   <select id="selectByPagination" resultMap="BaseResultMap">
-    select id, name, campus, number, max_number, enable
-    from dormitory
+    select id, name, campus, 
+	    (select count(1) from students st, users u
+	     	where st.users_username=u.username and u.enable=1 
+	        and st.campus=dorm.campus and st.dormitory=dorm.name) number, 
+	    max_number, enable
+    from dormitory dorm
     <where>
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}

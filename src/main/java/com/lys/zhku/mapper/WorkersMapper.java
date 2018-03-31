@@ -1,11 +1,11 @@
 package com.lys.zhku.mapper;
 
-import com.lys.zhku.model.Workers;
-import com.lys.zhku.pojo.web.Pagination;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.lys.zhku.model.Workers;
+import com.lys.zhku.pojo.web.Pagination;
 
 public interface WorkersMapper {
 
@@ -49,4 +49,11 @@ public interface WorkersMapper {
 	 * @return
 	 */
 	int deleteByUsernames(@Param("usersUsernames") String[] usersUsernames);
+	
+	/**
+	 * 根据主键数组获取对应的记录
+	 * @param pks
+	 * @return
+	 */
+	List<Workers> selectByPrimaryKeys(@Param("usersUsernames") String[] usersUsernames);
 }

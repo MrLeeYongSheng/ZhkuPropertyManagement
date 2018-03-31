@@ -2,6 +2,8 @@ package com.lys.zhku.web.students;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lys.zhku.model.Datadict;
@@ -19,8 +20,8 @@ import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
-import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.pojo.web.StudentsPagination;
+import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.students.StudentsService;
 import com.lys.zhku.service.system.DatadictService;
 import com.lys.zhku.utils.StatusCode;
@@ -35,6 +36,9 @@ public class StudentsController {
 	@Autowired
 	private DatadictService datadictService;
 
+	@Autowired
+	private ExportExcelService exportExcelService;
+	
 	/**
 	 * 用来处理异常ErrorException的情况
 	 * 
@@ -115,6 +119,27 @@ public class StudentsController {
 	@ResponseBody
 	public List<Datadict> getDatadictListByDatadict(Datadict datadict) {
 		return datadictService.getListByDatadict(datadict);
+	}
+	
+	/**
+	 * 导出所有记录信息
+	 * @param response
+	 */
+	@RequestMapping(value="/exportAll")
+	public void exportAllExcel(HttpServletResponse response) {
+		List<Students> list = studentsService.getAll();
+		exportExcelService.exportAll(list, response, Students.class);
+	}
+
+	/**
+	 * 导出pks主键集合所指定的记录
+	 * @param response
+	 * @param pks
+	 */
+	@RequestMapping(value="/exportSelections")
+	public void exportSelectionsExcel(HttpServletResponse response, String[] pks) {
+		List<Students> list = studentsService.getByPrimaryKeys(pks);
+		exportExcelService.exportAll(list, response, Students.class);
 	}
 
 }

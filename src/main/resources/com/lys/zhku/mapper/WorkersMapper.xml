@@ -91,4 +91,20 @@
    		</if>
    </where>
   </delete>
+
+  <select id="selectByPrimaryKeys" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select users_username, name, gender, position
+    from workers
+   <where>
+   		<if test="usersUsernames!=null and usersUsernames.length>0">
+   			users_username in
+   			<foreach collection="usersUsernames" item="username" index="i" open="(" close=")" separator=",">
+   				#{username, jdbcType=VARCHAR}
+   			</foreach>
+   		</if>
+   		<if test="usersUsernames==null or usersUsernames.length==0">
+   			1=0
+   		</if>
+   </where>
+  </select>
 </mapper>

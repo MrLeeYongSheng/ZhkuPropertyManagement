@@ -44,4 +44,11 @@ public interface StudentsMapper {
 	Integer selectTotalForPagination(Pagination pagination);
 	
 	Integer deleteByPrimaryKeys(@Param("usersUsernames") String[] usersUsernames);
+
+	/**
+	 * 根据主键数组获取对应的记录
+	 * @param pks
+	 * @return
+	 */
+	List<Students> selectByPrimaryKeys(@Param("usersUsernames") String[] usersUsernames);
 }

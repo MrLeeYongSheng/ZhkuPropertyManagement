@@ -110,16 +110,55 @@
 					});
 				}
 			}, '-', {
-				text : '<input id="search_gender" class="easyui-combobox" data-options="">',
-			}, '-', {
-				text : '<input id="ss" class="easyui-combobox" data-options="">',
-			}, '-', {
-				text : '<input id="dd" class="easyui-textbox" data-options="">',
-			}, '-', {
-				iconCls : 'icon-search',
-				text : '查询',
+				iconCls : 'icon-print',
+				text : '导出已选',
 				handler : function() {
-					alert('查询按钮');//TODO: 查询
+					var selections = $("#dg").datagrid("getSelections");
+					if(selections.length==0 ){
+						$.messager.alert('操作提示','至少选择一行！','info');
+						return ;
+					}
+					$.messager.confirm('操作提示', '您确定要导出'+selections.length+'条数据吗？', function(r){
+						if (!r){
+							$("#dg").datagrid("clearSelections");
+						    return ;
+						}
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","post");  
+						form.attr("action","${prePath}/students/exportSelections");
+						$.each(selections,function(rowNum,row){
+							//定义input标签
+							var input = $("<input>");
+							input.attr("type","hidden");
+							input.attr("name","pks");
+							input.attr("value",row.usersUsername)
+							form.append(input);//将input拼接到form
+							//end 定义input标签
+						});					
+						//end form
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+						$("#dg").datagrid("clearSelections");
+					});					
+				}
+			}, '-', {
+				iconCls : 'icon-print',
+				text : '导出所有',
+				handler : function() {
+					//下载
+					//定义一个form表单
+					var form=$("<form>");
+					form.attr("style","display:none");  
+					form.attr("target","");  
+					form.attr("method","post");  
+					form.attr("action","${prePath}/students/exportAll");
+					//end form
+					$("#win").append(form);//将表单放置在web中  
+					form.submit();//表单提交 	
 				}
 			} ],
 			//列    
