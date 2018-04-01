@@ -81,6 +81,7 @@ public class JdbcTest {
 	@Autowired
 	WorkersMapper workersMapper;
 
+	@Autowired
 	DatadictMapper datadictMapper;
 	
 	@Autowired
@@ -100,14 +101,10 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		Files f = new Files();
-		f.setEnable(true);
-		f.setName("aa");
-		f.setParentDir("aa");
-		f.setPosition("aa");
-		f.setUuidName("aa");
-		filesMapper.insert(f);
-
+		filesMapper.getAll();
+		filesMapper.selectByPrimaryKeys(null);
+		filesMapper.selectByPrimaryKeys(new Integer[] {});
+		filesMapper.selectByPrimaryKeys(new Integer[] {1,2});
 	}
 	
 	@Test

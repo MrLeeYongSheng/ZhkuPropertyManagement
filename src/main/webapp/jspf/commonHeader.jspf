@@ -1,6 +1,8 @@
 <!-- taglibs -->
 <!-- 导入jstl标签 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- 导入spring security标签 -->
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <!-- page scope var -->
 <!-- 设置变量prePath为应用的跟路径 -->

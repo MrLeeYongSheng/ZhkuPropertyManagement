@@ -19,62 +19,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-		return "/test/home";
-	}
-
-	@RequestMapping(value = "/home2", method = RequestMethod.GET)
-	public String home2(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate);
-		
-		return "/test/home";
-	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-
 		return "login";
 	}
 	
-
-	
-
-	
-/*	@RequestMapping(value = "/{pathName}", method = RequestMethod.GET)
-	public String pathName(@PathVariable String pathName) {
-
-		return pathName;
-	}*/
-
 	@RequestMapping(value = {"/index","/"})
 	public String index() {
-		
 		return "index";
 	}
 
 	@RequestMapping(value = "/subviews/{pathName}/{fileName}", method = RequestMethod.GET)
 	public String subviews(@PathVariable String pathName, @PathVariable String fileName) {
-		
 		return "subviews/" + pathName +"/"+ fileName;
 	}
 

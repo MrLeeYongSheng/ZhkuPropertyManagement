@@ -1,0 +1,18 @@
+[
+	{
+		"id": "user_1330",
+		"pid": "user_1325",
+		"text": "校园信息",
+		"state": "closed",
+		"iconCls": "fa fa-bar-chart",
+		"url": ""
+	},
+	{
+		"id": "user_1329",
+		"pid": "user_1325",
+		"text": "文件下载",
+		"state": "closed",
+		"iconCls": "fa fa-list",
+		"url": ""
+	}
+]

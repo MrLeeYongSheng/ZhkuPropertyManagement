@@ -348,14 +348,30 @@
                 </td>
                 <td>
                     <table id="topmenucontent" cellpadding="0" cellspacing="0">
-                        <td id="1325" title="这只是静态演示" class="topmenu selected systemName">
+                   	  <security:authorize url="/json/menu/menu_1325.json">
+                   	  <!-- 管理员所看的菜单项 -->
+                        <td id="1325" title="菜单" class="topmenu selected systemName">
                             <a class="l-btn-text bannerMenu" href="javascript:void(0)">
                                 <p>
                                     <lable class="fa fa-hand-pointer-o"></lable>
                                 </p>
-                                <p><span style="white-space:nowrap;">静态演示</span></p>
+                                <p><span style="white-space:nowrap;">菜单</span></p>
                             </a>
                         </td>
+                   	  </security:authorize>
+                   	  <security:authorize url="/json/menu/menu_user_1325.json"
+                   	  	access="not hasAuthority(T(com.lys.zhku.utils.Authorities).admin.auth)"
+                   	  > <!-- 普通用户看的内容,不将该内容呈现给管理员看 -->
+                        <td id="user_1325" title="菜单" class="topmenu selected systemName">
+                            <a class="l-btn-text bannerMenu" href="javascript:void(0)">
+                                <p>
+                                    <lable class="fa fa-hand-pointer-o"></lable>
+                                </p>
+                                <p><span style="white-space:nowrap;">菜单</span></p>
+                            </a>
+                        </td>
+                   	  </security:authorize>
+
                         <td id="60" title="TopJUI开发文档" class="topmenu systemName">
                             <a class="l-btn-text bannerMenu" href="javascript:void(0)">
                                 <p>

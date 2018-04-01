@@ -1,0 +1,18 @@
+[
+  {
+    "id": "user_1357",
+    "pid": "user_1330",
+    "state": "open",
+    "iconCls": "",
+    "text": "宿舍信息",
+    "url": "./school/dormitory/main"
+  },
+  {
+    "id": "user_1355",
+    "pid": "user_1330",
+    "state": "open",
+    "iconCls": "",
+    "text": "教室查询",
+    "url": "./school/classroom/main"
+  }
+]

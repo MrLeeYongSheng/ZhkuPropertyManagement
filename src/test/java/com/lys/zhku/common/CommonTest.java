@@ -1,48 +1,32 @@
 package com.lys.zhku.common;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.UnknownHostException;
-import java.nio.charset.Charset;
+import java.io.FileOutputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPHTTPClient;
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.lys.zhku.config.RootConfig;
-import com.lys.zhku.model.Datadict;
+import com.lys.zhku.anno.NameMapping;
 import com.lys.zhku.model.Park;
-import com.lys.zhku.utils.CollectionUtils;
-import com.lys.zhku.utils.FileUtils;
-import com.lys.zhku.utils.PropertiesUtils;
+import com.lys.zhku.model.Students;
+import com.lys.zhku.service.impl.ExportExcelServiceImpl;
 
 //@RunWith(value=SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes=RootConfig.class)
@@ -53,29 +37,93 @@ public class CommonTest {
 	//@Autowired
 	//Environment env;
 	
+	
+	public <T> T hello(T t) {
+		System.out.println(t.getClass().getName());
+		return t;
+	}
+	
 	@Test
 	public void test() throws Exception {
-		File file = new File("ab/bb","dd4.vvv");
-		System.out.println(file.getPath());
+		System.out.println(hello("a"));
+		System.out.println(new Students());
+		System.out.println(hello(1));
+	}
+
+	@Test
+	public void testExcel() throws Exception {
+		File file = new File("D:/a.xls");
+		Workbook create = new HSSFWorkbook();
 		
-		
+		/*workbook.setSheetName(0, "hello");
+		Sheet sheet = workbook.createSheet();
+		Row row = sheet.createRow(0);
+		Cell cell = row.createCell(0);
+		cell.setCellValue("hello");
+		workbook.close();*/
+		//Workbook create = WorkbookFactory.create();
+		Sheet sheet = create.createSheet("hello");
+		Row row = sheet.createRow(0);
+		Cell cell = row.createCell(0);
+		cell.setCellValue("hello");		
+		create.write(new FileOutputStream(file));
+		create.close();
 	}
 	
 	
 	
-	private final static String s = "a";
 	
 	@Test
 	public void testProperties() throws Exception {
-		 System.out.println("ccc"+s);
-		
+		NameMapping typeAnno = TestNameMappingAnno.class.getDeclaredAnnotation(NameMapping.class);
+		System.out.println(typeAnno.value());
+		Field[] declaredFields = TestNameMappingAnno.class.getDeclaredFields();
+		for (Field field : declaredFields) {
+			String name = field.getName();
+			NameMapping declaredAnnotation = field.getDeclaredAnnotation(NameMapping.class);
+			if(declaredAnnotation!=null) {
+				String value = declaredAnnotation.value();
+				System.out.println(name+" -- " + value);
+			}
+		}
 	}
 
 	@Test
-	public void testTx() {
-		assertEquals(true, CollectionUtils.isEmpty(new ArrayList<>()));
-
+	public void testTx() throws Exception {
+		ExportExcelServiceImpl e = new ExportExcelServiceImpl();
+		Collection<Students> coll = new ArrayList<>();
+		Students s1 = new Students();
+		s1.setCampus("cam1");
+		s1.setClassnum(1);
+		s1.setDepartment("depart1");
+		s1.setDormitory("a1");
+		s1.setGender("n1");
+		s1.setGrade(1);
+		s1.setMajor("ma1");
+		s1.setName("s1");
+		s1.setUsersUsername("11");
+		coll.add(s1);
+		Students s2 = new Students();
+		s2.setCampus("cam2");
+		s2.setClassnum(2);
+		s2.setDepartment("depart2");
+		s2.setDormitory("a2");
+		s2.setGender("n2");
+		s2.setGrade(2);
+		s2.setMajor("ma2");
+		s2.setName("s2");
+		s2.setUsersUsername("22");
+		coll.add(s2);
+		Students s3 = new Students();
+		s3.setCampus("cam3");
+		s3.setDepartment("depart3");
+		s3.setDormitory("a3");
+		s3.setGrade(3);
+		s3.setName("s3");
+		coll.add(s3);
+		e.exportAll(coll , null, Students.class);
 	}
+	
 
 	@Test
 	public void testSet() {
