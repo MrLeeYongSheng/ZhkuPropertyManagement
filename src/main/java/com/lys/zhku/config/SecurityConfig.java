@@ -46,17 +46,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.hasAuthority(Authorities.admin.getAuth());// 管理员的权限
 		// end 配置主页面
 
+		// 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
+		http.authorizeRequests().antMatchers("/school/dormitory/main", // 宿舍主页面 // 学生用户查询宿舍模块
+				"/students/getDormitoryStudentsByUsersUsername", "/students/exportSelections", // 获取/导出学生用户宿舍成员信息
+				// end 学生用户查询宿舍模块
+				// 学生用户查询教室模块
+				"/school/classroom/main", "/school/classroom/getPage", // 获取教室列表
+				"/school/classroom/exportSelections", "/school/classroom/exportAll", // 导出教室列表
+				"/school/classroom/schedule/main", "/school/classroom/schedule/getPage", // 获取教室安排表
+				"/school/classroom/schedule/exportSelections", "/school/classroom/schedule/exportAll", // 导出安排表
+				"/school/classroom/schedule/edit", // 预约教室(修改安排表记录)
+				// end 学生用户查询教室模块
+				// 文件查询,导出模块
+				"/files/main", "/files/getPage", "/files/exportSelections", "/files/exportAll")
+				.hasAnyAuthority(Authorities.user.getAuth());
 
-/*		// 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
-		http.authorizeRequests().antMatchers("/school/dormitory/main", "/school/dormitory/detail", // 宿舍
-				"/school/classroom", // 教室
-				"/files", // 文件
-				"/students/*")// 学生
-				.hasAnyAuthority(Authorities.user.getAuth());// 宿舍,教室,文件下载,获取学生信息
 		// end 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
-*/
+
 		// 全局配置
-		http.authorizeRequests().antMatchers("/static/**").permitAll();//将静态资源放出去
+		http.authorizeRequests().antMatchers("/topjui/**", "/html/**", "/json/**", "/static/**", // topUi组件
+				"/jquery-easyui-*/**", "/jspf/**", "/css/**", "/js/**").permitAll();// 将静态资源放出去
+		http.authorizeRequests().antMatchers("/**").hasAnyAuthority(Authorities.admin.getAuth());// 默认所有资源需要管理员权限
 		// end 全局配置
 	}
 

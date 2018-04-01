@@ -101,10 +101,11 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		filesMapper.getAll();
-		filesMapper.selectByPrimaryKeys(null);
-		filesMapper.selectByPrimaryKeys(new Integer[] {});
-		filesMapper.selectByPrimaryKeys(new Integer[] {1,2});
+		StudentsPagination pagination = new StudentsPagination();
+		pagination.setPage(1);
+		pagination.setDormitoryLike("A");
+		pagination.setRows(100);
+		studentsMapper.selectForPagination(pagination);
 	}
 	
 	@Test

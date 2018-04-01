@@ -12,185 +12,313 @@
 <body>
 	<table id="dg"></table>
 	<div id="win"/>
-
-	<script type="text/javascript">
-		$('#dg').datagrid({
-			//数据源
-			url : '${prePath}/files/getPage',
-			//queryParams : {enable:true},//加载有效的账号信息
-			cache : false,//取消datagrid缓存
-			//行宽填充窗体
-			fitColumns : true,
-			striped : true,//显示斑马效果
-			idField : "id", //指明哪一个字段是标识字段
-			pagination : true,//在DataGrid控件底部显示分页工具栏
-			rownumbers : true,//显示一个行号列
-			pageSize : 5,//初始化页面大小
-			pageList : [5, 10, 20, 30],//初始化页面大小选择列表
-			//菜单栏
-			toolbar : [ {
-				iconCls : 'icon-add',
-				text : '增加',
-				handler : function() {
-					showDialog("win","${prePath}/files/add","增加文件信息");
-				}
-			}, '-', {
-				iconCls : 'icon-edit',
-				text : '修改',
-				handler : function() {
-					var selections = $("#dg").datagrid("getSelections");
-					if(selections.length !=1 ){
-						$.messager.alert('操作提示','必须且只能选择一行！','info');
-						return ;
+	<!-- 管理员渲染模块 -->
+	<security:authorize access="hasAuthority(T(com.lys.zhku.utils.Authorities).admin.auth)">
+		<script type="text/javascript">
+			$('#dg').datagrid({
+				//数据源
+				url : '${prePath}/files/getPage',
+				//queryParams : {enable:true},//加载有效的账号信息
+				cache : false,//取消datagrid缓存
+				//行宽填充窗体
+				fitColumns : true,
+				striped : true,//显示斑马效果
+				idField : "id", //指明哪一个字段是标识字段
+				pagination : true,//在DataGrid控件底部显示分页工具栏
+				rownumbers : true,//显示一个行号列
+				pageSize : 5,//初始化页面大小
+				pageList : [5, 10, 20, 30],//初始化页面大小选择列表
+				//菜单栏
+				toolbar : [ {
+					iconCls : 'icon-add',
+					text : '增加',
+					handler : function() {
+						showDialog("win","${prePath}/files/add","增加文件信息");
 					}
-					showDialog("win","${prePath}/files/edit","修改文件信息");
-				}
-			}, '-', {
-				iconCls : 'icon-remove',
-				text : '删除',
-				handler : function() {
-					var selections = $("#dg").datagrid("getSelections");
-					if(selections.length==0 ){
-						$.messager.alert('操作提示','至少选择一行！','info');
-						return ;
-					}
-					$.messager.confirm('操作提示', '这是一个不可逆的操作,您确定要删除这些数据吗？', function(r){
-						if (!r){
-							$("#dg").datagrid("clearSelections");
-						    return ;
+				}, '-', {
+					iconCls : 'icon-edit',
+					text : '修改',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length !=1 ){
+							$.messager.alert('操作提示','必须且只能选择一行！','info');
+							return ;
 						}
-						var pks = new Array();
-						$.each(selections,function(rowNum,row){
-							pks.push(row.id);
-						});
-						$.ajax({
-							type : "POST",//请求方式
-							dataType : 'json',
-							url : "${prePath}/files/delete",//请求目的URL
-							traditional : true,//用传统的方式来序列化数据,去除参数名的[]
-							data : {//请求数据
-								ids : pks
-							},
-							success : function(msg) {//数据返回时所执行的函数
-								$('#dg').datagrid('clearSelections'); //把CheckBox历史选项清空
-								$('#dg').datagrid('reload');//从新加载reload
-							},
-							error : function(XMLHttpRequest, textStatus, errorThrown) {
-								// 通常 textStatus 和 errorThrown 之中
-								// 只有一个会包含信息
-								alert("服务器发生未知错误textStatus:" + textStatus + " textStatus:"
-										+ textStatus);
+						showDialog("win","${prePath}/files/edit","修改文件信息");
+					}
+				}, '-', {
+					iconCls : 'icon-remove',
+					text : '删除',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length==0 ){
+							$.messager.alert('操作提示','至少选择一行！','info');
+							return ;
+						}
+						$.messager.confirm('操作提示', '这是一个不可逆的操作,您确定要删除这些数据吗？', function(r){
+							if (!r){
+								$("#dg").datagrid("clearSelections");
+							    return ;
 							}
-						});						
-					});
-				}
-			}, '-', {
-				iconCls : 'icon-edit',
-				text : '下载',
-				handler : function() {
-					var selections = $("#dg").datagrid("getSelections");
-					if(selections.length !=1 ){
-						$.messager.alert('操作提示','必须且只能选择一行！','info');
-						return ;
+							var pks = new Array();
+							$.each(selections,function(rowNum,row){
+								pks.push(row.id);
+							});
+							$.ajax({
+								type : "POST",//请求方式
+								dataType : 'json',
+								url : "${prePath}/files/delete",//请求目的URL
+								traditional : true,//用传统的方式来序列化数据,去除参数名的[]
+								data : {//请求数据
+									ids : pks
+								},
+								success : function(msg) {//数据返回时所执行的函数
+									$('#dg').datagrid('clearSelections'); //把CheckBox历史选项清空
+									$('#dg').datagrid('reload');//从新加载reload
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown) {
+									// 通常 textStatus 和 errorThrown 之中
+									// 只有一个会包含信息
+									alert("服务器发生未知错误textStatus:" + textStatus + " textStatus:"
+											+ textStatus);
+								}
+							});						
+						});
 					}
-					var row = selections[0];
-					//下载
-					//定义一个form表单
-					var form=$("<form>");
-					form.attr("style","display:none");  
-					form.attr("target","");  
-					form.attr("method","post");  
-					form.attr("action","${prePath}/files/download");
-					//end form
-					//定义input标签
-					var input=$("<input>");  
-					input.attr("type","hidden");  
-					input.attr("name","id");  
-					input.attr("value",row.id);  
-					//end input
-					form.append(input); //将input标签放到form中 
-					$("#win").append(form);//将表单放置在web中  
-					form.submit();//表单提交 	
-				}
-			}, '-', {
-				iconCls : 'icon-print',
-				text : '导出已选',
-				handler : function() {
-					var selections = $("#dg").datagrid("getSelections");
-					if(selections.length==0 ){
-						$.messager.alert('操作提示','至少选择一行！','info');
-						return ;
-					}
-					$.messager.confirm('操作提示', '您确定要导出'+selections.length+'条数据吗？', function(r){
-						if (!r){
-							$("#dg").datagrid("clearSelections");
-						    return ;
+				}, '-', {
+					iconCls : 'icon-edit',
+					text : '下载',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length !=1 ){
+							$.messager.alert('操作提示','必须且只能选择一行！','info');
+							return ;
 						}
+						var row = selections[0];
 						//下载
 						//定义一个form表单
 						var form=$("<form>");
 						form.attr("style","display:none");  
 						form.attr("target","");  
 						form.attr("method","post");  
-						form.attr("action","${prePath}/files/exportSelections");
-						$.each(selections,function(rowNum,row){
-							//定义input标签
-							var input = $("<input>");
-							input.attr("type","hidden");
-							input.attr("name","pks");
-							input.attr("value",row.id)
-							form.append(input);//将input拼接到form
-							//end 定义input标签
+						form.attr("action","${prePath}/files/download");
+						//end form
+						//定义input标签
+						var input=$("<input>");  
+						input.attr("type","hidden");  
+						input.attr("name","id");  
+						input.attr("value",row.id);  
+						//end input
+						form.append(input); //将input标签放到form中 
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+					}
+				}, '-', {
+					iconCls : 'icon-print',
+					text : '导出已选',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length==0 ){
+							$.messager.alert('操作提示','至少选择一行！','info');
+							return ;
+						}
+						$.messager.confirm('操作提示', '您确定要导出'+selections.length+'条数据吗？', function(r){
+							if (!r){
+								$("#dg").datagrid("clearSelections");
+							    return ;
+							}
+							//下载
+							//定义一个form表单
+							var form=$("<form>");
+							form.attr("style","display:none");  
+							form.attr("target","");  
+							form.attr("method","post");  
+							form.attr("action","${prePath}/files/exportSelections");
+							$.each(selections,function(rowNum,row){
+								//定义input标签
+								var input = $("<input>");
+								input.attr("type","hidden");
+								input.attr("name","pks");
+								input.attr("value",row.id)
+								form.append(input);//将input拼接到form
+								//end 定义input标签
+							});					
+							//end form
+							$("#win").append(form);//将表单放置在web中  
+							form.submit();//表单提交 	
+							$("#dg").datagrid("clearSelections");
 						});					
+					}
+				}, '-', {
+					iconCls : 'icon-print',
+					text : '导出所有',
+					handler : function() {
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","post");  
+						form.attr("action","${prePath}/files/exportAll");
 						//end form
 						$("#win").append(form);//将表单放置在web中  
 						form.submit();//表单提交 	
-						$("#dg").datagrid("clearSelections");
-					});					
-				}
-			}, '-', {
-				iconCls : 'icon-print',
-				text : '导出所有',
-				handler : function() {
-					//下载
-					//定义一个form表单
-					var form=$("<form>");
-					form.attr("style","display:none");  
-					form.attr("target","");  
-					form.attr("method","post");  
-					form.attr("action","${prePath}/files/exportAll");
-					//end form
-					$("#win").append(form);//将表单放置在web中  
-					form.submit();//表单提交 	
-				}
-			} ],
-			//列    
-			columns : [ [ {
-				field : 'select',
-				checkbox: true,
-				width : 100
-			}, {
-				field : 'parentDir',
-				title : '目录',
-				width : 100
-			}, {
-				field : 'name',
-				title : '文件名',
-				width : 100
-			}, {
-				field : 'size',
-				title : '文件大小',
-				width : 100
-			}, {
-				field : 'time',
-				title : '时间',
-				width : 100
-			}, {
-				field : 'enable',
-				title : '有效',
-				width : 100
-			} ] ]
-		});
-	</script>
+					}
+				} ],
+				//列    
+				columns : [ [ {
+					field : 'select',
+					checkbox: true,
+					width : 100
+				}, {
+					field : 'parentDir',
+					title : '目录',
+					width : 100
+				}, {
+					field : 'name',
+					title : '文件名',
+					width : 100
+				}, {
+					field : 'size',
+					title : '文件大小',
+					width : 100
+				}, {
+					field : 'time',
+					title : '时间',
+					width : 100
+				}, {
+					field : 'enable',
+					title : '有效',
+					width : 100
+				} ] ]
+			});
+		</script>
+	</security:authorize>
+	<!-- 普通用户渲染模块 -->
+	<security:authorize access="not hasAuthority(T(com.lys.zhku.utils.Authorities).admin.auth)">
+		<script type="text/javascript">
+			$('#dg').datagrid({
+				//数据源
+				url : '${prePath}/files/getPage',
+				//queryParams : {enable:true},//加载有效的账号信息
+				cache : false,//取消datagrid缓存
+				//行宽填充窗体
+				fitColumns : true,
+				striped : true,//显示斑马效果
+				idField : "id", //指明哪一个字段是标识字段
+				pagination : true,//在DataGrid控件底部显示分页工具栏
+				rownumbers : true,//显示一个行号列
+				pageSize : 5,//初始化页面大小
+				pageList : [5, 10, 20, 30],//初始化页面大小选择列表
+				//菜单栏
+				toolbar : [ {
+					iconCls : 'icon-edit',
+					text : '下载',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length !=1 ){
+							$.messager.alert('操作提示','必须且只能选择一行！','info');
+							return ;
+						}
+						var row = selections[0];
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","post");  
+						form.attr("action","${prePath}/files/download");
+						//end form
+						//定义input标签
+						var input=$("<input>");  
+						input.attr("type","hidden");  
+						input.attr("name","id");  
+						input.attr("value",row.id);  
+						//end input
+						form.append(input); //将input标签放到form中 
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+					}
+				}, '-', {
+					iconCls : 'icon-print',
+					text : '导出已选',
+					handler : function() {
+						var selections = $("#dg").datagrid("getSelections");
+						if(selections.length==0 ){
+							$.messager.alert('操作提示','至少选择一行！','info');
+							return ;
+						}
+						$.messager.confirm('操作提示', '您确定要导出'+selections.length+'条数据吗？', function(r){
+							if (!r){
+								$("#dg").datagrid("clearSelections");
+							    return ;
+							}
+							//下载
+							//定义一个form表单
+							var form=$("<form>");
+							form.attr("style","display:none");  
+							form.attr("target","");  
+							form.attr("method","post");  
+							form.attr("action","${prePath}/files/exportSelections");
+							$.each(selections,function(rowNum,row){
+								//定义input标签
+								var input = $("<input>");
+								input.attr("type","hidden");
+								input.attr("name","pks");
+								input.attr("value",row.id)
+								form.append(input);//将input拼接到form
+								//end 定义input标签
+							});					
+							//end form
+							$("#win").append(form);//将表单放置在web中  
+							form.submit();//表单提交 	
+							$("#dg").datagrid("clearSelections");
+						});					
+					}
+				}, '-', {
+					iconCls : 'icon-print',
+					text : '导出所有',
+					handler : function() {
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","post");  
+						form.attr("action","${prePath}/files/exportAll");
+						//end form
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+					}
+				} ],
+				//列    
+				columns : [ [ {
+					field : 'select',
+					checkbox: true,
+					width : 100
+				}, {
+					field : 'parentDir',
+					title : '目录',
+					width : 100
+				}, {
+					field : 'name',
+					title : '文件名',
+					width : 100
+				}, {
+					field : 'size',
+					title : '文件大小',
+					width : 100
+				}, {
+					field : 'time',
+					title : '时间',
+					width : 100
+				}, {
+					field : 'enable',
+					title : '有效',
+					width : 100
+				} ] ]
+			});
+		</script>
+	</security:authorize>
 </body>
 </html>

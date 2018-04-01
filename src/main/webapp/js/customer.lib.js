@@ -12,13 +12,16 @@ function showDialog(id,path,title) {
 	});				
 }
 
-function showDialogWithAll(id,path,title,height,width,cache,model) {
+function showDialogWithAll(id,path,title,height,width,cache,model,closable,draggable,resizable) {
 	$('#'+id).dialog({
 		title : title,
 		width : width,
 		height : height,
 		cache : cache,
 		modal : model,//将窗体显示为模式化窗口
+		closable : closable,
+		draggable : draggable,
+		resizable : resizable,
 		content:"<iframe src='"+path+"' frameborder='0' width='100%' height='100%'></iframe>"//所要加载的内容
 	});				
 }

@@ -84,7 +84,7 @@
 	  		and users.enable=#{enable,jdbcType=BOOLEAN}
 	  	</if>
 	  	<if test="dormitoryLike != null">
-	  		and students.dormitory like '%'#{dormitory,jdbcType=VARCHAR}'%'
+	  		and students.dormitory like concat('%',#{dormitoryLike,jdbcType=VARCHAR},'%')
 	  	</if>
 	  	<if test="dormitory != null">
 	  		and students.dormitory = #{dormitory,jdbcType=VARCHAR}
@@ -99,8 +99,21 @@
 	<select id="selectTotalForPagination" resultType="java.lang.Integer" parameterType="com.lys.zhku.pojo.web.Pagination">
 	  select count(1) as total
 	  from students,users  
-      where students.users_username=users.username      
-      and users.enable=#{enable,jdbcType=BOOLEAN}
+	  <where>
+	  	students.users_username=users.username 
+	  	<if test="enable != null">
+	  		and users.enable = #{enable,jdbcType=BOOLEAN}
+	  	</if>
+	  	<if test="dormitoryLike != null">
+	  		and students.dormitory like concat('%',#{dormitoryLike,jdbcType=VARCHAR},'%')
+	  	</if>
+	  	<if test="dormitory != null">
+	  		and students.dormitory = #{dormitory,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="campus != null">
+	  		and students.campus = #{campus,jdbcType=VARCHAR}
+	  	</if>
+	  </where>
 	</select>
 	
   <delete id="deleteByPrimaryKeys" parameterType="java.lang.String">

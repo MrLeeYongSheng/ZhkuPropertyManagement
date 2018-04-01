@@ -22,6 +22,7 @@ import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.StatusCode;
+import com.lys.zhku.utils.StringUtils;
 
 @Service
 public class StudentsServiceImpl implements StudentsService {
@@ -118,5 +119,13 @@ public class StudentsServiceImpl implements StudentsService {
 			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
 		}
 		return studentsMapper.selectByPrimaryKeys(pks);
+	}
+
+	@Override
+	public Students getByPrimaryKey(String usersUsername) {
+		if(StringUtils.isEmpty(usersUsername)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return studentsMapper.selectByPrimaryKey(usersUsername);
 	}
 }

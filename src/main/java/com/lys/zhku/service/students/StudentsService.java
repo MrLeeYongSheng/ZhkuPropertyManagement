@@ -2,6 +2,8 @@ package com.lys.zhku.service.students;
 
 import java.util.List;
 
+import org.springframework.security.access.annotation.Secured;
+
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.pojo.web.Page;
@@ -51,5 +53,12 @@ public interface StudentsService {
 	 * @return
 	 */
 	List<Students> getByPrimaryKeys(String[] pks);
+
+	/**
+	 * 根据usersUsername获取记录
+	 * @param usersUsername
+	 * @return
+	 */
+	Students getByPrimaryKey(String usersUsername);
 
 }

@@ -1,5 +1,6 @@
 package com.lys.zhku.web.students;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
+import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.pojo.web.StudentsPagination;
 import com.lys.zhku.service.ExportExcelService;
 import com.lys.zhku.service.students.StudentsService;
@@ -142,4 +146,20 @@ public class StudentsController {
 		exportExcelService.exportAll(list, response, Students.class);
 	}
 
+	@RequestMapping(value="/getDormitoryStudentsByUsersUsername")
+	@ResponseBody
+	public Collection<Students> getDormitoryStudentsByUsersUsername(String usersUsername) {
+		Students student = studentsService.getByPrimaryKey(usersUsername);
+		if(student==null) {
+			throw new ErrorException(StatusCode.NOT_FOUND, "用户不存在");
+		}
+		StudentsPagination pagination = new StudentsPagination();
+		pagination.setCampus(student.getCampus());
+		pagination.setDormitory(student.getDormitory());
+		pagination.setEnable(true);
+		pagination.setPage(1);
+		pagination.setRows(100);
+		Page<Students> studentsPage = studentsService.getStudentsPage(pagination);
+		return studentsPage.getRows();
+	}
 }
