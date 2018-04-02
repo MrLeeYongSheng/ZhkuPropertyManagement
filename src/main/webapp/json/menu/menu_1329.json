@@ -6,29 +6,5 @@
     "iconCls": "",
     "text": "文件管理",
     "url": "./files/main"
-  },
-  {
-    "id": 1340,
-    "pid": 1329,
-    "state": "open",
-    "iconCls": "",
-    "text": "文件下载",
-    "url": "./files/download"
-  },
-  {
-    "id": 1341,
-    "pid": 1329,
-    "state": "open",
-    "iconCls": "",
-    "text": "执行Ajax请求",
-    "url": "./html/menu/doAjax_index.html"
-  },
-  {
-    "id": 1341,
-    "pid": 1329,
-    "state": "open",
-    "iconCls": "",
-    "text": "执行普通请求",
-    "url": "./html/menu/request_index.html"
   }
 ]

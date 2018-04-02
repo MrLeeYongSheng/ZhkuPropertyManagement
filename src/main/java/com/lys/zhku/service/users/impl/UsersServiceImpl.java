@@ -12,9 +12,11 @@ import com.lys.zhku.model.UsersRoles;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.service.users.UsersService;
 import com.lys.zhku.utils.CollectionUtils;
+import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.RolesUtils;
 import com.lys.zhku.utils.StatusCode;
+import com.lys.zhku.utils.StringUtils;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -84,5 +86,21 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public int deleteByUsernamesInMemory(String[] usersUsernames) {
 		return usersMapper.deleteByPrimaryKeys(usersUsernames);
+	}
+
+	@Override
+	public Users getByPrimaryKey(String username) {
+		if(StringUtils.isEmpty(username)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return usersMapper.selectByPrimaryKey(username);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Users selectUser) {
+		if(!ModelUtils.isNotNullForAllNotNullField(selectUser)) {
+			throw new ErrorException(StatusCode.INCOMPLETE_MODEL_DATA, "不完整的对象信息");
+		}
+		return usersMapper.updateByPrimaryKey(selectUser);
 	}
 }

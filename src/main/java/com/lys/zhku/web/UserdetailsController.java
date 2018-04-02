@@ -12,6 +12,7 @@ import com.lys.zhku.model.Userdetails;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.service.UserDetailsService;
+import com.lys.zhku.utils.StatusCode;
 
 @Controller
 @RequestMapping("/userdetails")
@@ -26,6 +27,13 @@ public class UserdetailsController {
 		
 		Userdetails userdetail = userDetailsService.getUserdetailsByUsersUsername(usersUsername);
 		return userdetail;
+	}
+
+	@RequestMapping("/edit")
+	@ResponseBody 
+	public Message edit(Userdetails ud) {
+		userDetailsService.updateByUsersUsername(ud);
+		return new Message(StatusCode.SUCCESS, "操作成功");
 	}
 	
 	@ExceptionHandler(ErrorException.class)

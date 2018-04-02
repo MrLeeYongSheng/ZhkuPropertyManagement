@@ -8,6 +8,7 @@ import com.lys.zhku.model.Dormitory;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.model.Userdetails;
+import com.lys.zhku.model.Users;
 import com.lys.zhku.model.Workers;
 
 public class ModelUtils {
@@ -96,6 +97,11 @@ public class ModelUtils {
 
 	public static boolean isNotNullForAllNotNullField(ClassroomSchedule cs) {
 		return !(cs.getId()==null || !isNotNullForAllNotNullFieldExceptPrimaryKey(cs));
+	}
+
+	public static boolean isNotNullForAllNotNullField(Users user) {
+		return !(StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) ||
+				StringUtils.isEmpty(user.getNickname()) || user.getEnable()==null);
 	}
 
 }

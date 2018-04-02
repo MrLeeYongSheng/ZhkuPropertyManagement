@@ -22,13 +22,5 @@
     "iconCls": "",
     "text": "车位管理",
     "url": "./school/park/main"
-  },
-  {
-    "id": 1357,
-    "pid": 1330,
-    "state": "open",
-    "iconCls": "",
-    "text": "雷达图",
-    "url": "./html/echarts/radar.html"
   }
 ]

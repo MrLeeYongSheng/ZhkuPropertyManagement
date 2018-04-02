@@ -2,6 +2,7 @@ package com.lys.zhku.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,11 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// 配置登录信息
-		http.headers().frameOptions().sameOrigin().and().csrf().disable()
-				// .and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/index").and().authorizeRequests()
-				.antMatchers("/login").permitAll().antMatchers("/", "/index")
-				.hasAnyAuthority(Authorities.user.getAuth());
+		http.headers().frameOptions().sameOrigin().and().csrf().disable().formLogin().loginPage("/login")
+				.defaultSuccessUrl("/index").and().authorizeRequests().antMatchers("/login").permitAll()
+				.antMatchers("/", "/index").hasAnyAuthority(Authorities.user.getAuth());
 		// end 配置登录信息
 
 		// 配置主页面
@@ -60,8 +59,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 文件查询,导出模块
 				"/files/main", "/files/getPage", "/files/exportSelections", "/files/exportAll")
 				.hasAnyAuthority(Authorities.user.getAuth());
-
 		// end 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
+
+		// 系统首页配置
+		http.authorizeRequests().antMatchers(
+				"/subviews/portal/index",//系统首页界面
+				"/subviews/user/modifyPassword", "/home/modifyPassword", // 修改密码
+				// 个人信息
+				"/subviews/user/infoDetail", "/students/getByUsersUsername", // 获取个人信息
+				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit"// 修改
+		// end 个人信息
+		).hasAnyAuthority(Authorities.user.getAuth());
+		// end 系统首页配置
 
 		// 全局配置
 		http.authorizeRequests().antMatchers("/topjui/**", "/html/**", "/json/**", "/static/**", // topUi组件

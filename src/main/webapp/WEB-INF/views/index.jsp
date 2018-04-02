@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/jspf/commonHeader.jspf" %><!-- 相对于webapp根路径下 -->
+<%@include file="/jspf/customerHeader.jspf" %><!-- 相对于webapp根路径下 -->
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -407,7 +408,8 @@
             <a href="javascript:void(0)" id="mb3" class="topjui-menubutton"
                data-options="menu:'#mm3',iconCls:'fa fa-cog',hasDownArrow:true" style="color:#fff;">设置</a>
             <div id="mm3" style="width:74px;">
-                <div data-options="iconCls:'fa fa-info-circle'" onclick="javascript:void(0)">个人信息</div>
+            	<security:authentication property="principal.username" var="username"/>
+                <div data-options="iconCls:'fa fa-info-circle'" onclick="javascript:personalInfo('${username}')">个人信息</div>
                 <div class="menu-sep"></div>
                 <div data-options="iconCls:'fa fa-key'" onclick="javascript:modifyPwd(0)">修改密码</div>
             </div>|
@@ -450,7 +452,7 @@
     <div id="center" data-options="region:'center',border:false" style="overflow:hidden;">
         <div id="index_tabs" style="width:100%;height:100%">
             <div title="系统首页" iconCls="fa fa-home" data-options="border:true,
-            content:'<iframe src=\'${prePath }/subviews/portal/index.html\' scrolling=\'auto\' frameborder=\'0\' style=\'width:100%;height:100%;\'></iframe>'"></div>
+            content:'<iframe src=\'${prePath }/subviews/portal/index\' scrolling=\'auto\' frameborder=\'0\' style=\'width:100%;height:100%;\'></iframe>'"></div>
         </div>
     </div>
 
@@ -549,6 +551,7 @@
       iconCls:'fa fa-key',
       width: 400,
       height: 300,
-      href: '${prePath }/subviews/user/modifyPassword.html'"></form>
+      href: '${prePath }/subviews/user/modifyPassword'"></form>
+<div id="win"></div>
 </body>
 </html>

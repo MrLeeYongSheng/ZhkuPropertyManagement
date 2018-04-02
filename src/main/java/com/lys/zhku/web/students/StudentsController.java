@@ -162,4 +162,10 @@ public class StudentsController {
 		Page<Students> studentsPage = studentsService.getStudentsPage(pagination);
 		return studentsPage.getRows();
 	}
+
+	@RequestMapping(value="/getByUsersUsername")
+	@ResponseBody
+	public Students getByUsersUsername(String usersUsername) {
+		return studentsService.getByPrimaryKey(usersUsername);
+	}
 }

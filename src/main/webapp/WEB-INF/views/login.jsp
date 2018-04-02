@@ -132,7 +132,6 @@
         <div class="login-content ">
             <div class="form">
                 <form:form id="modifyPassword" class="form-horizontal" action="${pageContext.request.contextPath}/login" method="post">
-                    <input type="hidden" id="referer" name="referer" value="${param.referer}">
                     <div class="form-group">
                         <div class="col-xs-10 col-xs-offset-1">
                             <div class="input-group">
@@ -233,9 +232,7 @@
             	$("form:first").submit();
                 var formData = {
                     username: $('#username').val(),
-                    password: $('#password').val(),
-                    referer: $('#referer').val()
-                    //,${_csrf.parameterName } : $('#${_csrf.parameterName }').val()
+                    password: $('#password').val()
                 };
                 $.ajax({
                     type: 'POST',
@@ -243,15 +240,9 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(formData),
                     success: function (data) {
-                        if (data.statusCode == 200) {
-                            //location.href = '/system/index/index?portal=${portal}';
-                            location.href = data.referer;
-                        } else {
-                            $('#myModal').modal();
-                            //alert("用户名或密码错误！");
-                        }
+
                     },
-                    error: function () {
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
 
                     }
                 });

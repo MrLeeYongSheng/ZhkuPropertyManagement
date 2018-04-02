@@ -130,7 +130,7 @@ $(function () {
                     } else {
                         var formData = $("#pwdDialog").serialize();
                         $.ajax({
-                            url: './json/response/success.json',
+                            url: './home/modifyPassword',
                             type: 'post',
                             cache: false,
                             data: formData,
@@ -141,7 +141,7 @@ $(function () {
                             },
                             success: function (data, response, status) {
                                 $.iMessager.progress('close');
-                                if (data.statusCode == 200) {
+                                if (data.code == 1) {
                                     $.iMessager.show({
                                         title: '提示',
                                         msg: '操作成功'
@@ -149,7 +149,7 @@ $(function () {
                                     $("#pwdDialog").iDialog('close').form('reset');
 
                                 } else {
-                                    $.iMessager.alert('操作失败！', '未知错误或没有任何修改，请重试！', 'messager-error');
+                                    $.iMessager.alert('操作失败！', data.msg, 'messager-error');
                                 }
                             }
                         });
@@ -392,4 +392,9 @@ function addParentTab(options) {
 
 function modifyPwd() {
     $("#pwdDialog").iDialog('open');
+};
+
+function personalInfo(username) {
+	showDialog('win',"./subviews/user/infoDetail","个人信息");
+	
 };

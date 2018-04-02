@@ -391,17 +391,5 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
-    // 百度统计代码开始
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71559c3bdac3e45bebab67a5a841c70e";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-    // 百度统计代码结束
-</script>
 </body>
 </html>

@@ -27,4 +27,18 @@ public interface UsersService {
 	Integer insertUserForworkers(Users user);
 
 	int deleteByUsernamesInMemory(String[] usersUsernames);
+
+	/**
+	 * 根据主键获取记录
+	 * @param username
+	 * @return
+	 */
+	Users getByPrimaryKey(String username);
+
+	/**
+	 * 根据主键,更新记录
+	 * @param selectUser
+	 * @return
+	 */
+	int updateByPrimaryKey(Users selectUser);
 }

@@ -1,42 +1,18 @@
 [
 	{
-		"id": 1350,
-		"pid": 1325,
-		"text": "综合演示",
-		"state": "closed",
-		"iconCls": "fa fa-heartbeat",
-		"url": ""
-	},
-	{
-		"id": 1327,
-		"pid": 1325,
-		"text": "表单组件",
-		"state": "closed",
-		"iconCls": "fa fa-bank",
-		"url": ""
-	},
-	{
-		"id": 1328,
-		"pid": 1325,
-		"text": "表格组件",
-		"state": "closed",
-		"iconCls": "fa fa-table",
-		"url": ""
-	},
-	{
-		"id": 1329,
-		"pid": 1325,
-		"text": "文件管理",
-		"state": "closed",
-		"iconCls": "fa fa-list",
-		"url": ""
-	},
-	{
 		"id": 1330,
 		"pid": 1325,
 		"text": "物业管理",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
+		"url": ""
+	},
+	{
+		"id": 1332,
+		"pid": 1325,
+		"text": "人员管理",
+		"state": "closed",
+		"iconCls": "fa fa-group",
 		"url": ""
 	},
 	{
@@ -48,11 +24,11 @@
 		"url": ""
 	},
 	{
-		"id": 1332,
+		"id": 1329,
 		"pid": 1325,
-		"text": "人员管理",
+		"text": "文件管理",
 		"state": "closed",
-		"iconCls": "fa fa-group",
+		"iconCls": "fa fa-list",
 		"url": ""
-	}
+	}	
 ]
