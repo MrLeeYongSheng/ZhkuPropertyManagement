@@ -1,5 +1,13 @@
 package com.lys.zhku.web;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +16,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lys.zhku.model.Users;
 import com.lys.zhku.pojo.exception.ErrorException;
@@ -59,5 +69,44 @@ public class HomeController {
 	public String subviews(@PathVariable String pathName, @PathVariable String fileName) {
 		return "subviews/" + pathName +"/"+ fileName;
 	}
-
+	
+	@RequestMapping(value="/home/uploadHeadPicture")
+	@ResponseBody
+	public Message uploadHeadPicture(@RequestPart Part file) {
+		InputStream is;
+		try {
+			is = file.getInputStream();
+			FileOutputStream fos = new FileOutputStream("D:/"+file.getSubmittedFileName());
+			byte[] buff = new byte[1024];
+			int len=0;
+			while((len=is.read(buff))>0) {
+				fos.write(buff, 0, len);
+			}
+			fos.close();
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new Message(StatusCode.SUCCESS, "测试");
+	}
+	
+	//@RequestMapping(value="/home/uploadHeadPicture")
+	@ResponseBody
+	public Message uploadHeadPictureBackup(Part file) {
+		InputStream is;
+		try {
+			is = file.getInputStream();
+			FileOutputStream fos = new FileOutputStream("D:/"+file.getSubmittedFileName());
+			byte[] buff = new byte[1024];
+			int len=0;
+			while((len=is.read(buff))>0) {
+				fos.write(buff, 0, len);
+			}
+			fos.close();
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new Message(StatusCode.SUCCESS, "测试");
+	}
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>html5 调用本地摄像头</title>
+	</head>
+
+	<body>
+		<input type="button" title="开启摄像头" value="开启摄像头" onclick="new VideoCanvas().getMedia('video');" /><br />
+		<video id='video' height="240px" width="320px" autoplay="autoplay"></video>
+		<hr />
+		<input type="button" title="拍照" value="拍照" onclick="new VideoCanvas().getPhoto('canvas1',120);" /><br />
+		<canvas id="canvas1" height="120px" width="160px"></canvas>
+		<hr />
+		<input type="button" value="下载" onclick="new VideoCanvas().download();" />
+		<hr />
+		<input type="button" value="上传" onclick="new VideoCanvas().upload('http://localhost:8080/zhku/home/uploadHeadPicture');" />
+		<hr />
+		<form method="post" action="http://localhost:8080/zhku/home/uploadHeadPicture" enctype="multipart/form-data">
+			<input type="file" name="file" id="ff"/>
+			<input type="submit" name="ss" id="ss" value="submit" />
+		</form>
+		
+		<script type="text/javascript">
+
+			function VideoCanvas() {
+				this.getMedia = function (id) {
+					VideoCanvas.prototype.video = document.getElementById(id);
+					navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia;
+					if(navigator.getUserMedia) {
+						navigator.getUserMedia({
+							'video': true,
+							'audio': false
+						}, function(stream) { //success是获取成功的回调函数
+							VideoCanvas.prototype.video.srcObject = stream;
+						}, function(e) { //error是获取失败的回调函数
+							alert('Error！' + e);
+						});   
+					} else {
+						alert('Native device media streaming (getUserMedia) not supported in this browser.');
+					}
+				}
+				//拍照
+				this.getPhoto = function (orginId,height) {
+					VideoCanvas.prototype.canvas = document.getElementById(orginId);
+					var context = VideoCanvas.prototype.canvas.getContext('2d');				
+					var radio = this.video.width/this.video.height;
+					context.drawImage(VideoCanvas.prototype.video, 0, 0, radio*height, height); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+				}
+				
+				this.download = function(){
+					var canvas = VideoCanvas.prototype.canvas;
+					var alink = document.createElement('a');
+					alink.download=new Date().getTime()+'.png';
+					alink.href=canvas.toDataURL();
+					alink.click();
+				}
+				
+				this.upload = function(url) {
+					var formData = new FormData();
+					VideoCanvas.prototype.canvas.toBlob(function(blobData) {//该回调函数是异步的
+						formData.append('file',blobData,new Date().getTime()+'.png');
+						var xhr;
+						if(window.XMLHttpRequest) {
+							xhr = new XMLHttpRequest();
+						} else if(window.ActiveXObject) {
+							xhr = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xhr.onreadystatechange = function(e) {
+						}
+						xhr.open('post',url,true);
+						xhr.send(formData);
+					});
+				}
+			}
+		</script>
+	</body>
