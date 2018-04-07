@@ -373,12 +373,12 @@
                         </td>
                    	  </security:authorize>
 
-                        <td id="60" title="TopJUI开发文档" class="topmenu systemName">
+                        <td id="video_1600" title="TopJUI开发文档" class="topmenu systemName">
                             <a class="l-btn-text bannerMenu" href="javascript:void(0)">
                                 <p>
                                     <lable class="fa fa-puzzle-piece"></lable>
                                 </p>
-                                <p><span style="white-space:nowrap;">开发文档</span></p>
+                                <p><span style="white-space:nowrap;">视频图像</span></p>
                             </a>
                         </td>
                         <td id="" title="人力资源" class="topmenu systemName">

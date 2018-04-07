@@ -122,44 +122,7 @@ public class FilesController {
 		Files file = filesService.selectByPrimaryKey(id);
 		ftpClientService.downloadFilesToResponse(file,response);	
 	}
-	
-	//@RequestMapping("/download")
-	public void downloadTest(HttpServletResponse response, Integer id) {
-		//response操作
-		response.setCharacterEncoding("UTF-8");  
-        response.setContentType("multipart/form-data;charset=UTF-8"); 
-        try {  
-
-		    response.setHeader("Content-Disposition", "attachment;fileName="+ new String( "kkk.properties".getBytes("utf-8"), "ISO8859-1" ) );  
-		    
-		    OutputStream os = response.getOutputStream();
-		    InputStream is = this.getClass().getClassLoader().getResourceAsStream("com/lys/zhku/config/webapp.porperties");
-		    int len=0;
-		    byte[] buff = new byte[1024];
-		    while((len=is.read(buff))>0) {
-		    	os.write(buff, 0, len);
-		    }
-		    is.close();
-		    os.flush();  
-		    os.close();
-		    
-		    
-		    response.setHeader("Content-Disposition", "attachment;fileName="+ new String( "aaaa.properties".getBytes("utf-8"), "ISO8859-1" ) );  
-		     os = response.getOutputStream();
-		     is = this.getClass().getClassLoader().getResourceAsStream("com/lys/zhku/config/webapp.porperties");
-		     len=0;
-		     buff = new byte[1024];
-		    while((len=is.read(buff))>0) {
-		    	os.write(buff, 0, len);
-		    }
-		    is.close();
-		    os.flush();  
-		    os.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }	
-	}
-	
+		
 	/**
 	 * 导出所有记录信息
 	 * @param response

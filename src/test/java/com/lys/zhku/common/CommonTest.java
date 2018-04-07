@@ -26,7 +26,9 @@ import org.junit.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.lys.zhku.anno.NameMapping;
+import com.lys.zhku.model.Files;
 import com.lys.zhku.model.Park;
+import com.lys.zhku.model.PersonalFiles;
 import com.lys.zhku.model.Students;
 import com.lys.zhku.service.impl.ExportExcelServiceImpl;
 import com.lys.zhku.utils.StringUtils;
@@ -41,34 +43,11 @@ public class CommonTest {
 	//Environment env;
 	
 	
-	public String generatePath(String origin,int round) {
-		if(round<1) {
-			return origin;
-		}
-		StringBuilder sb = null;
-		if(StringUtils.isEmpty(origin)) {
-			sb = new StringBuilder();
-		} else {
-			sb = new StringBuilder(origin);
-		}
-		if(round==1) {
-			Random random = new Random();
-			int nextInt = random.nextInt(1000);
-			sb.append(nextInt);
-			if(nextInt<10) {
-				sb.insert(0, "00");
-			}else if(nextInt<100) {
-				sb.insert(0, 0);
-			}
-			return sb.toString();
-		} else {
-			return generatePath(sb.append("/").toString(), --round);
-		}
-	}
+
 	
 	@Test
 	public void test() throws Exception {
-		System.out.println(generatePath("", 2));
+		
 	}
 
 	@Test

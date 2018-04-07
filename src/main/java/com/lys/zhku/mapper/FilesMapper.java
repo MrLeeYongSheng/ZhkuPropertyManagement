@@ -50,5 +50,5 @@ public interface FilesMapper extends BaseMapper<Files>{
 	 * @param ids
 	 * @return
 	 */
-	List<Files> selectUuidNameAndPositionByPrimaryKeys(@Param("ids") Integer[] ids);
+	List<Files> selectUuidNameAndPositionByPrimaryKeys(@Param("pks") Integer[] ids);
 }

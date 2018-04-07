@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!--form表单样式 -->
 <link type="text/css" href="${prePath }/css/form.css" rel="stylesheet">
 <!-- 自定义验证规则 -->

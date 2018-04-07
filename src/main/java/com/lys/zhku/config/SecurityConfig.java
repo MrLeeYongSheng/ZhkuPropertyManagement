@@ -67,8 +67,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/subviews/user/modifyPassword", "/home/modifyPassword", // 修改密码
 				// 个人信息
 				"/subviews/user/infoDetail", "/students/getByUsersUsername", // 获取个人信息
-				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit"// 修改
-		// end 个人信息
+				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit",// 修改
+				// end 个人信息
+				//头像
+				"/subviews/user/headPicture","/subviews/user/headPicture_main",//获取上传页面,管理页面
+				"/personalFiles/getPage","/personalFiles/delete",//获取分页,删除操作
+				"/personalFiles/download","/personalFiles/uploadHeadPicture"//下载操作,上传操作
+				//end 头像
 		).hasAnyAuthority(Authorities.user.getAuth());
 		// end 系统首页配置
 
