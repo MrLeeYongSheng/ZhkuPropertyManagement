@@ -12,8 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="keywords" content='easyui,jui,jquery easyui,easyui demo,easyui中文'/>
-    <meta name="description" content='TopJUI前端框架，基于最新版EasyUI前端框架构建，纯HTML调用功能组件，不用写JS代码的EasyUI，专注你的后端业务开发！'/>
-    <title>TopJUI前端框架 - 静态演示</title>
+    <meta name="description" content='仲园高校物业管理系统,专注于高校物业自动化管理的系统！'/>
+    <title>仲园高校物业管理系统</title>
     <!-- 浏览器标签图片 -->
     <link rel="shortcut icon" href="${prePath }/topjui/image/favicon.ico"/>
     <!-- TopJUI框架样式 -->

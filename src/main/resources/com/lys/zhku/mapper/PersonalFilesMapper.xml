@@ -97,6 +97,9 @@
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
     	</if>
+    	<if test="usersUsername != null">
+    		and users_username=#{usersUsername,jdbcType=VARCHAR}
+    	</if>
     </where>
   </select>
 
@@ -105,6 +108,9 @@
     <where>
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
+    	</if>
+    	<if test="usersUsername != null">
+    		and users_username=#{usersUsername,jdbcType=VARCHAR}
     	</if>
     </where>
     	limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}

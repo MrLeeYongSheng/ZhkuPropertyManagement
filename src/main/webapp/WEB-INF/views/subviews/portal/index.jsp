@@ -55,7 +55,6 @@
         }
     </style>
 </head>
-
 <body>
 <div class="layui-container-fluid">
     <div class="panel_box row">
@@ -132,36 +131,36 @@
         <div class="layui-col-md12">
             <blockquote class="layui-elem-quote explain">
                 <p style="color: red;font-weight: bold;font-size: 16px;">
-                    这是TopJUI免费版静态演示，免费版功能组件不完整，不提供软件升级及技术支持服务，商用软件请使用全功能授权版，了解授权版更多组件功能请与我们联系。
+                    这是"仲园物业管理系统",使用SpringMVC+Spring+Mybatis+JSP+Mysql+Vsftp+Redis+EasyUI开发,了解更多请与本人联系!
                 </p>
             </blockquote>
         </div>
         <div class="layui-col-md12">
             <blockquote class="layui-elem-quote explain">
                 <p>
-                    致力于打造既美观实用又能快速开发的后台管理前端框架，解决传统EasyUI的性能和功能问题！
-                    纯HTML调用功能组件，不用写JS代码的EasyUI，专注你的后端业务开发！
+                   页面主体框架使用TopUI,功能页面框架使用EasyUI,致力于打造既美观实用又能快速开发的后台管理前端框架,使用SpringMVC来作为后台Web框架,
+                   使用MySQL关系数据库来存储数据,使用Mybatis来作为持久化框架,JSP来作为页面,vsftp服务器作为文件管理服务器,使用Redis数据库作为缓存数据库.
                 </p>
                 <p>
-                    基于成熟稳定的EasyUI框架开发，集丰富组件+强大功能+优异性能+精美界面+便捷开发于一身，适用于企业级信息管理系统或Web后台管理系统
+        "仲园物业管理系统"是一款专注于高校物业业务的电子管理系统,物业管理系统是一种将计算机网络和现代化物业管理相结合的一个管理系统，
+		使用计算机的强大的处理能力处理各种信息，通过互联网来传递处理的信息，使管理做到有序的实时管理.
                 </p>
                 <p>
-                    <span style="font-weight: bold;">下载TopJUI：</span><a href="http://www.topjui.com/download.html"
+                    <span style="font-weight: bold;">下载系统：</span><a href="#"
                                                                     target="_blank"
-                                                                    onclick="_hmt.push(['_trackEvent', '门户', '点击', 'TopJUI下载'])">http://www.topjui.com/download.html</a>
-                    <span style="font-weight: bold;">动态演示：</span><a href="http://demo.ewsd.cn/login" target="_blank"
-                                                                    onclick="_hmt.push(['_trackEvent', '门户', '点击', 'EMIS演示'])">http://demo.ewsd.cn/login</a>（整合JAVA
-                    SSHM，<a href="http://www.ewsd.cn/emis.html" target="_blank"
-                            onclick="_hmt.push(['_trackEvent', '门户', '点击', 'EMIS介绍'])">查看详细介绍</a>）
-
+                                                                    onclick="_hmt.push(['_trackEvent', '门户', '点击', '系统下载'])">http://www.888888.com/download.html</a>
+                    <span style="font-weight: bold;">动态演示：</span><a href="#" target="_blank"
+                                                                    onclick="_hmt.push(['_trackEvent', '门户', '点击', '演示'])">http://demo.88888.cn/login</a>
+                    <a href="#" target="_blank"
+                            onclick="_hmt.push(['_trackEvent', '门户', '点击', '介绍'])">查看详细介绍</a>
                 </p>
                 <p>
                     <span style="font-weight: bold;">联系我们：</span>
-                    <i class="fa fa-qq"></i> 251122361
-                    <i class="fa fa-fax"></i> 0755-33942020
-                    <i class="fa fa fa-envelope"></i> service@ewsd.cn
-                    <a target=blank href=tencent://message/?uin=251122361&Site=TopJUI前端框架&Menu=yes>
-                        <img border="0" SRC=http://wpa.qq.com/pa?p=1:251122361:1 alt="点击这里给我发消息">
+                    <i class="fa fa-qq"></i> 8888888888
+                    <i class="fa fa-fax"></i> 0888-8888888
+                    <i class="fa fa fa-envelope"></i> 8888888@888.com
+                    <a target=blank href=tencent://message/?Menu=yes>
+                        <img border="0" SRC=http://wpa.qq.com/pa?p=1:88888:1 alt="点击这里给我发消息">
                     </a>
                 </p>
             </blockquote>
@@ -179,27 +178,27 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'强化党内监督是全面从严治党重要保障'})">强化党内监督是全面从严治党重要保障</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲恺高校物业管理系统成功上线'})">仲恺高校物业管理系统成功上线...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：地方和部门主要负责同志要带头...'})">李克强：地方和部门主要负责同志要带头...</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统评为十大杰出应用系统'})">仲园物管系统评为十大杰出应用系统...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：政务公开是常态不公开是例外'})">李克强：政务公开是常态不公开是例外</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统使用了Vsftp服务器'})">仲园物管系统使用了Vsftp服务器...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'军委机关将总体实行“部—局—处”三级体制'})">军委机关将总体实行“部—局—处”三级体制</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统使用了SpringSecurity'})">仲园物管系统使用了SpringSecurity...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'蔡奇就任北京代市长 王安顺因工作调动请辞'})">蔡奇就任北京代市长王安顺因工作调动请辞</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统使用了Redis缓存'})">仲园物管系统使用了Redis缓存...</a>
                     </td>
                 </tr>
                 </tbody>
@@ -215,27 +214,27 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'强化党内监督是全面从严治党重要保障'})">强化党内监督是全面从严治党重要保障</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统的开发技术'})">仲园物管系统的所用的开发技术...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：地方和部门主要负责同志要带头...'})">李克强：地方和部门主要负责同志要带头...</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统开发人员的秘密'})">震惊:仲园物管系统开发人员鲜为人知的秘密...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：政务公开是常态不公开是例外'})">李克强：政务公开是常态不公开是例外</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'用了仲园物管系统,仲恺变得更好了'})">用了仲园物管系统,仲恺变得更好了...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'军委机关将总体实行“部—局—处”三级体制'})">军委机关将总体实行“部—局—处”三级体制</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统解放了物管工作人员'})">仲园物管系统解放了物管工作人员...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'蔡奇就任北京代市长 王安顺因工作调动请辞'})">蔡奇就任北京代市长王安顺因工作调动请辞</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统使世界更加美好'})">仲园物管系统使世界更加美好...</a>
                     </td>
                 </tr>
                 </tbody>
@@ -251,27 +250,27 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'强化党内监督是全面从严治党重要保障'})">强化党内监督是全面从严治党重要保障</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'校园网停网公告'})">校园网停网公告:于XXXX.XX.XX停网全日,带来不便敬请原谅...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：地方和部门主要负责同志要带头...'})">李克强：地方和部门主要负责同志要带头...</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'白云校区停水公告'})">白云校区停水公告:于XXXX.XX.XX停水全日,带来不便敬请原谅...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：政务公开是常态不公开是例外'})">李克强：政务公开是常态不公开是例外</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'海珠校区停电公告'})">海珠校区停水公告:于XXXX.XX.XX停电全日,带来不便敬请原谅...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'军委机关将总体实行“部—局—处”三级体制'})">军委机关将总体实行“部—局—处”三级体制</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'关于停放共享单车'})">从XXXX.XX.XX起,禁止校园内停放共享单车...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'蔡奇就任北京代市长 王安顺因工作调动请辞'})">蔡奇就任北京代市长王安顺因工作调动请辞</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'出入登记'})">学校规定,带非本校人员进校必须进行身份证登记...</a>
                     </td>
                 </tr>
                 </tbody>
@@ -290,34 +289,34 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'TopJUI前端框架'})">静态演示系统中首页初始化为什么有时不能全屏？</a>
+                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'系统首页问题'})">系统中首页初始化为什么有时不能全屏？</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'TopJUI前端框架'})">静态演示系统中部分组件（如对话框）风格和整体风格不一致？</a>
+                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'个人文件导出问题'})">个人文件不能导出Excel？</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'TopJUI前端框架'})">静态演示系统中首页初始化为什么有时不能全屏？</a>
+                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'上传头像没有反应'})">上传头像后,没有反应,不知是否上传成功？</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'TopJUI前端框架'})">静态演示系统中部分组件（如对话框）风格和整体风格不一致？</a>
+                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'教室预约问题'})">教室预约出现预约失败,能否人工预约？</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'TopJUI前端框架'})">静态演示系统中部分组件（如对话框）风格和整体风格不一致？</a>
+                        <a href="javascript:window.parent.addParentTab({href:'http://www.topjui.com/document/question/fullscreen.html',title:'宿舍管理,不能查看个人详细信息'})">宿舍管理,不能查看个人详细信息？</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="layui-col-md4">
-            <blockquote class="layui-elem-quote title">客商管理</blockquote>
+            <blockquote class="layui-elem-quote title">系统特性</blockquote>
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col>
@@ -326,27 +325,27 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'强化党内监督是全面从严治党重要保障'})">强化党内监督是全面从严治党重要保障</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'自动化管理'})">实现了电子计算机的自动化管理...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：地方和部门主要负责同志要带头...'})">李克强：地方和部门主要负责同志要带头...</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'文件管理,方便又快捷'})">文件管理,方便又快捷...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：政务公开是常态不公开是例外'})">李克强：政务公开是常态不公开是例外</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'缓存策略'})">使用了缓存策略,减轻了服务器的压力...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'军委机关将总体实行“部—局—处”三级体制'})">军委机关将总体实行“部—局—处”三级体制</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'局部加载'})">使用ajax局部加载信息,缩短了服务器的相应时间...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'蔡奇就任北京代市长 王安顺因工作调动请辞'})">蔡奇就任北京代市长王安顺因工作调动请辞</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'系统安全'})">使用了url级别的拦截和局部视图渲染,增强系统安全...</a>
                     </td>
                 </tr>
                 </tbody>
@@ -362,27 +361,27 @@
                 <tbody class="hot_news">
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'强化党内监督是全面从严治党重要保障'})">强化党内监督是全面从严治党重要保障</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统公司上市'})">仲园物业管理系统技术有限公司正式上市...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：地方和部门主要负责同志要带头...'})">李克强：地方和部门主要负责同志要带头...</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物业管理系统有限公司更名'})">仲园物业管理系统技术有限公司更名为仲园物业管理系统股份有限公司</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'李克强：政务公开是常态不公开是例外'})">李克强：政务公开是常态不公开是例外</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物业管理系统更新'})">仲园物业管理系统更新公告...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'军委机关将总体实行“部—局—处”三级体制'})">军委机关将总体实行“部—局—处”三级体制</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园系统管理公司融资'})">仲园物业管理系统股份有限公司融资2亿成功...</a>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'蔡奇就任北京代市长 王安顺因工作调动请辞'})">蔡奇就任北京代市长王安顺因工作调动请辞</a>
+                        <a href="javascript:window.parent.addParentTab({href:'./html/article/detail.html',title:'仲园物管系统公司CEO评选十大杰出青年'})">仲园物管系统公司CEO评选十大杰出青年...</a>
                     </td>
                 </tr>
                 </tbody>

@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,7 @@ import com.lys.zhku.model.PersonalFiles;
 import com.lys.zhku.pojo.exception.ErrorException;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
-import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.pojo.web.PersonalFilesPagination;
 import com.lys.zhku.service.FTPClientService;
 import com.lys.zhku.service.files.PersonalFilesService;
 import com.lys.zhku.utils.CollectionUtils;
@@ -49,7 +48,7 @@ public class PersonalFilesController {
 
 	@RequestMapping(value="/getPage")
 	@ResponseBody
-	public Page<PersonalFiles> getPage(Pagination pagination) {
+	public Page<PersonalFiles> getPage(PersonalFilesPagination pagination) {
 		return personalFilesService.getPageByPagination(pagination);
 	}
 

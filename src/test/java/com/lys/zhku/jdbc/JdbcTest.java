@@ -40,6 +40,7 @@ import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Users;
 import com.lys.zhku.model.UsersRoles;
 import com.lys.zhku.pojo.web.Pagination;
+import com.lys.zhku.pojo.web.PersonalFilesPagination;
 import com.lys.zhku.pojo.web.StudentsPagination;
 import com.lys.zhku.security.userdetails.ZhkuUserDetails;
 import com.lys.zhku.security.userdetails.ZhkuUserDetailsService;
@@ -91,7 +92,12 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		System.out.println(personalFilesMapper.selectPositionByUsersUsername("adm0in").size());
+		PersonalFilesPagination p = new PersonalFilesPagination();
+		p.setEnable(true);
+		p.setPage(1);
+		p.setUsersUsername("admin");
+		p.setRows(1);
+		personalFilesMapper.selectByPagination(p);
 	}
 	
 	@Test

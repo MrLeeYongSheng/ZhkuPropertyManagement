@@ -12,11 +12,12 @@
 <body>
 	<table id="dg"></table>
 	<div id="win"/>
+	<security:authentication property="principal.username" var="username"/>
 	<script type="text/javascript">
 		$('#dg').datagrid({
 			//数据源
 			url : '${prePath}/personalFiles/getPage',
-			//queryParams : {enable:true},//加载有效的账号信息
+			queryParams : {usersUsername:'${username}'},//加载有效的账号信息
 			cache : false,//取消datagrid缓存
 			//行宽填充窗体
 			fitColumns : true,
