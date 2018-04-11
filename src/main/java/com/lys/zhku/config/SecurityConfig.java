@@ -2,7 +2,6 @@ package com.lys.zhku.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -46,8 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// end 配置主页面
 
 		// 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
-		http.authorizeRequests().antMatchers("/school/dormitory/main", // 宿舍主页面 // 学生用户查询宿舍模块
+		http.authorizeRequests().antMatchers("/school/dormitory/detail", // 宿舍主页面 // 学生用户查询宿舍模块
 				"/students/getDormitoryStudentsByUsersUsername", "/students/exportSelections", // 获取/导出学生用户宿舍成员信息
+				"/remote/waterElectricity/dormitory/weChargeByUsername",//获取水电费账单
 				// end 学生用户查询宿舍模块
 				// 学生用户查询教室模块
 				"/school/classroom/main", "/school/classroom/getPage", // 获取教室列表

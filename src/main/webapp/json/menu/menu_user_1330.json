@@ -5,7 +5,7 @@
     "state": "open",
     "iconCls": "",
     "text": "宿舍信息",
-    "url": "./school/dormitory/main"
+    "url": "./school/dormitory/detail"
   },
   {
     "id": "user_1355",

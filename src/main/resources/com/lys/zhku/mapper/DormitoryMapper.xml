@@ -128,4 +128,11 @@
     	</if>
     </where>
   </select>
+
+  <select id="selectFromStudentsByUserUsername" resultMap="BaseResultMap">
+	select dorm.* from dormitory dorm left join students stu
+	on dorm.name=stu.dormitory and dorm.campus=stu.campus
+	where stu.users_username=#{usersUsername,jdbcType=VARCHAR}
+	AND dorm.enable=1
+  </select>
 </mapper>

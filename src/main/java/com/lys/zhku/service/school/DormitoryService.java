@@ -30,4 +30,11 @@ public interface DormitoryService extends BaseService<Dormitory>{
 	 */
 	int updateDormitory(Dormitory dormitory);
 
+	/**
+	 * 根据Students表的userUsername获取记录
+	 * @param usersUsername
+	 * @return
+	 */
+	Dormitory getFromStudentsByUserUsername(String usersUsername);
+
 }

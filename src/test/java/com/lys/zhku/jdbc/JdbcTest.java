@@ -92,12 +92,7 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		PersonalFilesPagination p = new PersonalFilesPagination();
-		p.setEnable(true);
-		p.setPage(1);
-		p.setUsersUsername("admin");
-		p.setRows(1);
-		personalFilesMapper.selectByPagination(p);
+		dormitoryMapper.selectFromStudentsByUserUsername("202");
 	}
 	
 	@Test

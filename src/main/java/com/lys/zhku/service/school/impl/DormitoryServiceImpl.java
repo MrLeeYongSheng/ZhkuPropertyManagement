@@ -16,6 +16,7 @@ import com.lys.zhku.service.school.DormitoryService;
 import com.lys.zhku.utils.CollectionUtils;
 import com.lys.zhku.utils.ModelUtils;
 import com.lys.zhku.utils.StatusCode;
+import com.lys.zhku.utils.StringUtils;
 
 @Service
 public class DormitoryServiceImpl extends BaseServiceImpl<Dormitory> implements DormitoryService {
@@ -65,6 +66,14 @@ public class DormitoryServiceImpl extends BaseServiceImpl<Dormitory> implements 
 	public int existEntity(Dormitory record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Dormitory getFromStudentsByUserUsername(String usersUsername) {
+		if(StringUtils.isEmpty(usersUsername)) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM,"缺失请求参数:usersUsername");
+		}
+		return dormitoryMapper.selectFromStudentsByUserUsername(usersUsername);
 	}
 
 }

@@ -60,4 +60,11 @@ public interface DormitoryMapper extends BaseMapper<Dormitory>{
 	 */
 	int deleteByPrimaryKeys(@Param("ids") Integer[] ids);
 
+	/**
+	 *  根据Students表的userUsername获取记录
+	 * @param usersUsername
+	 * @return
+	 */
+	Dormitory selectFromStudentsByUserUsername(String usersUsername);
+
 }

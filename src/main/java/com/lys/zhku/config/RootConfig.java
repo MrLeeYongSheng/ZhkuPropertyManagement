@@ -15,8 +15,11 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.waterelectricity.we.service.WaterElectricityService;
 
 /**
  * <p>Spring的全局配置</p>
@@ -83,5 +86,13 @@ public class RootConfig {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setBasePackage("com.lys.zhku.mapper");
 		return mapperScannerConfigurer;
+	}
+	
+	@Bean
+	public HttpInvokerProxyFactoryBean httpInvokerProxyFactoryBean() {
+		HttpInvokerProxyFactoryBean bean = new HttpInvokerProxyFactoryBean();
+		bean.setServiceInterface(WaterElectricityService.class);
+		bean.setServiceUrl("http://localhost:8080/we/remote/serviceExporter");
+		return bean;
 	}
 }
