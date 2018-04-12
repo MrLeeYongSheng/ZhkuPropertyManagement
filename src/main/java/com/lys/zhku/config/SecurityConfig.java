@@ -37,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/index").hasAnyAuthority(Authorities.user.getAuth());
 		// end 配置登录信息
 
+		http.authorizeRequests().antMatchers("/login/getVerifyCode", // login页面获取验证码
+				"/login/verifyCode").permitAll();// 验证验证码
+
 		// 配置主页面
 		http.authorizeRequests().antMatchers("/json/menu/menu_user_*.json")// 普通用户可以获取的菜单
 				.hasAuthority(Authorities.user.getAuth())// 普通用户权限
@@ -47,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
 		http.authorizeRequests().antMatchers("/school/dormitory/detail", // 宿舍主页面 // 学生用户查询宿舍模块
 				"/students/getDormitoryStudentsByUsersUsername", "/students/exportSelections", // 获取/导出学生用户宿舍成员信息
-				"/remote/waterElectricity/dormitory/weChargeByUsername",//获取水电费账单
+				"/remote/waterElectricity/dormitory/weChargeByUsername", // 获取水电费账单
 				// end 学生用户查询宿舍模块
 				// 学生用户查询教室模块
 				"/school/classroom/main", "/school/classroom/getPage", // 获取教室列表
@@ -62,18 +65,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// end 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
 
 		// 系统首页配置
-		http.authorizeRequests().antMatchers(
-				"/subviews/portal/index",//系统首页界面
+		http.authorizeRequests().antMatchers("/subviews/portal/index", // 系统首页界面
 				"/subviews/user/modifyPassword", "/home/modifyPassword", // 修改密码
 				// 个人信息
 				"/subviews/user/infoDetail", "/students/getByUsersUsername", // 获取个人信息
-				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit",// 修改
+				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit", // 修改
 				// end 个人信息
-				//头像
-				"/subviews/user/headPicture","/subviews/user/headPicture_main",//获取上传页面,管理页面
-				"/personalFiles/getPage","/personalFiles/delete",//获取分页,删除操作
-				"/personalFiles/download","/personalFiles/uploadHeadPicture"//下载操作,上传操作
-				//end 头像
+				// 头像
+				"/subviews/user/headPicture", "/subviews/user/headPicture_main", // 获取上传页面,管理页面
+				"/personalFiles/getPage", "/personalFiles/delete", // 获取分页,删除操作
+				"/personalFiles/download", "/personalFiles/uploadHeadPicture"// 下载操作,上传操作
+		// end 头像
 		).hasAnyAuthority(Authorities.user.getAuth());
 		// end 系统首页配置
 

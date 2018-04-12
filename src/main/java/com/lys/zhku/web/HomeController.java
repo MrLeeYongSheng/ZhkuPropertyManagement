@@ -1,5 +1,13 @@
 package com.lys.zhku.web;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Map;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections4.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lys.zhku.model.Users;
@@ -16,6 +25,7 @@ import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.service.users.UsersService;
 import com.lys.zhku.utils.PasswordUtils;
 import com.lys.zhku.utils.StatusCode;
+import com.lys.zhku.utils.VerifyCodeUtil;
 
 /**
  * Handles requests for the application home page.
@@ -24,6 +34,8 @@ import com.lys.zhku.utils.StatusCode;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	private String code = null;
 	
 	@Autowired
 	private UsersService usersService;
@@ -60,5 +72,41 @@ public class HomeController {
 		return "subviews/" + pathName +"/"+ fileName;
 	}
 	
+	/**
+	 * 获取验证码图片
+	 * @param response
+	 */
+	@RequestMapping("/login/getVerifyCode")
+	public void getVerifyCode(HttpServletResponse response) {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		code = VerifyCodeUtil.drawImg(output);
+		try {
+			ServletOutputStream out = response.getOutputStream();
+			output.writeTo(out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	/**
+	 * 验证验证码
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("/login/verifyCode")
+	@ResponseBody
+	public Map<String, Boolean> verifyCode(@RequestParam String code) {
+		boolean verify = false;
+		Map<String, Boolean> map = new HashedMap<>();
+		if(this.code==null) {
+			map.put("verify", false);
+			this.code = null;
+			return map;
+		} else if(this.code.equalsIgnoreCase(code)) {
+			verify = true;
+		}
+		this.code = null;
+		map.put("verify", verify);
+		return map;
+	}
 }

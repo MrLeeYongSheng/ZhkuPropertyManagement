@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,22 +15,7 @@
     <link rel="shortcut icon" href="./topjui/image/favicon.ico"/>
     <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./static/plugins/font-awesome/css/font-awesome.min.css">
-	<!-- 引入jQuery -->
-	<script src="./static/plugins/jquery/jquery.min.js"></script>
-	<script src="./static/plugins/jquery/jquery.cookie.js"></script>
-	<script src="./static/plugins/bootstrap/js/bootstrap.min.js"></script>    
-	<!-- 设置变量prePath为应用的跟路径 -->
-	<c:set scope="page" var="prePath" value="${pageContext.request.contextPath }"/>
-	<!-- 导入jquery.easyui -->
-	<link rel="stylesheet" type="text/css" href="${prePath}/jquery-easyui-1.5.4.2/themes/default/easyui.css">   
-	<link rel="stylesheet" type="text/css" href="${prePath}/jquery-easyui-1.5.4.2/themes/icon.css"> 
-	<!-- jquery.min.js必须在jquery.easyui.min.js之前否则解析不了jquery.min.js -->  
-	<script type="text/javascript" src="${prePath}/jquery-easyui-1.5.4.2/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="${prePath}/jquery-easyui-1.5.4.2/locale/easyui-lang-zh_CN.js"></script>    
     <style type="text/css">
-    
-    	.passcode{position:absolute;right:0;bottom:0;height:32px;margin:1px;border-left:solid 1px #ddd;text-align:center;line-height:32px;border-radius:0 4px 4px 0;}
-    
         html, body {
             height: 100%;
         }
@@ -76,7 +60,7 @@
         .login-content {
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
-            height: 300px;
+            height: 250px;
             width: 100%;
             max-width: 500px;
             background-color: rgba(255, 250, 2550, .6);
@@ -165,19 +149,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input type="text" id="verifycode" name="verifycode" class="form-control" style="width:260px"
-                                       placeholder="验证码">
-								<span><img src="<c:url value='/login/getVerifyCode'/>" alt=""
-											width="100" height="40" class="passcode"
-											style="height:40px;cursor:pointer;"
-											onclick="this.src=this.src+'?'"></span> 
-                            </div>
-                        </div>
-                    </div>               
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-center">
                             <button type="button" id="login" class="btn btn-sm btn-success">
@@ -203,6 +174,17 @@
         </div>
     </div>
 </div>
+
+<!-- 引入jQuery -->
+<script src="./static/plugins/jquery/jquery.min.js"></script>
+<script src="./static/plugins/jquery/jquery.cookie.js"></script>
+<script src="./static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="./static/plugins/bootstrap/plugins/html5shiv.min.js"></script>
+<script src="./static/plugins/bootstrap/plugins/respond.min.js"></script>
+<![endif]-->
 <script type="text/javascript">
     if (navigator.appName == "Microsoft Internet Explorer" &&
             (navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE6.0" ||
@@ -212,7 +194,15 @@
         alert("您的浏览器版本过低，请使用360安全浏览器的极速模式或IE9.0以上版本的浏览器");
     }
 </script>
-
+<!--<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?71559c3bdac3e45bebab67a5a841c70e";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>-->
 <script type="text/javascript">
     $(function () {
     	
@@ -228,15 +218,7 @@
         });
 
         $("#login").on("click", function () {
-    		var code = $("#verifycode").val();
-        	$.post("${prePath}/login/verifyCode", { "code": code },
-     			   function(data){
-     			     if(data.verify) {
-			    		submitForm();
-     			     } else {
-     			    	$.messager.alert('操作提示','验证码不正确，或者验证码已过期，请刷新验证码后重新输入验证码！','info');
-     			     }
-     			   }, "json");  
+            submitForm();
         });
 
         function submitForm() {

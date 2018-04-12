@@ -2,7 +2,7 @@
 	{
 		"id": "video_1611",
 		"pid": "video_1610",
-		"text": "自拍头像",
+		"text": "拍摄图片",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
 		"url": "./subviews/user/headPicture"
@@ -10,7 +10,7 @@
 	{
 		"id": "video_1612",
 		"pid": "video_1610",
-		"text": "头像管理",
+		"text": "图片管理",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
 		"url": "./subviews/user/headPicture_main"
