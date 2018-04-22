@@ -2,15 +2,15 @@
 	{
 		"id": "video_1611",
 		"pid": "video_1610",
-		"text": "拍摄图片",
+		"text": "监控录像",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
-		"url": "./subviews/video/headPicture"
+		"url": "./subviews/video/video"
 	},	
 	{
 		"id": "video_1612",
 		"pid": "video_1610",
-		"text": "图片管理",
+		"text": "视频管理",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
 		"url": "./subviews/video/headPicture_main"

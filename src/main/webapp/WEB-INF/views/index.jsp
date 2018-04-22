@@ -359,6 +359,7 @@
                                 <p><span style="white-space:nowrap;">菜单</span></p>
                             </a>
                         </td>
+                        <c:set scope="page" var="videoMenuId" value="video_1600"/>
                    	  </security:authorize>
                    	  <security:authorize url="/json/menu/menu_user_1325.json"
                    	  	access="not hasAuthority(T(com.lys.zhku.utils.Authorities).admin.auth)"
@@ -371,9 +372,10 @@
                                 <p><span style="white-space:nowrap;">菜单</span></p>
                             </a>
                         </td>
+                        <c:set scope="page" var="videoMenuId" value="user_video_1600"/>
                    	  </security:authorize>
 
-                        <td id="video_1600" title="TopJUI开发文档" class="topmenu systemName">
+                        <td id="${videoMenuId }" title="视频图像" class="topmenu systemName">
                             <a class="l-btn-text bannerMenu" href="javascript:void(0)">
                                 <p>
                                     <lable class="fa fa-puzzle-piece"></lable>

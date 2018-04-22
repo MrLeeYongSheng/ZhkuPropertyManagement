@@ -6,5 +6,13 @@
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
 		"url": ""
-	}	
+	},
+	{
+		"id": "video_1620",
+		"pid": "video_1600",
+		"text": "录像管理",
+		"state": "closed",
+		"iconCls": "fa fa-bar-chart",
+		"url": ""
+	}
 ]
