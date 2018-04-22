@@ -100,6 +100,9 @@
     	<if test="usersUsername != null">
     		and users_username=#{usersUsername,jdbcType=VARCHAR}
     	</if>
+    	<if test="positionPrefixLike != null">
+    		and position like concat(#{positionPrefixLike,jdbcType=VARCHAR},'%')
+    	</if>    	
     </where>
   </select>
 
@@ -111,6 +114,9 @@
     	</if>
     	<if test="usersUsername != null">
     		and users_username=#{usersUsername,jdbcType=VARCHAR}
+    	</if>
+    	<if test="positionPrefixLike != null">
+    		and position like concat(#{positionPrefixLike,jdbcType=VARCHAR},'%')
     	</if>
     </where>
     	limit #{index,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}

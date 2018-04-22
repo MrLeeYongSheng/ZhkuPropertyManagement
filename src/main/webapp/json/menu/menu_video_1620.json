@@ -13,6 +13,6 @@
 		"text": "视频管理",
 		"state": "closed",
 		"iconCls": "fa fa-bar-chart",
-		"url": "./subviews/video/headPicture_main"
+		"url": "./subviews/video/video_main"
 	}	
 ]

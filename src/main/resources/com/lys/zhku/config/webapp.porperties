@@ -24,3 +24,6 @@ jdbc.driver=com.mysql.jdbc.Driver
 
 #数据库连接url
 jdbc.url=jdbc:mysql://localhost:3306/zhku
+
+#视频文件根文件夹
+video.root=/video
