@@ -27,3 +27,6 @@ jdbc.url=jdbc:mysql://localhost:3306/zhku
 
 #视频文件根文件夹
 video.root=/video
+
+#宿舍维修表根文件夹
+dormitory.root=/dormitory

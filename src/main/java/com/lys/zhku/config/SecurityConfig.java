@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// 配置宿舍,教室,文件下载,获取学生信息页面(学生可访问页面)
 		http.authorizeRequests().antMatchers("/school/dormitory/detail", // 宿舍主页面 // 学生用户查询宿舍模块
+				"/school/dormitory/fixExcelUpload", "/school/dormitory/uploadFixExcel", // 上传宿舍维修表
 				"/students/getDormitoryStudentsByUsersUsername", "/students/exportSelections", // 获取/导出学生用户宿舍成员信息
 				"/remote/waterElectricity/dormitory/weChargeByUsername", // 获取水电费账单
 				// end 学生用户查询宿舍模块

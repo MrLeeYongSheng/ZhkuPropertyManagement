@@ -278,7 +278,28 @@
 							$("#dg").datagrid("clearSelections");
 						});					
 					}
-				} ],
+				} ,'-', {
+					iconCls: 'icon-edit',
+					text: '下载维修表',
+					handler: function() {
+						//下载
+						//定义一个form表单
+						var form=$("<form>");
+						form.attr("style","display:none");  
+						form.attr("target","");  
+						form.attr("method","get");  
+						form.attr("action","${prePath}/static/office-template/dormitory/宿舍维修表.xls");
+						//end form
+						$("#win").append(form);//将表单放置在web中  
+						form.submit();//表单提交 	
+					}
+				} ,'-', {
+					iconCls: 'icon-add',
+					text: '上传维修表',
+					handler: function() {
+						showDialog("win","${prePath}/school/dormitory/fixExcelUpload","增加文件信息");
+					}
+				}],
 				//列    
 				columns : [ [ {
 					field : 'select',

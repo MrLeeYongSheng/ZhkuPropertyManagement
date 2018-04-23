@@ -6,7 +6,15 @@
     "iconCls": "",
     "text": "宿舍管理",
     "url": "./school/dormitory/main"
-  },
+  }, 
+  {
+    "id": 1358,
+    "pid": 1330,
+    "state": "open",
+    "iconCls": "",
+    "text": "宿舍维修表",
+    "url": "./school/dormitory/fixExcel_main"
+  }, 
   {
     "id": 1355,
     "pid": 1330,
