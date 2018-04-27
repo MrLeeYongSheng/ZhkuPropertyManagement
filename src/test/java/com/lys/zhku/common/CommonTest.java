@@ -51,7 +51,7 @@ public class CommonTest {
 	}
 
 	@Test
-	public void testExcel() throws Exception {
+	private void testExcel() throws Exception {
 		File file = new File("D:/a.xls");
 		Workbook create = new HSSFWorkbook();
 		

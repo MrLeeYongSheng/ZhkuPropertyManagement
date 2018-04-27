@@ -97,12 +97,12 @@
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
     	</if>
-    	<if test="usersUsername != null">
+    	<if test="usersUsername != null and usersUsername.length>0">
     		and users_username=#{usersUsername,jdbcType=VARCHAR}
     	</if>
-    	<if test="positionPrefixLike != null">
+    	<if test="positionPrefixLike != null and positionPrefixLike.length>0">
     		and position like concat(#{positionPrefixLike,jdbcType=VARCHAR},'%')
-    	</if>    	
+    	</if>   	
     </where>
   </select>
 
@@ -112,10 +112,10 @@
     	<if test="enable != null">
     		enable=#{enable,jdbcType=BOOLEAN}
     	</if>
-    	<if test="usersUsername != null">
+    	<if test="usersUsername != null and usersUsername.length>0">
     		and users_username=#{usersUsername,jdbcType=VARCHAR}
     	</if>
-    	<if test="positionPrefixLike != null">
+    	<if test="positionPrefixLike != null and positionPrefixLike.length>0">
     		and position like concat(#{positionPrefixLike,jdbcType=VARCHAR},'%')
     	</if>
     </where>
@@ -174,5 +174,19 @@
     <where>
     	users_username=#{usersUsername,jdbcType=VARCHAR}
     </where>    
+  </select>     
+  
+  <select id="selectPositionByFileQuery" resultMap="BaseResultMap">
+    select position
+    from personal_files
+    <where>
+    	<if test="usersUsername != null and usersUsername.length>0">
+    		and users_username=#{usersUsername,jdbcType=VARCHAR}
+    	</if>
+    	<if test="positionPrefixLike != null and positionPrefixLike.length>0">
+    		and position like concat(#{positionPrefixLike,jdbcType=VARCHAR},'%')
+    	</if>
+    </where>
+    limit 1,1    
   </select>     
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lys.zhku.mapper.PersonalFilesMapper;
 import com.lys.zhku.model.PersonalFiles;
 import com.lys.zhku.pojo.exception.ErrorException;
+import com.lys.zhku.pojo.query.FileQuery;
 import com.lys.zhku.service.files.PersonalFilesService;
 import com.lys.zhku.service.impl.BaseServiceImpl;
 import com.lys.zhku.utils.CollectionUtils;
@@ -68,6 +69,14 @@ public class PersonalFilesServiceImpl extends BaseServiceImpl<PersonalFiles> imp
 			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
 		}
 		return personalFilesMapper.selectPositionByUsersUsername(usersUsername);
+	}
+
+	@Override
+	public List<PersonalFiles> selectPositionByFileQuery(FileQuery fileQuery) {
+		if(fileQuery == null) {
+			throw new ErrorException(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数");
+		}
+		return personalFilesMapper.selectPositionByFileQuery(fileQuery);
 	}
 
 }

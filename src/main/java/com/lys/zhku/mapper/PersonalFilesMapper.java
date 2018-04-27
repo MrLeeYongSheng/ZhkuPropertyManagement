@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lys.zhku.mapper.base.BaseMapper;
 import com.lys.zhku.model.PersonalFiles;
+import com.lys.zhku.pojo.query.FileQuery;
 
 public interface PersonalFilesMapper extends BaseMapper<PersonalFiles>{
     /**
@@ -68,4 +69,11 @@ public interface PersonalFilesMapper extends BaseMapper<PersonalFiles>{
 	 * @return
 	 */
 	List<PersonalFiles> selectPositionByUsersUsername(String usersUsername);
+
+	/**
+	 * 根据FileQuery来获取数据
+	 * @param fileQuery
+	 * @return
+	 */
+	List<PersonalFiles> selectPositionByFileQuery(FileQuery fileQuery);
 }

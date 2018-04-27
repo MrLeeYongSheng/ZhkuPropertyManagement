@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lys.zhku.model.Files;
 import com.lys.zhku.model.PersonalFiles;
 import com.lys.zhku.pojo.exception.ErrorException;
+import com.lys.zhku.pojo.query.FileQuery;
 import com.lys.zhku.pojo.web.Message;
 import com.lys.zhku.pojo.web.Page;
 import com.lys.zhku.pojo.web.PersonalFilesPagination;
@@ -49,6 +50,7 @@ public class PersonalFilesController {
 	@RequestMapping(value="/getPage")
 	@ResponseBody
 	public Page<PersonalFiles> getPage(PersonalFilesPagination pagination) {
+		pagination.setPositionPrefixLike("/users");
 		return personalFilesService.getPageByPagination(pagination);
 	}
 
@@ -78,7 +80,11 @@ public class PersonalFilesController {
 		if(file==null || StringUtils.isEmpty(username)) {
 			return new Message(StatusCode.MISSING_REQUEST_PARAM, "缺失请求参数,上传失败");
 		}
-		List<PersonalFiles> list = personalFilesService.selectPositionByUsersUsername(username);
+		//List<PersonalFiles> list = personalFilesService.selectPositionByUsersUsername(username);
+		FileQuery fileQuery = new FileQuery();
+		fileQuery.setUsersUsername(username);
+		fileQuery.setPositionPrefixLike("/users");
+		List<PersonalFiles> list = personalFilesService.selectPositionByFileQuery(fileQuery);
 		String parentDir = null;
 		PersonalFiles pf = null;
 		if(!CollectionUtils.isEmpty(list)) {

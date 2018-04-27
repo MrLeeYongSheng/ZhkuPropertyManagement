@@ -3,6 +3,7 @@ package com.lys.zhku.service.files;
 import java.util.List;
 
 import com.lys.zhku.model.PersonalFiles;
+import com.lys.zhku.pojo.query.FileQuery;
 import com.lys.zhku.service.BaseService;
 
 public interface PersonalFilesService extends BaseService<PersonalFiles>{
@@ -41,5 +42,12 @@ public interface PersonalFilesService extends BaseService<PersonalFiles>{
 	 * @return
 	 */
 	List<PersonalFiles> selectPositionByUsersUsername(String usersUsername);
+
+	/**
+	 * 根据FileQuery来获取记录
+	 * @param fileQuery
+	 * @return
+	 */
+	List<PersonalFiles> selectPositionByFileQuery(FileQuery fileQuery);
 
 }

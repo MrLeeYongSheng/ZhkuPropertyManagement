@@ -39,6 +39,7 @@ import com.lys.zhku.model.Park;
 import com.lys.zhku.model.Roles;
 import com.lys.zhku.model.Users;
 import com.lys.zhku.model.UsersRoles;
+import com.lys.zhku.pojo.query.FileQuery;
 import com.lys.zhku.pojo.web.Pagination;
 import com.lys.zhku.pojo.web.PersonalFilesPagination;
 import com.lys.zhku.pojo.web.StudentsPagination;
@@ -92,7 +93,10 @@ public class JdbcTest {
 	
 	@Test
 	public void testMapper() throws Exception {
-		dormitoryMapper.selectFromStudentsByUserUsername("202");
+		FileQuery fileQuery = new FileQuery();
+		fileQuery.setUsersUsername("admin");
+		fileQuery.setPositionPrefixLike("/users");
+		personalFilesMapper.selectPositionByFileQuery(fileQuery);
 	}
 	
 	@Test

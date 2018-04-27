@@ -160,7 +160,7 @@
                     <i class="fa fa-fax"></i> 0888-8888888
                     <i class="fa fa fa-envelope"></i> 8888888@888.com
                     <a target=blank href=tencent://message/?Menu=yes>
-                        <img border="0" SRC=http://wpa.qq.com/pa?p=1:88888:1 alt="点击这里给我发消息">
+                        <img border="0" src="../../static/image/button_old_11.gif" alt="点击这里给我发消息">
                     </a>
                 </p>
             </blockquote>

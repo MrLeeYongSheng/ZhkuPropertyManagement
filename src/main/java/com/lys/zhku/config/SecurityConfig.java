@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 配置登录信息
 		http.headers().frameOptions().sameOrigin().and().csrf().disable().formLogin().loginPage("/login")
 				.defaultSuccessUrl("/index").and().authorizeRequests().antMatchers("/login").permitAll()
-				.antMatchers("/", "/index").hasAnyAuthority(Authorities.user.getAuth());
+				.antMatchers("/", "/index").hasAnyAuthority(Authorities.user.getAuth(),Authorities.worker.getAuth());
 		// end 配置登录信息
 
 		http.authorizeRequests().antMatchers("/login/getVerifyCode", // login页面获取验证码
@@ -73,11 +73,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/userdetails/getUserdetailsByUsersUsername", "/userdetails/edit", // 修改
 				// end 个人信息
 				// 头像
-				"/subviews/user/headPicture", "/subviews/user/headPicture_main", // 获取上传页面,管理页面
+				"/subviews/video/headPicture", "/subviews/video/headPicture_main", // 获取上传页面,管理页面
 				"/personalFiles/getPage", "/personalFiles/delete", // 获取分页,删除操作
 				"/personalFiles/download", "/personalFiles/uploadHeadPicture"// 下载操作,上传操作
 		// end 头像
-		).hasAnyAuthority(Authorities.user.getAuth());
+		).hasAnyAuthority(Authorities.user.getAuth(),Authorities.worker.getAuth());
 		// end 系统首页配置
 
 		// 全局配置
@@ -85,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/jquery-easyui-*/**", "/jspf/**", "/css/**", "/js/**").permitAll();// 将静态资源放出去
 		http.authorizeRequests().antMatchers("/**").hasAnyAuthority(Authorities.admin.getAuth());// 默认所有资源需要管理员权限
 		// end 全局配置
+
 	}
 
 }

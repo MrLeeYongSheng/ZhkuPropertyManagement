@@ -12,7 +12,9 @@
 <body>
 	<table id="dg"></table>
 	<div id="win"/>
-	<security:authentication property="principal.username" var="username"/>
+	<security:authorize access="!hasAuthority(T(com.lys.zhku.utils.Authorities).admin.auth)">
+		<security:authentication property="principal.username" var="username"/>	
+	</security:authorize>
 	<script type="text/javascript">
 		$('#dg').datagrid({
 			//数据源

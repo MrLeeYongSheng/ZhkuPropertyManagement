@@ -11,7 +11,7 @@ public enum Authorities {
 	}
 	
 	private String auth;
-	
+		
 	public String getAuth() {
 		return this.auth;
 	}

@@ -88,7 +88,7 @@
 			    .then(function(stream) {       
 		    		g_stream = stream;
 		       		//绑定本地媒体流到video标签用于输出
-		           	video.src = URL.createObjectURL(stream);
+		           	//video.src = URL.createObjectURL(stream);
 		         
 		       		//向PeerConnection中加入需要发送的流
 		           	video.srcObject = stream;
@@ -123,7 +123,7 @@
 							if (xmlhttp.readyState==4 && xmlhttp.status==200)
 							{
 								chunks = [];
-								$.messager.alert('操作提示','上传成功！','info');
+								$.messager.alert('操作提示',JSON.parse(xmlhttp.responseText).msg,'info');
 							}
 						}   
 					    xmlhttp.open("POST", "<c:url value='/video/upload'/>",true);
