@@ -16,7 +16,7 @@
 			<tr>
 				<td colspan="4">
 					<div class="divider">
-						<span>教室修改</span>
+						<span>教室安排表修改</span>
 					</div>
 				</td>
 			</tr>
